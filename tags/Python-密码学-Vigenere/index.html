@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-<title>Tag: Python 密码学 Vigenere - Bankroft</title>
+<title>标签: Python 密码学 Vigenere - Bankroft</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
@@ -11,7 +11,7 @@
 <meta property="og:title" content="Bankroft">
 <meta property="og:url" content="https://bankroft.github.io/tags/Python-密码学-Vigenere/index.html">
 <meta property="og:site_name" content="Bankroft">
-<meta property="og:locale" content="default">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://bankroft.github.io/images/og_image.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Bankroft">
@@ -97,32 +97,23 @@
             
             <div class="navbar-start">
                 
-                <a class="navbar-item" href="/">Home</a>
+                <a class="navbar-item" href="/">主页</a>
                 
-                <a class="navbar-item" href="/archives">Archives</a>
+                <a class="navbar-item" href="/archives">归档</a>
                 
-                <a class="navbar-item" href="/categories">Categories</a>
+                <a class="navbar-item" href="/categories">分类</a>
                 
-                <a class="navbar-item" href="/tags">Tags</a>
+                <a class="navbar-item" href="/tags">标签</a>
                 
-                <a class="navbar-item" href="/about">About</a>
+                <a class="navbar-item" href="/about">关于</a>
                 
             </div>
             
             <div class="navbar-end">
                 
-                    
-                    
-                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                    
                 
                 
-                
-                <a class="navbar-item search" title="Search" href="javascript:;">
+                <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
                 </a>
                 
@@ -138,7 +129,7 @@
     <div class="card-content">
         <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
-            <li><a href="/tags">Tags</a></li>
+            <li><a href="/tags">标签</a></li>
             <li class="is-active"><a href="#" aria-current="page">Python 密码学 Vigenere</a></li>
         </ul>
         </nav>
@@ -157,7 +148,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 minutes read (About 549 words)
+                    4 分钟 读完 (大约 549 个字)
                 </span>
                 
                 
@@ -170,7 +161,7 @@
             
         </h1>
         <div class="content">
-            <h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding:utf-8</span></span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encryptionVirginia</span><span class="params">(plaintext, secret_key)</span>:</span></span><br><span class="line">    <span class="string">'''加密'''</span></span><br><span class="line">    table = [chr(x) <span class="keyword">for</span> x <span class="keyword">in</span> range(ord(<span class="string">'a'</span>), ord(<span class="string">'z'</span>) + <span class="number">1</span>)]</span><br><span class="line">    tmp = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> plaintext:</span><br><span class="line">        <span class="keyword">if</span> x.lower() <span class="keyword">in</span> table:</span><br><span class="line">            tmp += x.lower()</span><br><span class="line">    ciphertext = <span class="string">''</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> index, value <span class="keyword">in</span> enumerate(tmp):</span><br><span class="line">        t = (table.index(value) + table.index(secret_key[index % len(secret_key)])) % <span class="number">26</span></span><br><span class="line">        ciphertext += table[t]</span><br><span class="line">    <span class="keyword">return</span> ciphertext</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decryptionVirginia</span><span class="params">(ciphertext, secret_key)</span>:</span></span><br><span class="line">    <span class="string">'''解密'''</span></span><br><span class="line">    ciphertext = ciphertext.lower()</span><br><span class="line">    table = [chr(x) <span class="keyword">for</span> x <span class="keyword">in</span> range(ord(<span class="string">'a'</span>), ord(<span class="string">'z'</span>) + <span class="number">1</span>)]</span><br><span class="line"></span><br><span class="line">    plaintext = <span class="string">''</span></span><br><span class="line">    num = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> index, value <span class="keyword">in</span> enumerate(ciphertext):</span><br><span class="line">        plaintext += table[(table.index(value) - table.index(secret_key[index % len(secret_key)])) % <span class="number">26</span>]</span><br><span class="line">        num += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> plaintext</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CrackVirginia</span>:</span></span><br><span class="line">    <span class="string">'''破解'''</span></span><br><span class="line">    <span class="comment"># 字母概率，从a到z</span></span><br><span class="line">    LETTER_PROBILITY = &#123;</span><br><span class="line">        <span class="string">'a'</span>:<span class="number">0.08167</span>, <span class="comment"># a</span></span><br><span class="line">        <span class="string">'b'</span>:<span class="number">0.01492</span>, <span class="comment"># b</span></span><br><span class="line">        <span class="string">'c'</span>:<span class="number">0.02782</span>, <span class="comment"># c</span></span><br><span class="line">        <span class="string">'d'</span>:<span class="number">0.04253</span>, <span class="comment"># d</span></span><br><span class="line">        <span class="string">'e'</span>:<span class="number">0.12702</span>, <span class="comment"># e</span></span><br><span class="line">        <span class="string">'f'</span>:<span class="number">0.02228</span>, <span class="comment"># f</span></span><br><span class="line">        <span class="string">'g'</span>:<span class="number">0.02015</span>, <span class="comment"># g</span></span><br><span class="line">        <span class="string">'h'</span>:<span class="number">0.06094</span>, <span class="comment"># h</span></span><br><span class="line">        <span class="string">'i'</span>:<span class="number">0.06966</span>, <span class="comment"># i</span></span><br><span class="line">        <span class="string">'j'</span>:<span class="number">0.00153</span>, <span class="comment"># j</span></span><br><span class="line">        <span class="string">'k'</span>:<span class="number">0.00772</span>, <span class="comment"># k</span></span><br><span class="line">        <span class="string">'l'</span>:<span class="number">0.04025</span>, <span class="comment"># l</span></span><br><span class="line">        <span class="string">'m'</span>:<span class="number">0.02406</span>, <span class="comment"># m</span></span><br><span class="line">        <span class="string">'n'</span>:<span class="number">0.06749</span>, <span class="comment"># n</span></span><br><span class="line">        <span class="string">'o'</span>:<span class="number">0.07507</span>, <span class="comment"># o</span></span><br><span class="line">        <span class="string">'p'</span>:<span class="number">0.01929</span>, <span class="comment"># p</span></span><br><span class="line">        <span class="string">'q'</span>:<span class="number">0.00095</span>, <span class="comment"># q</span></span><br><span class="line">        <span class="string">'r'</span>:<span class="number">0.05897</span>, <span class="comment"># r</span></span><br><span class="line">        <span class="string">'s'</span>:<span class="number">0.06327</span>, <span class="comment"># s</span></span><br><span class="line">        <span class="string">'t'</span>:<span class="number">0.09056</span>, <span class="comment"># t</span></span><br><span class="line">        <span class="string">'u'</span>:<span class="number">0.02758</span>, <span class="comment"># u</span></span><br><span class="line">        <span class="string">'v'</span>:<span class="number">0.00978</span>, <span class="comment"># v</span></span><br><span class="line">        <span class="string">'w'</span>:<span class="number">0.02360</span>, <span class="comment"># w</span></span><br><span class="line">        <span class="string">'x'</span>:<span class="number">0.00150</span>, <span class="comment"># x</span></span><br><span class="line">        <span class="string">'y'</span>:<span class="number">0.01974</span>, <span class="comment"># y</span></span><br><span class="line">        <span class="string">'z'</span>:<span class="number">0.00074</span>, <span class="comment"># z</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getSubstring</span><span class="params">(self, key_length)</span>:</span></span><br><span class="line">        <span class="string">'''分割为子串'''</span></span><br><span class="line">        num = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> num &lt; key_length:</span><br><span class="line">            <span class="keyword">yield</span> self.ciphertext[num::key_length].upper()</span><br><span class="line">            num += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__fangcha</span><span class="params">(self, average, li)</span>:</span></span><br><span class="line">        <span class="string">'''方差计算'''</span></span><br><span class="line">        tmp = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> li:</span><br><span class="line">            tmp += (x - average) ** <span class="number">2</span></span><br><span class="line">        <span class="keyword">return</span> tmp / len(li)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, ciphertext)</span>:</span></span><br><span class="line">        self.ciphertext = ciphertext.upper()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__IC_calculate</span><span class="params">(self, string_str)</span>:</span></span><br><span class="line">        <span class="string">'''无偏估计值计算'''</span></span><br><span class="line">        dict_ = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> string_str:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                dict_[x] += <span class="number">1</span></span><br><span class="line">            <span class="keyword">except</span> KeyError:</span><br><span class="line">                dict_[x] = <span class="number">1</span></span><br><span class="line">        tmp = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> value <span class="keyword">in</span> dict_.values():</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                tmp += ((value * (value<span class="number">-1</span>)) / (len(string_str) * (len(string_str) - <span class="number">1</span>)))</span><br><span class="line">            <span class="keyword">except</span> ZeroDivisionError:</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> tmp</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__calculate_Mj</span><span class="params">(self, text)</span>:</span></span><br><span class="line">        <span class="string">'''拟重合指数法'''</span></span><br><span class="line">        Mj = <span class="number">0</span></span><br><span class="line">        alpha = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> text:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                alpha[x] += <span class="number">1</span></span><br><span class="line">            <span class="keyword">except</span> KeyError:</span><br><span class="line">                alpha[x] = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> key, value <span class="keyword">in</span> alpha.items():</span><br><span class="line">            Mj += ((self.LETTER_PROBILITY[key.lower()] * value) / len(text))</span><br><span class="line">        <span class="keyword">return</span> Mj</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getKeyLength</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">'''破解密钥长度'''</span></span><br><span class="line">        key_length_ic = &#123;&#125;</span><br><span class="line">        key_length_fangcha = &#123;&#125;</span><br><span class="line">        key_length = <span class="number">1</span></span><br><span class="line">        result = &#123;&#125;</span><br><span class="line">        <span class="keyword">while</span> key_length &lt; len(self.ciphertext):</span><br><span class="line">            substring = []</span><br><span class="line">            <span class="keyword">for</span> x <span class="keyword">in</span> self.__getSubstring(key_length):</span><br><span class="line">                substring.append(x)</span><br><span class="line">            key_length += <span class="number">1</span></span><br><span class="line">            tmp = []</span><br><span class="line">            <span class="keyword">for</span> x <span class="keyword">in</span> substring:</span><br><span class="line">                ic = self.__IC_calculate(x)</span><br><span class="line">                tmp.append(ic)</span><br><span class="line">            <span class="keyword">if</span> tmp:</span><br><span class="line">                key_length_ic[str(key_length<span class="number">-1</span>)] = math.fabs(sum(tmp) / len(tmp) - <span class="number">0.065</span>)</span><br><span class="line">                key_length_fangcha[str(key_length<span class="number">-1</span>)] = self.__fangcha(key_length_ic[str(key_length<span class="number">-1</span>)], tmp)</span><br><span class="line">        <span class="keyword">for</span> key, value <span class="keyword">in</span> key_length_ic.items():</span><br><span class="line">            result[key] = key_length_fangcha[key] * <span class="number">4</span> + value</span><br><span class="line">        key_length = sorted(result.items(), key=<span class="keyword">lambda</span> a:a[<span class="number">1</span>])[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">return</span> int(key_length)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">crack</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">'''破解'''</span></span><br><span class="line">        key_length = self.__getKeyLength()</span><br><span class="line">        num = <span class="number">0</span></span><br><span class="line">        key_ic = []</span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> self.__getSubstring(key_length):</span><br><span class="line">            <span class="keyword">for</span> t <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">27</span>):</span><br><span class="line">                s = <span class="string">''</span>.join([chr(((ord(l)+t<span class="number">-65</span>) % <span class="number">26</span>) + <span class="number">65</span>) <span class="keyword">for</span> l <span class="keyword">in</span> x])</span><br><span class="line">                <span class="keyword">try</span>:</span><br><span class="line">                    key_ic[num].append(math.fabs(self.__calculate_Mj(s) - <span class="number">0.065</span>))</span><br><span class="line">                <span class="keyword">except</span> IndexError:</span><br><span class="line">                    key_ic.append([math.fabs(self.__calculate_Mj(s) - <span class="number">0.065</span>)])</span><br><span class="line">            num += <span class="number">1</span></span><br><span class="line">        key = <span class="string">''</span></span><br><span class="line">        <span class="keyword">for</span> value <span class="keyword">in</span> key_ic:</span><br><span class="line">            key += chr(ord(<span class="string">'z'</span>) - value.index(min(value)))</span><br><span class="line">        <span class="keyword">return</span> key</span><br><span class="line"></span><br><span class="line">string = <span class="string">'CHREEVOAHMAERATBIAXXWTNXBEEOPHBSBQMQEQERBWRVXUOAKXAOSXXWEAHBWGJMMQMNKGRFVGXWTRZXWIAKLXFPSKAUTEMNDCMGTSXMXBTUIADNGMGPSRELXNJELXVRVPRTULHDNQWTWDTYGBPHXTFALJHASVBFXNGLLCHRZBWELEKMSJIKNBHWRJGNMGJSGLXFEYPHAGNRBIEQJTAMRVLCRREMNDGLXRRIMGNSNRWCHRQHAEYEVTAQEBBIPEEWEVKAKOEWADREMXMTBHHCHRTKDNVRZCHRCLQOHPWQAIIWXNRMGWOIIFKEE'</span></span><br><span class="line">a = CrackVirginia(string)</span><br><span class="line">key = a.crack()</span><br><span class="line">plaintext = decryptionVirginia(string, a.crack())</span><br><span class="line">print(<span class="string">'明文为:'</span>, plaintext, end=<span class="string">'\n\n'</span>)</span><br><span class="line">print(<span class="string">'加密密钥:'</span>, key, end=<span class="string">'\n\n'</span>)</span><br><span class="line">print(<span class="string">'加密后:'</span>, string, end=<span class="string">'\n\n'</span>)</span><br><span class="line">print(<span class="string">'破解密钥:'</span>, key, end=<span class="string">'\n\n'</span>)</span><br><span class="line">print(<span class="string">'破解明文:'</span>, plaintext, end=<span class="string">'\n\n'</span>)</span><br></pre></td></tr></table></figure>
+            <h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># coding:utf-8</span></span><br><span class="line"><span class="hljs-keyword">import</span> math</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">encryptionVirginia</span><span class="hljs-params">(plaintext, secret_key)</span>:</span></span><br><span class="line">    <span class="hljs-string">'''加密'''</span></span><br><span class="line">    table = [chr(x) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> range(ord(<span class="hljs-string">'a'</span>), ord(<span class="hljs-string">'z'</span>) + <span class="hljs-number">1</span>)]</span><br><span class="line">    tmp = <span class="hljs-string">''</span></span><br><span class="line">    <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> plaintext:</span><br><span class="line">        <span class="hljs-keyword">if</span> x.lower() <span class="hljs-keyword">in</span> table:</span><br><span class="line">            tmp += x.lower()</span><br><span class="line">    ciphertext = <span class="hljs-string">''</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">for</span> index, value <span class="hljs-keyword">in</span> enumerate(tmp):</span><br><span class="line">        t = (table.index(value) + table.index(secret_key[index % len(secret_key)])) % <span class="hljs-number">26</span></span><br><span class="line">        ciphertext += table[t]</span><br><span class="line">    <span class="hljs-keyword">return</span> ciphertext</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">decryptionVirginia</span><span class="hljs-params">(ciphertext, secret_key)</span>:</span></span><br><span class="line">    <span class="hljs-string">'''解密'''</span></span><br><span class="line">    ciphertext = ciphertext.lower()</span><br><span class="line">    table = [chr(x) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> range(ord(<span class="hljs-string">'a'</span>), ord(<span class="hljs-string">'z'</span>) + <span class="hljs-number">1</span>)]</span><br><span class="line"></span><br><span class="line">    plaintext = <span class="hljs-string">''</span></span><br><span class="line">    num = <span class="hljs-number">0</span></span><br><span class="line">    <span class="hljs-keyword">for</span> index, value <span class="hljs-keyword">in</span> enumerate(ciphertext):</span><br><span class="line">        plaintext += table[(table.index(value) - table.index(secret_key[index % len(secret_key)])) % <span class="hljs-number">26</span>]</span><br><span class="line">        num += <span class="hljs-number">1</span></span><br><span class="line">    <span class="hljs-keyword">return</span> plaintext</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CrackVirginia</span>:</span></span><br><span class="line">    <span class="hljs-string">'''破解'''</span></span><br><span class="line">    <span class="hljs-comment"># 字母概率，从a到z</span></span><br><span class="line">    LETTER_PROBILITY = &#123;</span><br><span class="line">        <span class="hljs-string">'a'</span>:<span class="hljs-number">0.08167</span>, <span class="hljs-comment"># a</span></span><br><span class="line">        <span class="hljs-string">'b'</span>:<span class="hljs-number">0.01492</span>, <span class="hljs-comment"># b</span></span><br><span class="line">        <span class="hljs-string">'c'</span>:<span class="hljs-number">0.02782</span>, <span class="hljs-comment"># c</span></span><br><span class="line">        <span class="hljs-string">'d'</span>:<span class="hljs-number">0.04253</span>, <span class="hljs-comment"># d</span></span><br><span class="line">        <span class="hljs-string">'e'</span>:<span class="hljs-number">0.12702</span>, <span class="hljs-comment"># e</span></span><br><span class="line">        <span class="hljs-string">'f'</span>:<span class="hljs-number">0.02228</span>, <span class="hljs-comment"># f</span></span><br><span class="line">        <span class="hljs-string">'g'</span>:<span class="hljs-number">0.02015</span>, <span class="hljs-comment"># g</span></span><br><span class="line">        <span class="hljs-string">'h'</span>:<span class="hljs-number">0.06094</span>, <span class="hljs-comment"># h</span></span><br><span class="line">        <span class="hljs-string">'i'</span>:<span class="hljs-number">0.06966</span>, <span class="hljs-comment"># i</span></span><br><span class="line">        <span class="hljs-string">'j'</span>:<span class="hljs-number">0.00153</span>, <span class="hljs-comment"># j</span></span><br><span class="line">        <span class="hljs-string">'k'</span>:<span class="hljs-number">0.00772</span>, <span class="hljs-comment"># k</span></span><br><span class="line">        <span class="hljs-string">'l'</span>:<span class="hljs-number">0.04025</span>, <span class="hljs-comment"># l</span></span><br><span class="line">        <span class="hljs-string">'m'</span>:<span class="hljs-number">0.02406</span>, <span class="hljs-comment"># m</span></span><br><span class="line">        <span class="hljs-string">'n'</span>:<span class="hljs-number">0.06749</span>, <span class="hljs-comment"># n</span></span><br><span class="line">        <span class="hljs-string">'o'</span>:<span class="hljs-number">0.07507</span>, <span class="hljs-comment"># o</span></span><br><span class="line">        <span class="hljs-string">'p'</span>:<span class="hljs-number">0.01929</span>, <span class="hljs-comment"># p</span></span><br><span class="line">        <span class="hljs-string">'q'</span>:<span class="hljs-number">0.00095</span>, <span class="hljs-comment"># q</span></span><br><span class="line">        <span class="hljs-string">'r'</span>:<span class="hljs-number">0.05897</span>, <span class="hljs-comment"># r</span></span><br><span class="line">        <span class="hljs-string">'s'</span>:<span class="hljs-number">0.06327</span>, <span class="hljs-comment"># s</span></span><br><span class="line">        <span class="hljs-string">'t'</span>:<span class="hljs-number">0.09056</span>, <span class="hljs-comment"># t</span></span><br><span class="line">        <span class="hljs-string">'u'</span>:<span class="hljs-number">0.02758</span>, <span class="hljs-comment"># u</span></span><br><span class="line">        <span class="hljs-string">'v'</span>:<span class="hljs-number">0.00978</span>, <span class="hljs-comment"># v</span></span><br><span class="line">        <span class="hljs-string">'w'</span>:<span class="hljs-number">0.02360</span>, <span class="hljs-comment"># w</span></span><br><span class="line">        <span class="hljs-string">'x'</span>:<span class="hljs-number">0.00150</span>, <span class="hljs-comment"># x</span></span><br><span class="line">        <span class="hljs-string">'y'</span>:<span class="hljs-number">0.01974</span>, <span class="hljs-comment"># y</span></span><br><span class="line">        <span class="hljs-string">'z'</span>:<span class="hljs-number">0.00074</span>, <span class="hljs-comment"># z</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__getSubstring</span><span class="hljs-params">(self, key_length)</span>:</span></span><br><span class="line">        <span class="hljs-string">'''分割为子串'''</span></span><br><span class="line">        num = <span class="hljs-number">0</span></span><br><span class="line">        <span class="hljs-keyword">while</span> num &lt; key_length:</span><br><span class="line">            <span class="hljs-keyword">yield</span> self.ciphertext[num::key_length].upper()</span><br><span class="line">            num += <span class="hljs-number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__fangcha</span><span class="hljs-params">(self, average, li)</span>:</span></span><br><span class="line">        <span class="hljs-string">'''方差计算'''</span></span><br><span class="line">        tmp = <span class="hljs-number">0</span></span><br><span class="line">        <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> li:</span><br><span class="line">            tmp += (x - average) ** <span class="hljs-number">2</span></span><br><span class="line">        <span class="hljs-keyword">return</span> tmp / len(li)</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, ciphertext)</span>:</span></span><br><span class="line">        self.ciphertext = ciphertext.upper()</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__IC_calculate</span><span class="hljs-params">(self, string_str)</span>:</span></span><br><span class="line">        <span class="hljs-string">'''无偏估计值计算'''</span></span><br><span class="line">        dict_ = &#123;&#125;</span><br><span class="line">        <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> string_str:</span><br><span class="line">            <span class="hljs-keyword">try</span>:</span><br><span class="line">                dict_[x] += <span class="hljs-number">1</span></span><br><span class="line">            <span class="hljs-keyword">except</span> KeyError:</span><br><span class="line">                dict_[x] = <span class="hljs-number">1</span></span><br><span class="line">        tmp = <span class="hljs-number">0</span></span><br><span class="line">        <span class="hljs-keyword">for</span> value <span class="hljs-keyword">in</span> dict_.values():</span><br><span class="line">            <span class="hljs-keyword">try</span>:</span><br><span class="line">                tmp += ((value * (value<span class="hljs-number">-1</span>)) / (len(string_str) * (len(string_str) - <span class="hljs-number">1</span>)))</span><br><span class="line">            <span class="hljs-keyword">except</span> ZeroDivisionError:</span><br><span class="line">                <span class="hljs-keyword">return</span> <span class="hljs-number">1</span></span><br><span class="line">        <span class="hljs-keyword">return</span> tmp</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__calculate_Mj</span><span class="hljs-params">(self, text)</span>:</span></span><br><span class="line">        <span class="hljs-string">'''拟重合指数法'''</span></span><br><span class="line">        Mj = <span class="hljs-number">0</span></span><br><span class="line">        alpha = &#123;&#125;</span><br><span class="line">        <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> text:</span><br><span class="line">            <span class="hljs-keyword">try</span>:</span><br><span class="line">                alpha[x] += <span class="hljs-number">1</span></span><br><span class="line">            <span class="hljs-keyword">except</span> KeyError:</span><br><span class="line">                alpha[x] = <span class="hljs-number">1</span></span><br><span class="line">        <span class="hljs-keyword">for</span> key, value <span class="hljs-keyword">in</span> alpha.items():</span><br><span class="line">            Mj += ((self.LETTER_PROBILITY[key.lower()] * value) / len(text))</span><br><span class="line">        <span class="hljs-keyword">return</span> Mj</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__getKeyLength</span><span class="hljs-params">(self)</span>:</span></span><br><span class="line">        <span class="hljs-string">'''破解密钥长度'''</span></span><br><span class="line">        key_length_ic = &#123;&#125;</span><br><span class="line">        key_length_fangcha = &#123;&#125;</span><br><span class="line">        key_length = <span class="hljs-number">1</span></span><br><span class="line">        result = &#123;&#125;</span><br><span class="line">        <span class="hljs-keyword">while</span> key_length &lt; len(self.ciphertext):</span><br><span class="line">            substring = []</span><br><span class="line">            <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> self.__getSubstring(key_length):</span><br><span class="line">                substring.append(x)</span><br><span class="line">            key_length += <span class="hljs-number">1</span></span><br><span class="line">            tmp = []</span><br><span class="line">            <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> substring:</span><br><span class="line">                ic = self.__IC_calculate(x)</span><br><span class="line">                tmp.append(ic)</span><br><span class="line">            <span class="hljs-keyword">if</span> tmp:</span><br><span class="line">                key_length_ic[str(key_length<span class="hljs-number">-1</span>)] = math.fabs(sum(tmp) / len(tmp) - <span class="hljs-number">0.065</span>)</span><br><span class="line">                key_length_fangcha[str(key_length<span class="hljs-number">-1</span>)] = self.__fangcha(key_length_ic[str(key_length<span class="hljs-number">-1</span>)], tmp)</span><br><span class="line">        <span class="hljs-keyword">for</span> key, value <span class="hljs-keyword">in</span> key_length_ic.items():</span><br><span class="line">            result[key] = key_length_fangcha[key] * <span class="hljs-number">4</span> + value</span><br><span class="line">        key_length = sorted(result.items(), key=<span class="hljs-keyword">lambda</span> a:a[<span class="hljs-number">1</span>])[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]</span><br><span class="line">        <span class="hljs-keyword">return</span> int(key_length)</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">crack</span><span class="hljs-params">(self)</span>:</span></span><br><span class="line">        <span class="hljs-string">'''破解'''</span></span><br><span class="line">        key_length = self.__getKeyLength()</span><br><span class="line">        num = <span class="hljs-number">0</span></span><br><span class="line">        key_ic = []</span><br><span class="line">        <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> self.__getSubstring(key_length):</span><br><span class="line">            <span class="hljs-keyword">for</span> t <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, <span class="hljs-number">27</span>):</span><br><span class="line">                s = <span class="hljs-string">''</span>.join([chr(((ord(l)+t<span class="hljs-number">-65</span>) % <span class="hljs-number">26</span>) + <span class="hljs-number">65</span>) <span class="hljs-keyword">for</span> l <span class="hljs-keyword">in</span> x])</span><br><span class="line">                <span class="hljs-keyword">try</span>:</span><br><span class="line">                    key_ic[num].append(math.fabs(self.__calculate_Mj(s) - <span class="hljs-number">0.065</span>))</span><br><span class="line">                <span class="hljs-keyword">except</span> IndexError:</span><br><span class="line">                    key_ic.append([math.fabs(self.__calculate_Mj(s) - <span class="hljs-number">0.065</span>)])</span><br><span class="line">            num += <span class="hljs-number">1</span></span><br><span class="line">        key = <span class="hljs-string">''</span></span><br><span class="line">        <span class="hljs-keyword">for</span> value <span class="hljs-keyword">in</span> key_ic:</span><br><span class="line">            key += chr(ord(<span class="hljs-string">'z'</span>) - value.index(min(value)))</span><br><span class="line">        <span class="hljs-keyword">return</span> key</span><br><span class="line"></span><br><span class="line">string = <span class="hljs-string">'CHREEVOAHMAERATBIAXXWTNXBEEOPHBSBQMQEQERBWRVXUOAKXAOSXXWEAHBWGJMMQMNKGRFVGXWTRZXWIAKLXFPSKAUTEMNDCMGTSXMXBTUIADNGMGPSRELXNJELXVRVPRTULHDNQWTWDTYGBPHXTFALJHASVBFXNGLLCHRZBWELEKMSJIKNBHWRJGNMGJSGLXFEYPHAGNRBIEQJTAMRVLCRREMNDGLXRRIMGNSNRWCHRQHAEYEVTAQEBBIPEEWEVKAKOEWADREMXMTBHHCHRTKDNVRZCHRCLQOHPWQAIIWXNRMGWOIIFKEE'</span></span><br><span class="line">a = CrackVirginia(string)</span><br><span class="line">key = a.crack()</span><br><span class="line">plaintext = decryptionVirginia(string, a.crack())</span><br><span class="line">print(<span class="hljs-string">'明文为:'</span>, plaintext, end=<span class="hljs-string">'\n\n'</span>)</span><br><span class="line">print(<span class="hljs-string">'加密密钥:'</span>, key, end=<span class="hljs-string">'\n\n'</span>)</span><br><span class="line">print(<span class="hljs-string">'加密后:'</span>, string, end=<span class="hljs-string">'\n\n'</span>)</span><br><span class="line">print(<span class="hljs-string">'破解密钥:'</span>, key, end=<span class="hljs-string">'\n\n'</span>)</span><br><span class="line">print(<span class="hljs-string">'破解明文:'</span>, plaintext, end=<span class="hljs-string">'\n\n'</span>)</span><br></pre></td></tr></table></figure>
         </div>
         
         
@@ -200,23 +191,20 @@
             <div class="level-item has-text-centered" style="flex-shrink: 1">
                 <div>
                     
-                        <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="Your name">
+                        <figure class="image is-128x128 has-mb-6">
+                            <img class="is-rounded" src="https://www.gravatar.com/avatar/7df03aae9ce7351c0352c7582dd105e3?s=128" alt="Bankroft Vayne">
+                        </figure>
                     
                     
                     <p class="is-size-4 is-block">
-                        Your name
+                        Bankroft Vayne
                     </p>
                     
                     
                     <p class="is-size-6 is-block">
-                        Your title
+                        Bankroft
                     </p>
                     
-                    
-                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
-                        <i class="fas fa-map-marker-alt has-mr-7"></i>
-                        <span>Your location</span>
-                    </p>
                     
                 </div>
             </div>
@@ -225,7 +213,7 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Posts
+                        文章
                     </p>
                     <p class="title has-text-weight-normal">
                         19
@@ -235,7 +223,7 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Categories
+                        分类
                     </p>
                     <p class="title has-text-weight-normal">
                         0
@@ -245,7 +233,7 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Tags
+                        标签
                     </p>
                     <p class="title has-text-weight-normal">
                         5
@@ -254,38 +242,20 @@
             </div>
         </nav>
         <div class="level">
-            <a class="level-item button is-link is-rounded" href="https://github.com/ppoffice" target="_blank">
-                Follow</a>
+            <a class="level-item button is-link is-rounded" href="https://github.com/bankroft" target="_blank">
+                关注我</a>
         </div>
         
         
         <div class="level is-mobile">
             
-            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/ppoffice">
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/bankroft">
                 
                 <i class="fab fa-github"></i>
                 
             </a>
             
-            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="https://facebook.com">
-                
-                <i class="fab fa-facebook"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="https://twitter.com">
-                
-                <i class="fab fa-twitter"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="https://dribbble.com">
-                
-                <i class="fab fa-dribbble"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
+            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/atom.xml">
                 
                 <i class="fas fa-rss"></i>
                 
@@ -300,41 +270,6 @@
     
         
 
-<div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            Links
-        </h3>
-        <ul class="menu-list">
-        
-            <li>
-                <a class="level is-mobile" href="https://hexo.io" target="_blank">
-                    <span class="level-left">
-                        <span class="level-item">Hexo</span>
-                    </span>
-                    <span class="level-right">
-                        <span class="level-item tag">hexo.io</span>
-                    </span>
-                </a>
-            </li>
-        
-            <li>
-                <a class="level is-mobile" href="https://github.com/ppoffice" target="_blank">
-                    <span class="level-left">
-                        <span class="level-item">PPOffice</span>
-                    </span>
-                    <span class="level-right">
-                        <span class="level-item tag">github.com</span>
-                    </span>
-                </a>
-            </li>
-        
-        </ul>
-        </div>
-    </div>
-</div>
-
 
     
         
@@ -342,7 +277,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Categories
+                分类
             </h3>
             <ul class="menu-list">
             
@@ -355,7 +290,7 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Tag Cloud
+            标签云
         </h3>
         <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Python-curses/" style="font-size: 10px;">Python curses</a> <a href="/tags/Python-密码学-AES/" style="font-size: 10px;">Python 密码学 AES</a> <a href="/tags/Python-密码学-Vigenere/" style="font-size: 10px;">Python 密码学 Vigenere</a> <a href="/tags/linux-centos7-php-apache/" style="font-size: 10px;">linux centos7 php apache</a>
     </div>
@@ -369,7 +304,7 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            最新文章
         </h3>
         
         <article class="media">
@@ -475,14 +410,14 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            归档
         </h3>
         <ul class="menu-list">
         
         <li>
             <a class="level is-marginless" href="/archives/2019/08/">
                 <span class="level-start">
-                    <span class="level-item">August 2019</span>
+                    <span class="level-item">八月 2019</span>
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">19</span>
@@ -499,7 +434,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                标签
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -558,7 +493,7 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            最新文章
         </h3>
         
         <article class="media">
@@ -664,14 +599,14 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            归档
         </h3>
         <ul class="menu-list">
         
         <li>
             <a class="level is-marginless" href="/archives/2019/08/">
                 <span class="level-start">
-                    <span class="level-item">August 2019</span>
+                    <span class="level-item">八月 2019</span>
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">19</span>
@@ -688,7 +623,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                标签
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -759,25 +694,9 @@
                 
                 
                 <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
-                        
-                        <i class="fab fa-creative-commons"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
                     <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
                         
                         <i class="fab fa-creative-commons-by"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
-                        
-                        <i class="fab fa-github"></i>
                         
                     </a>
                 </p>
@@ -790,7 +709,7 @@
 </footer>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
-<script>moment.locale("en");</script>
+<script>moment.locale("zh-CN");</script>
 
 
     
@@ -856,7 +775,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     
 
-<a id="back-to-top" title="Back to Top" href="javascript:;">
+<a id="back-to-top" title="回到顶端" href="javascript:;">
     <i class="fas fa-chevron-up"></i>
 </a>
 <script src="/js/back-to-top.js" defer></script>
@@ -890,7 +809,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <div class="searchbox ins-search">
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么...">
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -902,11 +821,11 @@ document.addEventListener('DOMContentLoaded', function () {
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: 'Posts',
-                PAGES: 'Pages',
-                CATEGORIES: 'Categories',
-                TAGS: 'Tags',
-                UNTITLED: '(Untitled)',
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
             },
             CONTENT_URL: '/content.json',
         };

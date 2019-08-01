@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
 <title>信息隐藏 - Bankroft</title>
@@ -13,9 +13,9 @@
 <meta property="og:url" content="https://bankroft.github.io/2019/08/01/信息隐藏/index.html">
 <meta property="og:site_name" content="Bankroft">
 <meta property="og:description" content="斜体文字## 第一章 信息隐藏所谓的信息隐藏就是将秘密信息隐藏到非秘密文件中不让对手发觉的一种方法 信息能隐藏的原因">
-<meta property="og:locale" content="default">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://bankroft.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-08-01T04:49:52.084Z">
+<meta property="og:updated_time" content="2019-08-01T06:51:40.049Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="信息隐藏">
 <meta name="twitter:description" content="斜体文字## 第一章 信息隐藏所谓的信息隐藏就是将秘密信息隐藏到非秘密文件中不让对手发觉的一种方法 信息能隐藏的原因">
@@ -101,32 +101,27 @@
             
             <div class="navbar-start">
                 
-                <a class="navbar-item" href="/">Home</a>
+                <a class="navbar-item" href="/">主页</a>
                 
-                <a class="navbar-item" href="/archives">Archives</a>
+                <a class="navbar-item" href="/archives">归档</a>
                 
-                <a class="navbar-item" href="/categories">Categories</a>
+                <a class="navbar-item" href="/categories">分类</a>
                 
-                <a class="navbar-item" href="/tags">Tags</a>
+                <a class="navbar-item" href="/tags">标签</a>
                 
-                <a class="navbar-item" href="/about">About</a>
+                <a class="navbar-item" href="/about">关于</a>
                 
             </div>
             
             <div class="navbar-end">
                 
-                    
-                    
-                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                    
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
                 
                 
-                
-                <a class="navbar-item search" title="Search" href="javascript:;">
+                <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
                 </a>
                 
@@ -150,7 +145,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    18 minutes read (About 2756 words)
+                    18 分钟 读完 (大约 2756 个字)
                 </span>
                 
                 
@@ -240,7 +235,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="信息隐藏模型"><a href="#信息隐藏模型" class="headerlink" title="信息隐藏模型"></a>信息隐藏模型</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">载体C --&gt; 提取算法</span><br><span class="line">密钥K2 --&gt; 提取算法</span><br><span class="line">密钥K1 --&gt; 嵌入算法</span><br><span class="line">载体C --&gt; 嵌入算法</span><br><span class="line">消息 --&gt; |M|预处理</span><br><span class="line">预处理 --&gt; |M|嵌入算法</span><br><span class="line">嵌入算法 --&gt; |S|提取算法</span><br><span class="line">提取算法 --&gt; |M|解预处理</span><br><span class="line">解预处理 --&gt; |M|消息</span><br></pre></td></tr></table></figure>
+<h4 id="信息隐藏模型"><a href="#信息隐藏模型" class="headerlink" title="信息隐藏模型"></a>信息隐藏模型</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">载体C --&gt; 提取算法</span><br><span class="line">密钥K2 --&gt; 提取算法</span><br><span class="line">密钥K1 --&gt; 嵌入算法</span><br><span class="line">载体C --&gt; 嵌入算法</span><br><span class="line">消息 --&gt; |M|预处理</span><br><span class="line">预处理 --&gt; |M|嵌入算法</span><br><span class="line">嵌入算法 --&gt; |S|提取算法</span><br><span class="line">提取算法 --&gt; |M|解预处理</span><br><span class="line">解预处理 --&gt; |M|消息</span><br></pre></td></tr></table></figure>
 
 <p>信息隐藏模型和提取系统模型</p>
 <h5 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h5><p>略</p>
@@ -257,7 +252,7 @@
 <li><p>位平面方法 对伪装载体稍微更改的抵抗力是相当脆弱的，LSB方法简单、常用且有效</p>
 </li>
 <li><p>嵌入过程算法(伪代码)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for i = 1,..., l(c) do</span><br><span class="line">si &lt;-- ci</span><br><span class="line">end for</span><br><span class="line">for i = 1, ..., l(m) do</span><br><span class="line">计算存放第i个消息位的指针ji</span><br><span class="line">sji &lt;-- cji &lt;-- mi</span><br><span class="line">end for</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for i = 1,..., l(c) do</span><br><span class="line">si &lt;-- ci</span><br><span class="line">end for</span><br><span class="line">for i = 1, ..., l(m) do</span><br><span class="line">计算存放第i个消息位的指针ji</span><br><span class="line">sji &lt;-- cji &lt;-- mi</span><br><span class="line">end for</span><br></pre></td></tr></table></figure>
 
 
 
@@ -265,7 +260,7 @@
 </ul>
 <ul>
 <li><p>提取过程算法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for i = 1, ..., l(m) do</span><br><span class="line">计算存放第i个消息位的指针ji</span><br><span class="line">mi &lt;-- LSB(cji)</span><br><span class="line">end for</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for i = 1, ..., l(m) do</span><br><span class="line">计算存放第i个消息位的指针ji</span><br><span class="line">mi &lt;-- LSB(cji)</span><br><span class="line">end for</span><br></pre></td></tr></table></figure>
 
 
 
@@ -277,7 +272,7 @@
 <h4 id="二进制图像中的信息隐藏"><a href="#二进制图像中的信息隐藏" class="headerlink" title="二进制图像中的信息隐藏"></a>二进制图像中的信息隐藏</h4><p>在嵌入过程中，为达到希望的像素关系，需要修改一些像素颜色。修改是在那些邻近像素有相反的颜色中进行的。 <code>入</code>是传入过程中能改变颜色的像素百分比</p>
 <ul>
 <li><p>嵌入算法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">for i = 1, ..., l(M) do</span><br><span class="line">    do forever</span><br><span class="line">        随机选取一图像块Bj</span><br><span class="line">        if P1(Bj) &gt; R1 + 3入 or P1(Bj) &lt; R0 - 3入</span><br><span class="line">        if (ci = 1 and P1(Bj) &lt; R0) or (ci = 0 and P1(Bj) &gt; R1) then</span><br><span class="line">        将图像块Bj标记为不可用，即修改该图像块以使得：</span><br><span class="line">        P1(Bj) &lt; R0 - 3入 or P1(Bj) &gt; R1 + 3入</span><br><span class="line">        continue</span><br><span class="line">        end if</span><br><span class="line">        break</span><br><span class="line">        end do</span><br><span class="line"></span><br><span class="line">    if ci = 1 then</span><br><span class="line">        修改Bj以使得R1 + 入 &gt;= P1(Bj) &gt;= R1</span><br><span class="line">    else</span><br><span class="line">        修改Bj以使得 R0 - 入 &lt;=P0(Bj) &lt;= R0</span><br><span class="line">    end if</span><br><span class="line">end for</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">for i = 1, ..., l(M) do</span><br><span class="line">    do forever</span><br><span class="line">        随机选取一图像块Bj</span><br><span class="line">        if P1(Bj) &gt; R1 + 3入 or P1(Bj) &lt; R0 - 3入</span><br><span class="line">        if (ci = 1 and P1(Bj) &lt; R0) or (ci = 0 and P1(Bj) &gt; R1) then</span><br><span class="line">        将图像块Bj标记为不可用，即修改该图像块以使得：</span><br><span class="line">        P1(Bj) &lt; R0 - 3入 or P1(Bj) &gt; R1 + 3入</span><br><span class="line">        continue</span><br><span class="line">        end if</span><br><span class="line">        break</span><br><span class="line">        end do</span><br><span class="line"></span><br><span class="line">    if ci = 1 then</span><br><span class="line">        修改Bj以使得R1 + 入 &gt;= P1(Bj) &gt;= R1</span><br><span class="line">    else</span><br><span class="line">        修改Bj以使得 R0 - 入 &lt;=P0(Bj) &lt;= R0</span><br><span class="line">    end if</span><br><span class="line">end for</span><br></pre></td></tr></table></figure>
 
 
 
@@ -285,7 +280,7 @@
 </ul>
 <ul>
 <li><p>提取算法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">for i = 1, ..., l(M) do</span><br><span class="line">    do forever</span><br><span class="line">        随机选取一图像块Bj</span><br><span class="line">        if P1(Bj) &gt; R1 + 3入 or P1(Bj) &lt; R0 - 3入</span><br><span class="line">            继续</span><br><span class="line">        else</span><br><span class="line">            continue</span><br><span class="line">    end do</span><br><span class="line"></span><br><span class="line">    if P1(Bj) &gt; 50% then</span><br><span class="line">        mi &lt;-- 1</span><br><span class="line">    else </span><br><span class="line">        mi &lt;-- 0</span><br><span class="line">    endif</span><br><span class="line">end for</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">for i = 1, ..., l(M) do</span><br><span class="line">    do forever</span><br><span class="line">        随机选取一图像块Bj</span><br><span class="line">        if P1(Bj) &gt; R1 + 3入 or P1(Bj) &lt; R0 - 3入</span><br><span class="line">            继续</span><br><span class="line">        else</span><br><span class="line">            continue</span><br><span class="line">    end do</span><br><span class="line"></span><br><span class="line">    if P1(Bj) &gt; 50% then</span><br><span class="line">        mi &lt;-- 1</span><br><span class="line">    else </span><br><span class="line">        mi &lt;-- 0</span><br><span class="line">    endif</span><br><span class="line">end for</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>杂项</p>
 </li>
@@ -299,10 +294,10 @@
 <li><p>编码 在编码处理过程中，发送者首先将载体图像分为8*8的像素块， 每一块只精确地编码一个秘密信息位。 令Bi - D{bi} 为DCT变换后的图像块</p>
 </li>
 <li><p>编码过程</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">for i = 1, ..., l(M) do</span><br><span class="line">    选取一隐蔽数据块bi</span><br><span class="line">    Bi = D&#123;bi&#125;</span><br><span class="line">    if mi = 0 then</span><br><span class="line">        if Bi(u1, v1) &gt; Bi(u2, v2) then</span><br><span class="line">            交换Bi(u1, v1)和Bi(u2, v2)</span><br><span class="line">        end if</span><br><span class="line">    else</span><br><span class="line">        if Bi(u1, v1) &lt; b1(u2, v2)</span><br><span class="line">            交换Bi(u1, v1) 和 Bi(u2, v2)</span><br><span class="line">        endif</span><br><span class="line">    end if</span><br><span class="line">    调整两个数据块的值以使得|B(u1, v1) - Bi(u2, v2)| &gt; x</span><br><span class="line">    b&apos;i = D^-1&#123;Bi&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">for i = 1, ..., l(M) do</span><br><span class="line">    选取一隐蔽数据块bi</span><br><span class="line">    Bi = D&#123;bi&#125;</span><br><span class="line">    if mi = 0 then</span><br><span class="line">        if Bi(u1, v1) &gt; Bi(u2, v2) then</span><br><span class="line">            交换Bi(u1, v1)和Bi(u2, v2)</span><br><span class="line">        end if</span><br><span class="line">    else</span><br><span class="line">        if Bi(u1, v1) &lt; b1(u2, v2)</span><br><span class="line">            交换Bi(u1, v1) 和 Bi(u2, v2)</span><br><span class="line">        endif</span><br><span class="line">    end if</span><br><span class="line">    调整两个数据块的值以使得|B(u1, v1) - Bi(u2, v2)| &gt; x</span><br><span class="line">    b&apos;i = D^-1&#123;Bi&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>解码过程</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">for i = 1, ..., l(M) do</span><br><span class="line">    获取与第i位相关的隐蔽数据块bi</span><br><span class="line">    Bi = D&#123;bi&#125;</span><br><span class="line">    if Bi(u1, v1) &lt;= Bi(u2, v2) then</span><br><span class="line">        mi = 0</span><br><span class="line">    else</span><br><span class="line">        mi = 1</span><br><span class="line">    end if</span><br><span class="line">end for</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">for i = 1, ..., l(M) do</span><br><span class="line">    获取与第i位相关的隐蔽数据块bi</span><br><span class="line">    Bi = D&#123;bi&#125;</span><br><span class="line">    if Bi(u1, v1) &lt;= Bi(u2, v2) then</span><br><span class="line">        mi = 0</span><br><span class="line">    else</span><br><span class="line">        mi = 1</span><br><span class="line">    end if</span><br><span class="line">end for</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
@@ -350,7 +345,7 @@
 </li>
 </ul>
 <h4 id="索引图像"><a href="#索引图像" class="headerlink" title="索引图像"></a>索引图像</h4><p>索引图像是一类比较特殊的图像，可以看做两个二维矩阵，其中一个矩阵与灰度图像的矩阵相似，它的元素由0-255之间的整数构成；另一个矩阵是一个255行3列的矩阵，该矩阵中的元素为0-1之间的实数 - 嵌入过程</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">索引图像1 --&gt; |图像类型转换|RGB图像1</span><br><span class="line">RGB图像1 --&gt; |图像分层|灰度图像1</span><br><span class="line">灰度图像1 --&gt; |嵌入水印|灰度图像2</span><br><span class="line">灰度图像2 --&gt; |图像合层|RGB图像2</span><br><span class="line">RGB图像2 --&gt; |图像类型转换|索引图像2</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">索引图像1 --&gt; |图像类型转换|RGB图像1</span><br><span class="line">RGB图像1 --&gt; |图像分层|灰度图像1</span><br><span class="line">灰度图像1 --&gt; |嵌入水印|灰度图像2</span><br><span class="line">灰度图像2 --&gt; |图像合层|RGB图像2</span><br><span class="line">RGB图像2 --&gt; |图像类型转换|索引图像2</span><br></pre></td></tr></table></figure>
 
 <h2 id="第五章"><a href="#第五章" class="headerlink" title="第五章"></a>第五章</h2><h4 id="细胞自动机"><a href="#细胞自动机" class="headerlink" title="细胞自动机"></a>细胞自动机</h4><ul>
 <li>定义：是能和其他细胞相互作用具有相同计算功能的细胞的数组</li>
@@ -371,7 +366,7 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">graph TD</span><br><span class="line"></span><br><span class="line">subgraph 分发子系统</span><br><span class="line">指纹编码</span><br><span class="line">指纹嵌入</span><br><span class="line">数据库维护</span><br><span class="line">end</span><br><span class="line">subgraph 跟踪子系统</span><br><span class="line">指纹提取</span><br><span class="line">指纹匹配</span><br><span class="line">end</span><br><span class="line">数据库维护 &gt; |攻击|指纹提取</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">graph TD</span><br><span class="line"></span><br><span class="line">subgraph 分发子系统</span><br><span class="line">指纹编码</span><br><span class="line">指纹嵌入</span><br><span class="line">数据库维护</span><br><span class="line">end</span><br><span class="line">subgraph 跟踪子系统</span><br><span class="line">指纹提取</span><br><span class="line">指纹匹配</span><br><span class="line">end</span><br><span class="line">数据库维护 &gt; |攻击|指纹提取</span><br></pre></td></tr></table></figure>
 
 <h2 id="第七章"><a href="#第七章" class="headerlink" title="第七章"></a>第七章</h2><h4 id="水印攻击方法分类"><a href="#水印攻击方法分类" class="headerlink" title="水印攻击方法分类"></a>水印攻击方法分类</h4><ul>
 <li>有意攻击<ul>
@@ -409,7 +404,7 @@
 <li>公证机制</li>
 <li>单向水印机制</li>
 </ul>
-<h4 id="商家，TTP与用户的关系"><a href="#商家，TTP与用户的关系" class="headerlink" title="商家，TTP与用户的关系"></a>商家，TTP与用户的关系</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">shangjia[商家]</span><br><span class="line">chanping((产品))</span><br><span class="line">TTP((TTP))</span><br><span class="line">wangluo(网络)</span><br><span class="line">banquan(版权信息数据库)</span><br><span class="line">yonghu[用户]</span><br><span class="line">wmb&#123;wmb&#125;</span><br><span class="line"></span><br><span class="line">shangjia --&gt; |加入秘密水印及公开水印|chanping</span><br><span class="line">shangjia --&gt; |发送注册信息Ku|TTP</span><br><span class="line">TTP --&gt; |发送Kt及WmW|shangjia</span><br><span class="line">chanping --&gt; wmb</span><br><span class="line">chanping --&gt; |上传|wangluo</span><br><span class="line">wangluo --&gt; TTP</span><br><span class="line">TTP --&gt; wangluo</span><br><span class="line">wangluo --&gt; |下载|yonghu</span><br><span class="line">TTP --&gt; banquan</span><br><span class="line">banquan --&gt; TTP</span><br><span class="line">TTP --&gt; |发送WmB|yonghu</span><br><span class="line">yonghu --&gt; |申请WmB|TTP</span><br><span class="line">wmb --&gt; yonghu</span><br></pre></td></tr></table></figure>
+<h4 id="商家，TTP与用户的关系"><a href="#商家，TTP与用户的关系" class="headerlink" title="商家，TTP与用户的关系"></a>商家，TTP与用户的关系</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">shangjia[商家]</span><br><span class="line">chanping((产品))</span><br><span class="line">TTP((TTP))</span><br><span class="line">wangluo(网络)</span><br><span class="line">banquan(版权信息数据库)</span><br><span class="line">yonghu[用户]</span><br><span class="line">wmb&#123;wmb&#125;</span><br><span class="line"></span><br><span class="line">shangjia --&gt; |加入秘密水印及公开水印|chanping</span><br><span class="line">shangjia --&gt; |发送注册信息Ku|TTP</span><br><span class="line">TTP --&gt; |发送Kt及WmW|shangjia</span><br><span class="line">chanping --&gt; wmb</span><br><span class="line">chanping --&gt; |上传|wangluo</span><br><span class="line">wangluo --&gt; TTP</span><br><span class="line">TTP --&gt; wangluo</span><br><span class="line">wangluo --&gt; |下载|yonghu</span><br><span class="line">TTP --&gt; banquan</span><br><span class="line">banquan --&gt; TTP</span><br><span class="line">TTP --&gt; |发送WmB|yonghu</span><br><span class="line">yonghu --&gt; |申请WmB|TTP</span><br><span class="line">wmb --&gt; yonghu</span><br></pre></td></tr></table></figure>
 
 <h2 id="第十章"><a href="#第十章" class="headerlink" title="第十章"></a>第十章</h2><h4 id="各种攻击"><a href="#各种攻击" class="headerlink" title="各种攻击"></a>各种攻击</h4><ul>
 <li>水印系统的攻击<ul>
@@ -468,7 +463,7 @@
 
 <div class="card">
     <div class="card-content">
-        <h3 class="menu-label has-text-centered">Like this article? Support the author with</h3>
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
         <div class="buttons is-centered">
             
                 
@@ -480,19 +475,6 @@
                 
 <div class="notification is-danger">
     You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
-</div>
-
-                
-                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
-
-<div class="notification is-danger">
-    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
-</div>
-
-                
-                
-<div class="notification is-danger">
-    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
 </div>
 
                 
@@ -532,23 +514,20 @@
             <div class="level-item has-text-centered" style="flex-shrink: 1">
                 <div>
                     
-                        <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="Your name">
+                        <figure class="image is-128x128 has-mb-6">
+                            <img class="is-rounded" src="https://www.gravatar.com/avatar/7df03aae9ce7351c0352c7582dd105e3?s=128" alt="Bankroft Vayne">
+                        </figure>
                     
                     
                     <p class="is-size-4 is-block">
-                        Your name
+                        Bankroft Vayne
                     </p>
                     
                     
                     <p class="is-size-6 is-block">
-                        Your title
+                        Bankroft
                     </p>
                     
-                    
-                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
-                        <i class="fas fa-map-marker-alt has-mr-7"></i>
-                        <span>Your location</span>
-                    </p>
                     
                 </div>
             </div>
@@ -557,7 +536,7 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Posts
+                        文章
                     </p>
                     <p class="title has-text-weight-normal">
                         19
@@ -567,7 +546,7 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Categories
+                        分类
                     </p>
                     <p class="title has-text-weight-normal">
                         0
@@ -577,7 +556,7 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Tags
+                        标签
                     </p>
                     <p class="title has-text-weight-normal">
                         5
@@ -586,38 +565,20 @@
             </div>
         </nav>
         <div class="level">
-            <a class="level-item button is-link is-rounded" href="https://github.com/ppoffice" target="_blank">
-                Follow</a>
+            <a class="level-item button is-link is-rounded" href="https://github.com/bankroft" target="_blank">
+                关注我</a>
         </div>
         
         
         <div class="level is-mobile">
             
-            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/ppoffice">
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/bankroft">
                 
                 <i class="fab fa-github"></i>
                 
             </a>
             
-            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="https://facebook.com">
-                
-                <i class="fab fa-facebook"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="https://twitter.com">
-                
-                <i class="fab fa-twitter"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="https://dribbble.com">
-                
-                <i class="fab fa-dribbble"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
+            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/atom.xml">
                 
                 <i class="fas fa-rss"></i>
                 
@@ -629,43 +590,171 @@
 </div>
     
         
-    
-        
-
-<div class="card widget">
+<div class="card widget" id="toc">
     <div class="card-content">
         <div class="menu">
-        <h3 class="menu-label">
-            Links
-        </h3>
-        <ul class="menu-list">
-        
-            <li>
-                <a class="level is-mobile" href="https://hexo.io" target="_blank">
-                    <span class="level-left">
-                        <span class="level-item">Hexo</span>
-                    </span>
-                    <span class="level-right">
-                        <span class="level-item tag">hexo.io</span>
-                    </span>
-                </a>
-            </li>
-        
-            <li>
-                <a class="level is-mobile" href="https://github.com/ppoffice" target="_blank">
-                    <span class="level-left">
-                        <span class="level-item">PPOffice</span>
-                    </span>
-                    <span class="level-right">
-                        <span class="level-item tag">github.com</span>
-                    </span>
-                </a>
-            </li>
-        
-        </ul>
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><ul class="menu-list"><li>
+        <a class="is-flex" href="#信息隐藏">
+        <span class="has-mr-6">1.1</span>
+        <span>信息隐藏</span>
+        </a></li><li>
+        <a class="is-flex" href="#信息能隐藏的原因">
+        <span class="has-mr-6">1.2</span>
+        <span>信息能隐藏的原因</span>
+        </a></li><li>
+        <a class="is-flex" href="#信息隐藏的分类">
+        <span class="has-mr-6">1.3</span>
+        <span>信息隐藏的分类</span>
+        </a></li><li>
+        <a class="is-flex" href="#信息隐藏技术特点">
+        <span class="has-mr-6">1.4</span>
+        <span>信息隐藏技术特点</span>
+        </a></li><li>
+        <a class="is-flex" href="#信息隐藏模型">
+        <span class="has-mr-6">1.5</span>
+        <span>信息隐藏模型</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#过程">
+        <span class="has-mr-6">1.5.1</span>
+        <span>过程</span>
+        </a></li></ul></li></ul><li>
+        <a class="is-flex" href="#第二章">
+        <span class="has-mr-6">2</span>
+        <span>第二章</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#信息隐藏方法">
+        <span class="has-mr-6">2.1</span>
+        <span>信息隐藏方法</span>
+        </a></li><li>
+        <a class="is-flex" href="#空域隐秘技术">
+        <span class="has-mr-6">2.2</span>
+        <span>空域隐秘技术</span>
+        </a></li><li>
+        <a class="is-flex" href="#最不重要位替换">
+        <span class="has-mr-6">2.3</span>
+        <span>最不重要位替换</span>
+        </a></li><li>
+        <a class="is-flex" href="#二进制图像中的信息隐藏">
+        <span class="has-mr-6">2.4</span>
+        <span>二进制图像中的信息隐藏</span>
+        </a></li><li>
+        <a class="is-flex" href="#变换域隐秘技术：DCT-离散余弦变换">
+        <span class="has-mr-6">2.5</span>
+        <span>变换域隐秘技术：DCT(离散余弦变换)</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#第三章">
+        <span class="has-mr-6">3</span>
+        <span>第三章</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#数字水印概述">
+        <span class="has-mr-6">3.1</span>
+        <span>数字水印概述</span>
+        </a></li><li>
+        <a class="is-flex" href="#基本原理、分类和模型">
+        <span class="has-mr-6">3.2</span>
+        <span>基本原理、分类和模型</span>
+        </a></li><li>
+        <a class="is-flex" href="#数字水印应用">
+        <span class="has-mr-6">3.3</span>
+        <span>数字水印应用</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#第四章">
+        <span class="has-mr-6">4</span>
+        <span>第四章</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#小波">
+        <span class="has-mr-6">4.1</span>
+        <span>小波</span>
+        </a></li><li>
+        <a class="is-flex" href="#索引图像">
+        <span class="has-mr-6">4.2</span>
+        <span>索引图像</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#第五章">
+        <span class="has-mr-6">5</span>
+        <span>第五章</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#细胞自动机">
+        <span class="has-mr-6">5.1</span>
+        <span>细胞自动机</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#第六章">
+        <span class="has-mr-6">6</span>
+        <span>第六章</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#数字指纹">
+        <span class="has-mr-6">6.1</span>
+        <span>数字指纹</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#第七章">
+        <span class="has-mr-6">7</span>
+        <span>第七章</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#水印攻击方法分类">
+        <span class="has-mr-6">7.1</span>
+        <span>水印攻击方法分类</span>
+        </a></li><li>
+        <a class="is-flex" href="#水印攻击的方式">
+        <span class="has-mr-6">7.2</span>
+        <span>水印攻击的方式</span>
+        </a></li><li>
+        <a class="is-flex" href="#解释攻击">
+        <span class="has-mr-6">7.3</span>
+        <span>解释攻击</span>
+        </a></li><li>
+        <a class="is-flex" href="#抗解释攻击">
+        <span class="has-mr-6">7.4</span>
+        <span>抗解释攻击</span>
+        </a></li><li>
+        <a class="is-flex" href="#商家，TTP与用户的关系">
+        <span class="has-mr-6">7.5</span>
+        <span>商家，TTP与用户的关系</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#第十章">
+        <span class="has-mr-6">8</span>
+        <span>第十章</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#各种攻击">
+        <span class="has-mr-6">8.1</span>
+        <span>各种攻击</span>
+        </a></li><li>
+        <a class="is-flex" href="#软件水印">
+        <span class="has-mr-6">8.2</span>
+        <span>软件水印</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#第十一章">
+        <span class="has-mr-6">9</span>
+        <span>第十一章</span>
+        </a></li><li>
+        <a class="is-flex" href="#第十二、三、四、五章">
+        <span class="has-mr-6">10</span>
+        <span>第十二、三、四、五章</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#视频水印定义">
+        <span class="has-mr-6">10.1</span>
+        <span>视频水印定义</span>
+        </a></li><li>
+        <a class="is-flex" href="#音频水印定义">
+        <span class="has-mr-6">10.2</span>
+        <span>音频水印定义</span>
+        </a></li><li>
+        <a class="is-flex" href="#隐秘分析定义">
+        <span class="has-mr-6">10.3</span>
+        <span>隐秘分析定义</span>
+        </a></li><li>
+        <a class="is-flex" href="#感知hash">
+        <span class="has-mr-6">10.4</span>
+        <span>感知hash</span>
+        </a></li></ul></li></ul>
         </div>
     </div>
 </div>
+
+    
+        
 
 
     
@@ -674,7 +763,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Categories
+                分类
             </h3>
             <ul class="menu-list">
             
@@ -687,7 +776,7 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Tag Cloud
+            标签云
         </h3>
         <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Python-curses/" style="font-size: 10px;">Python curses</a> <a href="/tags/Python-密码学-AES/" style="font-size: 10px;">Python 密码学 AES</a> <a href="/tags/Python-密码学-Vigenere/" style="font-size: 10px;">Python 密码学 Vigenere</a> <a href="/tags/linux-centos7-php-apache/" style="font-size: 10px;">linux centos7 php apache</a>
     </div>
@@ -701,7 +790,7 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            最新文章
         </h3>
         
         <article class="media">
@@ -807,14 +896,14 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            归档
         </h3>
         <ul class="menu-list">
         
         <li>
             <a class="level is-marginless" href="/archives/2019/08/">
                 <span class="level-start">
-                    <span class="level-item">August 2019</span>
+                    <span class="level-item">八月 2019</span>
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">19</span>
@@ -831,7 +920,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                标签
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -890,7 +979,7 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            最新文章
         </h3>
         
         <article class="media">
@@ -996,14 +1085,14 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            归档
         </h3>
         <ul class="menu-list">
         
         <li>
             <a class="level is-marginless" href="/archives/2019/08/">
                 <span class="level-start">
-                    <span class="level-item">August 2019</span>
+                    <span class="level-item">八月 2019</span>
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">19</span>
@@ -1020,7 +1109,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                标签
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -1091,25 +1180,9 @@
                 
                 
                 <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
-                        
-                        <i class="fab fa-creative-commons"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
                     <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
                         
                         <i class="fab fa-creative-commons-by"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
-                        
-                        <i class="fab fa-github"></i>
                         
                     </a>
                 </p>
@@ -1122,7 +1195,7 @@
 </footer>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
-<script>moment.locale("en");</script>
+<script>moment.locale("zh-CN");</script>
 
 
     
@@ -1188,7 +1261,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     
 
-<a id="back-to-top" title="Back to Top" href="javascript:;">
+<a id="back-to-top" title="回到顶端" href="javascript:;">
     <i class="fas fa-chevron-up"></i>
 </a>
 <script src="/js/back-to-top.js" defer></script>
@@ -1222,7 +1295,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <div class="searchbox ins-search">
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么...">
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -1234,11 +1307,11 @@ document.addEventListener('DOMContentLoaded', function () {
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: 'Posts',
-                PAGES: 'Pages',
-                CATEGORIES: 'Categories',
-                TAGS: 'Tags',
-                UNTITLED: '(Untitled)',
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
             },
             CONTENT_URL: '/content.json',
         };
