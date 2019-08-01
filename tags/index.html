@@ -2,24 +2,20 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-<title>python-curses - Bankroft</title>
+<title>Tags - Bankroft</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="description" content="官方文档该库是unix和Linux平台下操作终端字符界面的一个标准库。windows下使用会报_curses模块不存在错误，但是这里有python windows非官方库，下载curses.whl安装即可使用 用法先importimport curses 在使用这个模块的时候必须先初始化tmp = curses.initscr() 关闭getch或者getkey回显到终端curses.noecho">
-<meta name="keywords" content="Python curses">
-<meta property="og:type" content="article">
-<meta property="og:title" content="python-curses">
-<meta property="og:url" content="https://bankroft.github.io/2019/08/01/python-curses/index.html">
+    <meta name="keywords" content="linux centos7 php apache,Python curses,Python,Python 密码学 Vigenere,Python 密码学 AES">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Bankroft">
+<meta property="og:url" content="https://bankroft.github.io/tags/index.html">
 <meta property="og:site_name" content="Bankroft">
-<meta property="og:description" content="官方文档该库是unix和Linux平台下操作终端字符界面的一个标准库。windows下使用会报_curses模块不存在错误，但是这里有python windows非官方库，下载curses.whl安装即可使用 用法先importimport curses 在使用这个模块的时候必须先初始化tmp = curses.initscr() 关闭getch或者getkey回显到终端curses.noecho">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://bankroft.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-08-01T04:21:24.492Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python-curses">
-<meta name="twitter:description" content="官方文档该库是unix和Linux平台下操作终端字符界面的一个标准库。windows下使用会报_curses模块不存在错误，但是这里有python windows非官方库，下载curses.whl安装即可使用 用法先importimport curses 在使用这个模块的时候必须先初始化tmp = curses.initscr() 关闭getch或者getkey回显到终端curses.noecho">
+<meta name="twitter:title" content="Bankroft">
 <meta name="twitter:image" content="https://bankroft.github.io/images/og_image.png">
 
 
@@ -94,7 +90,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="python-curses" height="28">
+                <img src="/images/logo.svg" alt="Bankroft" height="28">
             
             </a>
         </div>
@@ -108,7 +104,7 @@
                 
                 <a class="navbar-item" href="/categories">Categories</a>
                 
-                <a class="navbar-item" href="/tags">Tags</a>
+                <a class="navbar-item is-active" href="/tags">Tags</a>
                 
                 <a class="navbar-item" href="/about">About</a>
                 
@@ -139,146 +135,53 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-08-01T04:20:49.000Z">2019-08-01</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 minutes read (About 538 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                python-curses
-            
-        </h1>
-        <div class="content">
-            <h2 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a><a href="https://docs.python.org/3.6/howto/curses.html" title="curses" target="_blank" rel="noopener">官方文档</a></h2><p>该库是unix和Linux平台下操作终端字符界面的一个标准库。windows下使用会报_curses模块不存在错误，但是<a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/" target="_blank" rel="noopener">这里</a>有python windows非官方库，下载curses.whl安装即可使用</p>
-<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><h4 id="先import"><a href="#先import" class="headerlink" title="先import"></a>先import</h4><p><code>import curses</code></p>
-<h4 id="在使用这个模块的时候必须先初始化"><a href="#在使用这个模块的时候必须先初始化" class="headerlink" title="在使用这个模块的时候必须先初始化"></a>在使用这个模块的时候必须先初始化</h4><p><code>tmp = curses.initscr()</code></p>
-<p>关闭getch或者getkey回显到终端<br><code>curses.noecho()</code></p>
-<p>不需要回车确认<br><code>curses.cbreak()</code></p>
-<p>开启键盘模式，意思就是按下方向键之类的会得到KEY_UP之类的值<br><code>stdscr.keypad(True)</code></p>
-<h4 id="字体和颜色问题"><a href="#字体和颜色问题" class="headerlink" title="字体和颜色问题"></a>字体和颜色问题</h4><h5 id="颜色"><a href="#颜色" class="headerlink" title="颜色"></a>颜色</h5><p>在使用颜色的时候需要</p>
-<p><code>curses.start_color()</code></p>
-<p>初始化颜色</p>
-<p><code>curses.init_pair(1, curses.COLOR_RED, curses.COLOR_BLACK)</code></p>
-<p>第一位参数1代表颜色ID，第二个参数curses.COLOR_RED表示字体颜色，第三个参数curses.COLOR_BLACK表示字体背景色</p>
-<h6 id="颜色支持"><a href="#颜色支持" class="headerlink" title="颜色支持"></a>颜色支持</h6><ul>
-<li>COLOR_MAGENTA</li>
-<li>COLOR_BLACK</li>
-<li>COLOR_WHITE</li>
-<li>COLOR_BLUE</li>
-<li>COLOR_RED</li>
-<li>COLOR_CYAN</li>
-<li>COLOR_YELLOW</li>
-<li>COLOR_GREED</li>
-</ul>
-<h5 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h5><h6 id="字体支持"><a href="#字体支持" class="headerlink" title="字体支持"></a>字体支持</h6><p>不一定都可用，视觉效果不一样</p>
-<ul>
-<li>A_BLINK   闪烁字,我反正没看出来闪烁</li>
-<li>A_BOLD   加粗？我还是没看出来</li>
-<li>A_DIM   暗淡的，。。。。</li>
-<li>A_REVERSE   反转背景色和字体色</li>
-<li>A_STANDOUT   突出显示</li>
-<li>A_UNDERLINE   下划线</li>
-</ul>
-<h4 id="显示文字"><a href="#显示文字" class="headerlink" title="显示文字"></a>显示文字</h4><p><code>tmp.addstr(y, x, str, attr)</code></p>
-<p>y为cursor y坐标，x为cursor x坐标， str为要显示的文字，attr为属性(上面说的颜色和字体)<br>例<br>字体<br><code>tmp.addstr(1, 2 &#39;bankroft&#39;, curses.A_BLINK)</code><br>颜色<br><code>tmp.addstr(stdscr.getkey(), curses.color_pair(1))</code></p>
-<p>要同时设置颜色和字体的话用 或 运算</p>
-<p>如<code>tmp.addstr(1, 2, &#39;bankroft&#39;, curses.color_pair(1)|curses.A_BOLD)</code></p>
-<h6 id="refresh"><a href="#refresh" class="headerlink" title="refresh"></a>refresh</h6><p><code>tmp.refresh()</code>用来刷新屏幕</p>
-<h4 id="用户输入"><a href="#用户输入" class="headerlink" title="用户输入"></a>用户输入</h4><h6 id="getch"><a href="#getch" class="headerlink" title="getch"></a>getch</h6><p><code>tmp.getch()</code><br>刷新屏幕，然后等待用户点击按键，在回显模式开启状态下会将输入值输出到cursor所在位置。注意，这里获取的是整数</p>
-<p><code>tmp.getkey()</code><br>和上面的一样，只是获取的值是字母，在开始键盘模式的时候特殊按键(如方向键)会返回类似于KEY_UP字符串</p>
-
-        </div>
-        
-        <div class="level is-size-7 is-uppercase">
-            <div class="level-start">
-                <div class="level-item">
-                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/Python-curses/">Python curses</a>
-                </div>
-            </div>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-<div class="card">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card widget">
     <div class="card-content">
-        <h3 class="menu-label has-text-centered">Like this article? Support the author with</h3>
-        <div class="buttons is-centered">
-            
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
                 
-<div class="notification is-danger">
-    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
-</div>
-
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Python/">
+                        <span class="tag">Python</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
                 
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Python-curses/">
+                        <span class="tag">Python curses</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
                 
-<div class="notification is-danger">
-    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
-</div>
-
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Python-密码学-AES/">
+                        <span class="tag">Python 密码学 AES</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
                 
-                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
-
-<div class="notification is-danger">
-    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
-</div>
-
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Python-密码学-Vigenere/">
+                        <span class="tag">Python 密码学 Vigenere</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
                 
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux-centos7-php-apache/">
+                        <span class="tag">linux centos7 php apache</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
                 
-<div class="notification is-danger">
-    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
-</div>
-
-                
+            </div>
         </div>
     </div>
-</div>
-
-
-
-<div class="card card-transparent">
-    <div class="level post-navigation is-flex-wrap is-mobile">
-        
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/08/01/python-terminal-ui/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">python terminal ui</span>
-            </a>
-        </div>
-        
-        
-        <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2019/08/01/python3实现Vigenere加密、解密、破解/">
-                <span class="level-item">python3实现Vigenere加密、解密、破解</span>
-                <i class="level-item fas fa-chevron-right"></i>
-            </a>
-        </div>
-        
-    </div>
-</div>
-
-
-</div>
+</div></div>
                 
 
 
@@ -837,7 +740,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="python-curses" height="28">
+                    <img src="/images/logo.svg" alt="Bankroft" height="28">
                 
                 </a>
                 <p class="is-size-7">
