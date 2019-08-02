@@ -5,9 +5,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="https://bankroft.github.io/"/>
+  <link href="https://www.bankroft.cn/"/>
   <updated>2019-08-02T12:18:23.690Z</updated>
-  <id>https://bankroft.github.io/</id>
+  <id>https://www.bankroft.cn/</id>
   
   <author>
     <name>Bankroft Vayne</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>信息隐藏</title>
-    <link href="https://bankroft.github.io/2019/08/01/%E4%BF%A1%E6%81%AF%E9%9A%90%E8%97%8F/"/>
-    <id>https://bankroft.github.io/2019/08/01/信息隐藏/</id>
+    <link href="https://www.bankroft.cn/2019/08/01/%E4%BF%A1%E6%81%AF%E9%9A%90%E8%97%8F/"/>
+    <id>https://www.bankroft.cn/2019/08/01/信息隐藏/</id>
     <published>2019-08-01T04:49:39.000Z</published>
     <updated>2019-08-02T12:18:23.690Z</updated>
     
@@ -35,19 +35,19 @@
     
     </summary>
     
-      <category term="杂七杂八" scheme="https://bankroft.github.io/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/"/>
+      <category term="杂七杂八" scheme="https://www.bankroft.cn/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/"/>
     
     
-      <category term="python" scheme="https://bankroft.github.io/tags/python/"/>
+      <category term="python" scheme="https://www.bankroft.cn/tags/python/"/>
     
-      <category term="信息隐藏" scheme="https://bankroft.github.io/tags/%E4%BF%A1%E6%81%AF%E9%9A%90%E8%97%8F/"/>
+      <category term="信息隐藏" scheme="https://www.bankroft.cn/tags/%E4%BF%A1%E6%81%AF%E9%9A%90%E8%97%8F/"/>
     
   </entry>
   
   <entry>
     <title>图片转字符画</title>
-    <link href="https://bankroft.github.io/2019/08/01/%E5%9B%BE%E7%89%87%E8%BD%AC%E5%AD%97%E7%AC%A6%E7%94%BB/"/>
-    <id>https://bankroft.github.io/2019/08/01/图片转字符画/</id>
+    <link href="https://www.bankroft.cn/2019/08/01/%E5%9B%BE%E7%89%87%E8%BD%AC%E5%AD%97%E7%AC%A6%E7%94%BB/"/>
+    <id>https://www.bankroft.cn/2019/08/01/图片转字符画/</id>
     <published>2019-08-01T04:49:11.000Z</published>
     <updated>2019-08-02T12:18:40.777Z</updated>
     
@@ -59,17 +59,17 @@
     
     </summary>
     
-      <category term="脚本" scheme="https://bankroft.github.io/categories/%E8%84%9A%E6%9C%AC/"/>
+      <category term="脚本" scheme="https://www.bankroft.cn/categories/%E8%84%9A%E6%9C%AC/"/>
     
     
-      <category term="python" scheme="https://bankroft.github.io/tags/python/"/>
+      <category term="python" scheme="https://www.bankroft.cn/tags/python/"/>
     
   </entry>
   
   <entry>
     <title>树莓派使用Nokia 5110屏幕显示网速温度等</title>
-    <link href="https://bankroft.github.io/2019/08/01/%E6%A0%91%E8%8E%93%E6%B4%BE%E4%BD%BF%E7%94%A8Nokia-5110%E5%B1%8F%E5%B9%95%E6%98%BE%E7%A4%BA%E7%BD%91%E9%80%9F%E6%B8%A9%E5%BA%A6%E7%AD%89/"/>
-    <id>https://bankroft.github.io/2019/08/01/树莓派使用Nokia-5110屏幕显示网速温度等/</id>
+    <link href="https://www.bankroft.cn/2019/08/01/%E6%A0%91%E8%8E%93%E6%B4%BE%E4%BD%BF%E7%94%A8Nokia-5110%E5%B1%8F%E5%B9%95%E6%98%BE%E7%A4%BA%E7%BD%91%E9%80%9F%E6%B8%A9%E5%BA%A6%E7%AD%89/"/>
+    <id>https://www.bankroft.cn/2019/08/01/树莓派使用Nokia-5110屏幕显示网速温度等/</id>
     <published>2019-08-01T04:48:47.000Z</published>
     <updated>2019-08-02T12:30:15.740Z</updated>
     
@@ -82,19 +82,19 @@
     
     </summary>
     
-      <category term="硬件" scheme="https://bankroft.github.io/categories/%E7%A1%AC%E4%BB%B6/"/>
+      <category term="硬件" scheme="https://www.bankroft.cn/categories/%E7%A1%AC%E4%BB%B6/"/>
     
     
-      <category term="python" scheme="https://bankroft.github.io/tags/python/"/>
+      <category term="python" scheme="https://www.bankroft.cn/tags/python/"/>
     
-      <category term="raspberryPi" scheme="https://bankroft.github.io/tags/raspberryPi/"/>
+      <category term="raspberryPi" scheme="https://www.bankroft.cn/tags/raspberryPi/"/>
     
   </entry>
   
   <entry>
     <title>记录一次django2.0的部署</title>
-    <link href="https://bankroft.github.io/2019/08/01/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1django2-0%E7%9A%84%E9%83%A8%E7%BD%B2/"/>
-    <id>https://bankroft.github.io/2019/08/01/记录一次django2-0的部署/</id>
+    <link href="https://www.bankroft.cn/2019/08/01/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1django2-0%E7%9A%84%E9%83%A8%E7%BD%B2/"/>
+    <id>https://www.bankroft.cn/2019/08/01/记录一次django2-0的部署/</id>
     <published>2019-08-01T04:48:20.000Z</published>
     <updated>2019-08-02T12:30:03.271Z</updated>
     
@@ -111,19 +111,19 @@
     
     </summary>
     
-      <category term="笔记" scheme="https://bankroft.github.io/categories/%E7%AC%94%E8%AE%B0/"/>
+      <category term="笔记" scheme="https://www.bankroft.cn/categories/%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="python" scheme="https://bankroft.github.io/tags/python/"/>
+      <category term="python" scheme="https://www.bankroft.cn/tags/python/"/>
     
-      <category term="django" scheme="https://bankroft.github.io/tags/django/"/>
+      <category term="django" scheme="https://www.bankroft.cn/tags/django/"/>
     
   </entry>
   
   <entry>
     <title>超星刷课</title>
-    <link href="https://bankroft.github.io/2019/08/01/%E8%B6%85%E6%98%9F%E5%88%B7%E8%AF%BE/"/>
-    <id>https://bankroft.github.io/2019/08/01/超星刷课/</id>
+    <link href="https://www.bankroft.cn/2019/08/01/%E8%B6%85%E6%98%9F%E5%88%B7%E8%AF%BE/"/>
+    <id>https://www.bankroft.cn/2019/08/01/超星刷课/</id>
     <published>2019-08-01T04:47:27.000Z</published>
     <updated>2019-08-02T12:19:12.315Z</updated>
     
@@ -137,19 +137,19 @@
     
     </summary>
     
-      <category term="工具" scheme="https://bankroft.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
+      <category term="工具" scheme="https://www.bankroft.cn/categories/%E5%B7%A5%E5%85%B7/"/>
     
     
-      <category term="刷课" scheme="https://bankroft.github.io/tags/%E5%88%B7%E8%AF%BE/"/>
+      <category term="刷课" scheme="https://www.bankroft.cn/tags/%E5%88%B7%E8%AF%BE/"/>
     
-      <category term="超星" scheme="https://bankroft.github.io/tags/%E8%B6%85%E6%98%9F/"/>
+      <category term="超星" scheme="https://www.bankroft.cn/tags/%E8%B6%85%E6%98%9F/"/>
     
   </entry>
   
   <entry>
     <title>编译python3.6笔记</title>
-    <link href="https://bankroft.github.io/2019/08/01/%E7%BC%96%E8%AF%91python3-6%E7%AC%94%E8%AE%B0/"/>
-    <id>https://bankroft.github.io/2019/08/01/编译python3-6笔记/</id>
+    <link href="https://www.bankroft.cn/2019/08/01/%E7%BC%96%E8%AF%91python3-6%E7%AC%94%E8%AE%B0/"/>
+    <id>https://www.bankroft.cn/2019/08/01/编译python3-6笔记/</id>
     <published>2019-08-01T04:47:02.000Z</published>
     <updated>2019-08-02T12:29:44.826Z</updated>
     
@@ -163,19 +163,19 @@
     
     </summary>
     
-      <category term="笔记" scheme="https://bankroft.github.io/categories/%E7%AC%94%E8%AE%B0/"/>
+      <category term="笔记" scheme="https://www.bankroft.cn/categories/%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="linux" scheme="https://bankroft.github.io/tags/linux/"/>
+      <category term="python" scheme="https://www.bankroft.cn/tags/python/"/>
     
-      <category term="python" scheme="https://bankroft.github.io/tags/python/"/>
+      <category term="linux" scheme="https://www.bankroft.cn/tags/linux/"/>
     
   </entry>
   
   <entry>
     <title>VMware install macOS</title>
-    <link href="https://bankroft.github.io/2019/08/01/VMware-install-macOS/"/>
-    <id>https://bankroft.github.io/2019/08/01/VMware-install-macOS/</id>
+    <link href="https://www.bankroft.cn/2019/08/01/VMware-install-macOS/"/>
+    <id>https://www.bankroft.cn/2019/08/01/VMware-install-macOS/</id>
     <published>2019-08-01T04:46:38.000Z</published>
     <updated>2019-08-02T12:31:52.506Z</updated>
     
@@ -191,17 +191,17 @@
     
     </summary>
     
-      <category term="杂七杂八" scheme="https://bankroft.github.io/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/"/>
+      <category term="杂七杂八" scheme="https://www.bankroft.cn/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/"/>
     
     
-      <category term="vmware" scheme="https://bankroft.github.io/tags/vmware/"/>
+      <category term="vmware" scheme="https://www.bankroft.cn/tags/vmware/"/>
     
   </entry>
   
   <entry>
     <title>raspberry pi 3 使用lcd1602</title>
-    <link href="https://bankroft.github.io/2019/08/01/raspberry-pi-3-%E4%BD%BF%E7%94%A8lcd1602/"/>
-    <id>https://bankroft.github.io/2019/08/01/raspberry-pi-3-使用lcd1602/</id>
+    <link href="https://www.bankroft.cn/2019/08/01/raspberry-pi-3-%E4%BD%BF%E7%94%A8lcd1602/"/>
+    <id>https://www.bankroft.cn/2019/08/01/raspberry-pi-3-使用lcd1602/</id>
     <published>2019-08-01T04:46:15.000Z</published>
     <updated>2019-08-02T12:19:32.197Z</updated>
     
@@ -213,17 +213,17 @@
     
     </summary>
     
-      <category term="硬件" scheme="https://bankroft.github.io/categories/%E7%A1%AC%E4%BB%B6/"/>
+      <category term="硬件" scheme="https://www.bankroft.cn/categories/%E7%A1%AC%E4%BB%B6/"/>
     
     
-      <category term="raspberryPi" scheme="https://bankroft.github.io/tags/raspberryPi/"/>
+      <category term="raspberryPi" scheme="https://www.bankroft.cn/tags/raspberryPi/"/>
     
   </entry>
   
   <entry>
     <title>python工信部投诉电信运营商</title>
-    <link href="https://bankroft.github.io/2019/08/01/python%E5%B7%A5%E4%BF%A1%E9%83%A8%E6%8A%95%E8%AF%89%E7%94%B5%E4%BF%A1%E8%BF%90%E8%90%A5%E5%95%86/"/>
-    <id>https://bankroft.github.io/2019/08/01/python工信部投诉电信运营商/</id>
+    <link href="https://www.bankroft.cn/2019/08/01/python%E5%B7%A5%E4%BF%A1%E9%83%A8%E6%8A%95%E8%AF%89%E7%94%B5%E4%BF%A1%E8%BF%90%E8%90%A5%E5%95%86/"/>
+    <id>https://www.bankroft.cn/2019/08/01/python工信部投诉电信运营商/</id>
     <published>2019-08-01T04:45:43.000Z</published>
     <updated>2019-08-02T12:19:43.037Z</updated>
     
@@ -235,17 +235,17 @@
     
     </summary>
     
-      <category term="脚本" scheme="https://bankroft.github.io/categories/%E8%84%9A%E6%9C%AC/"/>
+      <category term="脚本" scheme="https://www.bankroft.cn/categories/%E8%84%9A%E6%9C%AC/"/>
     
     
-      <category term="python" scheme="https://bankroft.github.io/tags/python/"/>
+      <category term="python" scheme="https://www.bankroft.cn/tags/python/"/>
     
   </entry>
   
   <entry>
     <title>python笔记&amp;错误问题</title>
-    <link href="https://bankroft.github.io/2019/08/01/python%E7%AC%94%E8%AE%B0-%E9%94%99%E8%AF%AF%E9%97%AE%E9%A2%98/"/>
-    <id>https://bankroft.github.io/2019/08/01/python笔记-错误问题/</id>
+    <link href="https://www.bankroft.cn/2019/08/01/python%E7%AC%94%E8%AE%B0-%E9%94%99%E8%AF%AF%E9%97%AE%E9%A2%98/"/>
+    <id>https://www.bankroft.cn/2019/08/01/python笔记-错误问题/</id>
     <published>2019-08-01T04:45:12.000Z</published>
     <updated>2019-08-02T12:31:16.231Z</updated>
     
@@ -257,17 +257,17 @@
     
     </summary>
     
-      <category term="笔记" scheme="https://bankroft.github.io/categories/%E7%AC%94%E8%AE%B0/"/>
+      <category term="笔记" scheme="https://www.bankroft.cn/categories/%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="python" scheme="https://bankroft.github.io/tags/python/"/>
+      <category term="python" scheme="https://www.bankroft.cn/tags/python/"/>
     
   </entry>
   
   <entry>
     <title>pycharm-pyqt5环境搭建</title>
-    <link href="https://bankroft.github.io/2019/08/01/pycharm-pyqt5%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
-    <id>https://bankroft.github.io/2019/08/01/pycharm-pyqt5环境搭建/</id>
+    <link href="https://www.bankroft.cn/2019/08/01/pycharm-pyqt5%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+    <id>https://www.bankroft.cn/2019/08/01/pycharm-pyqt5环境搭建/</id>
     <published>2019-08-01T04:44:28.000Z</published>
     <updated>2019-08-02T12:30:56.086Z</updated>
     
@@ -280,19 +280,19 @@
     
     </summary>
     
-      <category term="笔记" scheme="https://bankroft.github.io/categories/%E7%AC%94%E8%AE%B0/"/>
+      <category term="笔记" scheme="https://www.bankroft.cn/categories/%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="python" scheme="https://bankroft.github.io/tags/python/"/>
+      <category term="python" scheme="https://www.bankroft.cn/tags/python/"/>
     
-      <category term="pyqt5" scheme="https://bankroft.github.io/tags/pyqt5/"/>
+      <category term="pyqt5" scheme="https://www.bankroft.cn/tags/pyqt5/"/>
     
   </entry>
   
   <entry>
     <title>MySql命令记录(随时更新)</title>
-    <link href="https://bankroft.github.io/2019/08/01/MySql%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95-%E9%9A%8F%E6%97%B6%E6%9B%B4%E6%96%B0/"/>
-    <id>https://bankroft.github.io/2019/08/01/MySql命令记录-随时更新/</id>
+    <link href="https://www.bankroft.cn/2019/08/01/MySql%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95-%E9%9A%8F%E6%97%B6%E6%9B%B4%E6%96%B0/"/>
+    <id>https://www.bankroft.cn/2019/08/01/MySql命令记录-随时更新/</id>
     <published>2019-08-01T04:44:06.000Z</published>
     <updated>2019-08-02T12:20:10.332Z</updated>
     
@@ -306,17 +306,17 @@
     
     </summary>
     
-      <category term="笔记" scheme="https://bankroft.github.io/categories/%E7%AC%94%E8%AE%B0/"/>
+      <category term="笔记" scheme="https://www.bankroft.cn/categories/%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="MySQL" scheme="https://bankroft.github.io/tags/MySQL/"/>
+      <category term="MySQL" scheme="https://www.bankroft.cn/tags/MySQL/"/>
     
   </entry>
   
   <entry>
     <title>MySql错误处理记录</title>
-    <link href="https://bankroft.github.io/2019/08/01/MySql%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E8%AE%B0%E5%BD%95/"/>
-    <id>https://bankroft.github.io/2019/08/01/MySql错误处理记录/</id>
+    <link href="https://www.bankroft.cn/2019/08/01/MySql%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E8%AE%B0%E5%BD%95/"/>
+    <id>https://www.bankroft.cn/2019/08/01/MySql错误处理记录/</id>
     <published>2019-08-01T04:43:34.000Z</published>
     <updated>2019-08-02T12:20:14.552Z</updated>
     
@@ -335,17 +335,17 @@
     
     </summary>
     
-      <category term="笔记" scheme="https://bankroft.github.io/categories/%E7%AC%94%E8%AE%B0/"/>
+      <category term="笔记" scheme="https://www.bankroft.cn/categories/%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="MySQL" scheme="https://bankroft.github.io/tags/MySQL/"/>
+      <category term="MySQL" scheme="https://www.bankroft.cn/tags/MySQL/"/>
     
   </entry>
   
   <entry>
     <title>mongdb Linux操作记录</title>
-    <link href="https://bankroft.github.io/2019/08/01/mongdb-Linux%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95/"/>
-    <id>https://bankroft.github.io/2019/08/01/mongdb-Linux操作记录/</id>
+    <link href="https://www.bankroft.cn/2019/08/01/mongdb-Linux%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95/"/>
+    <id>https://www.bankroft.cn/2019/08/01/mongdb-Linux操作记录/</id>
     <published>2019-08-01T04:23:16.000Z</published>
     <updated>2019-08-02T12:18:06.904Z</updated>
     
@@ -358,19 +358,19 @@
     
     </summary>
     
-      <category term="笔记" scheme="https://bankroft.github.io/categories/%E7%AC%94%E8%AE%B0/"/>
+      <category term="笔记" scheme="https://www.bankroft.cn/categories/%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="mongodb" scheme="https://bankroft.github.io/tags/mongodb/"/>
+      <category term="mongodb" scheme="https://www.bankroft.cn/tags/mongodb/"/>
     
-      <category term="Linux" scheme="https://bankroft.github.io/tags/Linux/"/>
+      <category term="Linux" scheme="https://www.bankroft.cn/tags/Linux/"/>
     
   </entry>
   
   <entry>
     <title>centos7.2下php7.0+mysql5.7+apache环境</title>
-    <link href="https://bankroft.github.io/2019/08/01/centos7-2%E4%B8%8Bphp7-0-mysql5-7-apache%E7%8E%AF%E5%A2%83/"/>
-    <id>https://bankroft.github.io/2019/08/01/centos7-2下php7-0-mysql5-7-apache环境/</id>
+    <link href="https://www.bankroft.cn/2019/08/01/centos7-2%E4%B8%8Bphp7-0-mysql5-7-apache%E7%8E%AF%E5%A2%83/"/>
+    <id>https://www.bankroft.cn/2019/08/01/centos7-2下php7-0-mysql5-7-apache环境/</id>
     <published>2019-08-01T04:22:28.000Z</published>
     <updated>2019-08-02T12:18:15.538Z</updated>
     
@@ -384,23 +384,23 @@
     
     </summary>
     
-      <category term="笔记" scheme="https://bankroft.github.io/categories/%E7%AC%94%E8%AE%B0/"/>
+      <category term="笔记" scheme="https://www.bankroft.cn/categories/%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="linux" scheme="https://bankroft.github.io/tags/linux/"/>
+      <category term="linux" scheme="https://www.bankroft.cn/tags/linux/"/>
     
-      <category term="centos7" scheme="https://bankroft.github.io/tags/centos7/"/>
+      <category term="centos7" scheme="https://www.bankroft.cn/tags/centos7/"/>
     
-      <category term="php" scheme="https://bankroft.github.io/tags/php/"/>
+      <category term="php" scheme="https://www.bankroft.cn/tags/php/"/>
     
-      <category term="apache" scheme="https://bankroft.github.io/tags/apache/"/>
+      <category term="apache" scheme="https://www.bankroft.cn/tags/apache/"/>
     
   </entry>
   
   <entry>
     <title>python terminal ui</title>
-    <link href="https://bankroft.github.io/2019/08/01/python-terminal-ui/"/>
-    <id>https://bankroft.github.io/2019/08/01/python-terminal-ui/</id>
+    <link href="https://www.bankroft.cn/2019/08/01/python-terminal-ui/"/>
+    <id>https://www.bankroft.cn/2019/08/01/python-terminal-ui/</id>
     <published>2019-08-01T04:21:46.000Z</published>
     <updated>2019-08-02T12:19:51.687Z</updated>
     
@@ -415,17 +415,17 @@
     
     </summary>
     
-      <category term="笔记" scheme="https://bankroft.github.io/categories/%E7%AC%94%E8%AE%B0/"/>
+      <category term="笔记" scheme="https://www.bankroft.cn/categories/%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="python" scheme="https://bankroft.github.io/tags/python/"/>
+      <category term="python" scheme="https://www.bankroft.cn/tags/python/"/>
     
   </entry>
   
   <entry>
     <title>python-curses</title>
-    <link href="https://bankroft.github.io/2019/08/01/python-curses/"/>
-    <id>https://bankroft.github.io/2019/08/01/python-curses/</id>
+    <link href="https://www.bankroft.cn/2019/08/01/python-curses/"/>
+    <id>https://www.bankroft.cn/2019/08/01/python-curses/</id>
     <published>2019-08-01T04:20:49.000Z</published>
     <updated>2019-08-02T12:19:54.631Z</updated>
     
@@ -438,19 +438,19 @@
     
     </summary>
     
-      <category term="笔记" scheme="https://bankroft.github.io/categories/%E7%AC%94%E8%AE%B0/"/>
+      <category term="笔记" scheme="https://www.bankroft.cn/categories/%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="Python" scheme="https://bankroft.github.io/tags/Python/"/>
+      <category term="Python" scheme="https://www.bankroft.cn/tags/Python/"/>
     
-      <category term="curses" scheme="https://bankroft.github.io/tags/curses/"/>
+      <category term="curses" scheme="https://www.bankroft.cn/tags/curses/"/>
     
   </entry>
   
   <entry>
     <title>python3实现Vigenere加密、解密、破解</title>
-    <link href="https://bankroft.github.io/2019/08/01/python3%E5%AE%9E%E7%8E%B0Vigenere%E5%8A%A0%E5%AF%86%E3%80%81%E8%A7%A3%E5%AF%86%E3%80%81%E7%A0%B4%E8%A7%A3/"/>
-    <id>https://bankroft.github.io/2019/08/01/python3实现Vigenere加密、解密、破解/</id>
+    <link href="https://www.bankroft.cn/2019/08/01/python3%E5%AE%9E%E7%8E%B0Vigenere%E5%8A%A0%E5%AF%86%E3%80%81%E8%A7%A3%E5%AF%86%E3%80%81%E7%A0%B4%E8%A7%A3/"/>
+    <id>https://www.bankroft.cn/2019/08/01/python3实现Vigenere加密、解密、破解/</id>
     <published>2019-08-01T04:16:06.000Z</published>
     <updated>2019-08-02T12:19:57.420Z</updated>
     
@@ -462,21 +462,21 @@
     
     </summary>
     
-      <category term="脚本" scheme="https://bankroft.github.io/categories/%E8%84%9A%E6%9C%AC/"/>
+      <category term="脚本" scheme="https://www.bankroft.cn/categories/%E8%84%9A%E6%9C%AC/"/>
     
     
-      <category term="Python" scheme="https://bankroft.github.io/tags/Python/"/>
+      <category term="Python" scheme="https://www.bankroft.cn/tags/Python/"/>
     
-      <category term="密码学" scheme="https://bankroft.github.io/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/"/>
+      <category term="密码学" scheme="https://www.bankroft.cn/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/"/>
     
-      <category term="Vigenere" scheme="https://bankroft.github.io/tags/Vigenere/"/>
+      <category term="Vigenere" scheme="https://www.bankroft.cn/tags/Vigenere/"/>
     
   </entry>
   
   <entry>
     <title>Python3.6实现AES(ECB)</title>
-    <link href="https://bankroft.github.io/2019/08/01/Python3-6%E5%AE%9E%E7%8E%B0AES-ECB/"/>
-    <id>https://bankroft.github.io/2019/08/01/Python3-6实现AES-ECB/</id>
+    <link href="https://www.bankroft.cn/2019/08/01/Python3-6%E5%AE%9E%E7%8E%B0AES-ECB/"/>
+    <id>https://www.bankroft.cn/2019/08/01/Python3-6实现AES-ECB/</id>
     <published>2019-08-01T04:02:05.000Z</published>
     <updated>2019-08-02T12:20:01.477Z</updated>
     
@@ -488,14 +488,14 @@
     
     </summary>
     
-      <category term="脚本" scheme="https://bankroft.github.io/categories/%E8%84%9A%E6%9C%AC/"/>
+      <category term="脚本" scheme="https://www.bankroft.cn/categories/%E8%84%9A%E6%9C%AC/"/>
     
     
-      <category term="Python" scheme="https://bankroft.github.io/tags/Python/"/>
+      <category term="Python" scheme="https://www.bankroft.cn/tags/Python/"/>
     
-      <category term="密码学" scheme="https://bankroft.github.io/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/"/>
+      <category term="密码学" scheme="https://www.bankroft.cn/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/"/>
     
-      <category term="AES" scheme="https://bankroft.github.io/tags/AES/"/>
+      <category term="AES" scheme="https://www.bankroft.cn/tags/AES/"/>
     
   </entry>
   
