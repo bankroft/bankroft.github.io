@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    18 分钟 读完 (大约 2752 个字)
+                    18 分钟 读完 (大约 2751 个字)
                 </span>
                 
                 
@@ -169,17 +169,297 @@
         </h1>
         <div class="content">
             <h2 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h2><h4 id="信息隐藏"><a href="#信息隐藏" class="headerlink" title="信息隐藏"></a>信息隐藏</h4><p>所谓的信息隐藏就是将秘密信息隐藏到非秘密文件中不让对手发觉的一种方法</p>
-<h4 id="信息能隐藏的原因"><a href="#信息能隐藏的原因" class="headerlink" title="信息能隐藏的原因"></a>信息能隐藏的原因</h4>
+<h4 id="信息能隐藏的原因"><a href="#信息能隐藏的原因" class="headerlink" title="信息能隐藏的原因"></a>信息能隐藏的原因</h4><ul>
+<li>多媒体文件存在冗余性</li>
+<li>人体感官存在掩蔽效应</li>
+</ul>
+<h4 id="信息隐藏的分类"><a href="#信息隐藏的分类" class="headerlink" title="信息隐藏的分类"></a>信息隐藏的分类</h4><ul>
+<li>按载体类型分类<ul>
+<li>包括基于文本、图像等信息隐藏技术</li>
+</ul>
+</li>
+<li>按密钥分类<ul>
+<li>嵌入和提取采取相同密钥为对称隐藏算法，否则为公钥隐藏算法</li>
+</ul>
+</li>
+<li>按嵌入域分类<ul>
+<li>空域(时域)方法以及变换域方法<ul>
+<li>空域:用待隐藏的信息替换载体信息中的冗余部分，鲁棒性差，如LSB。</li>
+<li>变换域:把待隐藏的信息嵌入到载体的一个变换空间(频域)中，优点:<ul>
+<li>嵌入的信号量可以分布到空域的所有像素上</li>
+<li>人体感知系统耨写掩蔽特性可以更方便地结合到编码过程中</li>
+<li>与数据压缩标准(jpeg等)兼容，常用变换:离散余弦、小波变换</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>按提取的要求分类<ul>
+<li>提取信息不需要原始载体为盲隐藏，否则为非盲隐藏</li>
+</ul>
+</li>
+<li>按保护对象分类<ul>
+<li>隐写术<ul>
+<li>在不引起任何怀疑情况下秘密传送消息</li>
+</ul>
+</li>
+<li>水印技术<ul>
+<li>标识版权，要求鲁棒性和不可感知性</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="信息隐藏技术特点"><a href="#信息隐藏技术特点" class="headerlink" title="信息隐藏技术特点"></a>信息隐藏技术特点</h4><ul>
+<li>透明性<ul>
+<li>信息隐藏基本要求，利用人类视觉系统或人类听觉系统经过各种隐藏处理，使目标载体没有明显的属性变化，隐藏数据无法被看见</li>
+</ul>
+</li>
+<li>鲁棒性<ul>
+<li>指载体不会因为改动(信道噪声，重采样等)而丢失隐藏数据</li>
+</ul>
+</li>
+<li>不可检测性<ul>
+<li>指载体隐藏数据前后没有明显属性变化</li>
+</ul>
+</li>
+<li>安全性<ul>
+<li>隐藏算法具有较强抗攻击能力</li>
+</ul>
+</li>
+<li>自恢复性<ul>
+<li>部分载体数据仍能回复隐藏信号，而且不需要宿主信号</li>
+</ul>
+</li>
+<li>对称性<ul>
+<li>隐藏提取具有对称性</li>
+</ul>
+</li>
+<li>可纠错性<ul>
+<li>为了保证隐藏数据完整性，采取纠错编码</li>
+</ul>
+</li>
+</ul>
+<h4 id="信息隐藏模型"><a href="#信息隐藏模型" class="headerlink" title="信息隐藏模型"></a>信息隐藏模型</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">载体C --&gt; 提取算法</span><br><span class="line">密钥K2 --&gt; 提取算法</span><br><span class="line">密钥K1 --&gt; 嵌入算法</span><br><span class="line">载体C --&gt; 嵌入算法</span><br><span class="line">消息 --&gt; |M|预处理</span><br><span class="line">预处理 --&gt; |M|嵌入算法</span><br><span class="line">嵌入算法 --&gt; |S|提取算法</span><br><span class="line">提取算法 --&gt; |M|解预处理</span><br><span class="line">解预处理 --&gt; |M|消息</span><br></pre></td></tr></table></figure>
+
+<p>信息隐藏模型和提取系统模型</p>
+<h5 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h5><p>略</p>
+<h2 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h2><h4 id="信息隐藏方法"><a href="#信息隐藏方法" class="headerlink" title="信息隐藏方法"></a>信息隐藏方法</h4><ul>
+<li>替换系统</li>
+<li>变换域系统</li>
+<li>扩展频谱技术</li>
+<li>统计方法</li>
+<li>失真技术</li>
+<li>载体生成方法</li>
+</ul>
+<h4 id="空域隐秘技术"><a href="#空域隐秘技术" class="headerlink" title="空域隐秘技术"></a>空域隐秘技术</h4><p>LSB(最低有效位)编码(位平面或噪音插入工具)</p>
+<h4 id="最不重要位替换"><a href="#最不重要位替换" class="headerlink" title="最不重要位替换"></a>最不重要位替换</h4><ul>
+<li><p>位平面方法 对伪装载体稍微更改的抵抗力是相当脆弱的，LSB方法简单、常用且有效</p>
+</li>
+<li><p>嵌入过程算法(伪代码)</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for i = 1,..., l(c) do</span><br><span class="line">si &lt;-- ci</span><br><span class="line">end for</span><br><span class="line">for i = 1, ..., l(m) do</span><br><span class="line">计算存放第i个消息位的指针ji</span><br><span class="line">sji &lt;-- cji &lt;-- mi</span><br><span class="line">end for</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p>提取过程算法</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for i = 1, ..., l(m) do</span><br><span class="line">计算存放第i个消息位的指针ji</span><br><span class="line">mi &lt;-- LSB(cji)</span><br><span class="line">end for</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li>杂项 PGMSstalth中使用了随机序列来扩大秘密信息的容量，使得l(c) = l(m)</li>
+</ul>
+<h4 id="二进制图像中的信息隐藏"><a href="#二进制图像中的信息隐藏" class="headerlink" title="二进制图像中的信息隐藏"></a>二进制图像中的信息隐藏</h4><p>在嵌入过程中，为达到希望的像素关系，需要修改一些像素颜色。修改是在那些邻近像素有相反的颜色中进行的。 <code>入</code>是传入过程中能改变颜色的像素百分比</p>
+<ul>
+<li><p>嵌入算法</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">for i = 1, ..., l(M) do</span><br><span class="line">    do forever</span><br><span class="line">        随机选取一图像块Bj</span><br><span class="line">        if P1(Bj) &gt; R1 + 3入 or P1(Bj) &lt; R0 - 3入</span><br><span class="line">        if (ci = 1 and P1(Bj) &lt; R0) or (ci = 0 and P1(Bj) &gt; R1) then</span><br><span class="line">        将图像块Bj标记为不可用，即修改该图像块以使得：</span><br><span class="line">        P1(Bj) &lt; R0 - 3入 or P1(Bj) &gt; R1 + 3入</span><br><span class="line">        continue</span><br><span class="line">        end if</span><br><span class="line">        break</span><br><span class="line">        end do</span><br><span class="line"></span><br><span class="line">    if ci = 1 then</span><br><span class="line">        修改Bj以使得R1 + 入 &gt;= P1(Bj) &gt;= R1</span><br><span class="line">    else</span><br><span class="line">        修改Bj以使得 R0 - 入 &lt;=P0(Bj) &lt;= R0</span><br><span class="line">    end if</span><br><span class="line">end for</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p>提取算法</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">for i = 1, ..., l(M) do</span><br><span class="line">    do forever</span><br><span class="line">        随机选取一图像块Bj</span><br><span class="line">        if P1(Bj) &gt; R1 + 3入 or P1(Bj) &lt; R0 - 3入</span><br><span class="line">            继续</span><br><span class="line">        else</span><br><span class="line">            continue</span><br><span class="line">    end do</span><br><span class="line"></span><br><span class="line">    if P1(Bj) &gt; 50% then</span><br><span class="line">        mi &lt;-- 1</span><br><span class="line">    else </span><br><span class="line">        mi &lt;-- 0</span><br><span class="line">    endif</span><br><span class="line">end for</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>杂项</p>
+</li>
+</ul>
+<ol>
+<li>可以用一个RL元素序列<code>&lt;ai, RL(ai, a(i+1))&gt;</code>来描述一个二值图像</li>
+<li>游程长度为1的RL元素在嵌入处理前被废弃</li>
+<li>扫描行：略</li>
+</ol>
+<h4 id="变换域隐秘技术：DCT-离散余弦变换"><a href="#变换域隐秘技术：DCT-离散余弦变换" class="headerlink" title="变换域隐秘技术：DCT(离散余弦变换)"></a>变换域隐秘技术：DCT(离散余弦变换)</h4><ul>
+<li><p>编码 在编码处理过程中，发送者首先将载体图像分为8*8的像素块， 每一块只精确地编码一个秘密信息位。 令Bi - D{bi} 为DCT变换后的图像块</p>
+</li>
+<li><p>编码过程</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">for i = 1, ..., l(M) do</span><br><span class="line">    选取一隐蔽数据块bi</span><br><span class="line">    Bi = D&#123;bi&#125;</span><br><span class="line">    if mi = 0 then</span><br><span class="line">        if Bi(u1, v1) &gt; Bi(u2, v2) then</span><br><span class="line">            交换Bi(u1, v1)和Bi(u2, v2)</span><br><span class="line">        end if</span><br><span class="line">    else</span><br><span class="line">        if Bi(u1, v1) &lt; b1(u2, v2)</span><br><span class="line">            交换Bi(u1, v1) 和 Bi(u2, v2)</span><br><span class="line">        endif</span><br><span class="line">    end if</span><br><span class="line">    调整两个数据块的值以使得|B(u1, v1) - Bi(u2, v2)| &gt; x</span><br><span class="line">    b&apos;i = D^-1&#123;Bi&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>解码过程</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">for i = 1, ..., l(M) do</span><br><span class="line">    获取与第i位相关的隐蔽数据块bi</span><br><span class="line">    Bi = D&#123;bi&#125;</span><br><span class="line">    if Bi(u1, v1) &lt;= Bi(u2, v2) then</span><br><span class="line">        mi = 0</span><br><span class="line">    else</span><br><span class="line">        mi = 1</span><br><span class="line">    end if</span><br><span class="line">end for</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="第三章"><a href="#第三章" class="headerlink" title="第三章"></a>第三章</h2><h4 id="数字水印概述"><a href="#数字水印概述" class="headerlink" title="数字水印概述"></a>数字水印概述</h4><ul>
+<li><p>定义 利用人感官特点，在数字媒体加入信息，很难分别原始数字媒体和加入信息后的数字媒体，但是通过专业检验步骤能提取该信息，以此证明数字媒体的版权</p>
+</li>
+<li><p>应用领域 原始数据的真假鉴别、数据侦测与跟踪、数字产品版权保护等</p>
+</li>
+<li><p>特点</p>
+<ul>
+<li>透明性</li>
+<li>鲁棒性<ul>
+<li>安全性</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="基本原理、分类和模型"><a href="#基本原理、分类和模型" class="headerlink" title="基本原理、分类和模型"></a>基本原理、分类和模型</h4><ul>
+<li>水印嵌入系统的输入：水印、载体数据和一个可选的公钥和私钥</li>
+<li>嵌入水印技术<ul>
+<li>秘密水印技术</li>
+<li>公开水印技术</li>
+</ul>
+</li>
+<li>分类<ul>
+<li>秘密水印</li>
+<li>半秘密水印</li>
+<li>公开水印</li>
+</ul>
+</li>
+</ul>
+<h4 id="数字水印应用"><a href="#数字水印应用" class="headerlink" title="数字水印应用"></a>数字水印应用</h4><ul>
+<li>版权保护的水印</li>
+<li>盗版跟踪的数字指纹</li>
+<li>图像认证的水印</li>
+<li>隐蔽标识</li>
+<li>隐蔽通信及其对抗</li>
+<li>数字广播电视分级控制</li>
+</ul>
+<h2 id="第四章"><a href="#第四章" class="headerlink" title="第四章"></a>第四章</h2><h4 id="小波"><a href="#小波" class="headerlink" title="小波"></a>小波</h4><ul>
+<li>分析<ul>
+<li>小波变换是一种信号的时间-尺度(时间-频率)分析方法， 它具有多分辨率分析的特点</li>
+</ul>
+</li>
+</ul>
+<h4 id="索引图像"><a href="#索引图像" class="headerlink" title="索引图像"></a>索引图像</h4><p>索引图像是一类比较特殊的图像，可以看做两个二维矩阵，其中一个矩阵与灰度图像的矩阵相似，它的元素由0-255之间的整数构成；另一个矩阵是一个255行3列的矩阵，该矩阵中的元素为0-1之间的实数 - 嵌入过程</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">索引图像1 --&gt; |图像类型转换|RGB图像1</span><br><span class="line">RGB图像1 --&gt; |图像分层|灰度图像1</span><br><span class="line">灰度图像1 --&gt; |嵌入水印|灰度图像2</span><br><span class="line">灰度图像2 --&gt; |图像合层|RGB图像2</span><br><span class="line">RGB图像2 --&gt; |图像类型转换|索引图像2</span><br></pre></td></tr></table></figure>
+
+<h2 id="第五章"><a href="#第五章" class="headerlink" title="第五章"></a>第五章</h2><h4 id="细胞自动机"><a href="#细胞自动机" class="headerlink" title="细胞自动机"></a>细胞自动机</h4><ul>
+<li>定义：是能和其他细胞相互作用具有相同计算功能的细胞的数组</li>
+</ul>
+<h2 id="第六章"><a href="#第六章" class="headerlink" title="第六章"></a>第六章</h2><h4 id="数字指纹"><a href="#数字指纹" class="headerlink" title="数字指纹"></a>数字指纹</h4><ul>
+<li><p>概论：可以用于数据的版权保护，应用数字指纹可以识别数据的单个拷贝</p>
+</li>
+<li><p>定义：利用数字作品中普遍存在的冗余数据与随即性，向被分发的每一份软件、图像或者其他数据拷贝中引入一定的误差，使得该拷贝是唯一的，从而可以在被发现的非法再分发的拷贝时，可以根据该拷贝中的误差跟踪到不诚实原始购买者的一种数字作品版权保护技术</p>
+</li>
+<li><p>数字指纹系统模型</p>
+<ul>
+<li>构成<ul>
+<li>用于向数据中嵌入指纹的分发子系统</li>
+<li>用于跟踪非法再分发者的子系统</li>
+</ul>
+</li>
+<li>模型</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">graph TD</span><br><span class="line"></span><br><span class="line">subgraph 分发子系统</span><br><span class="line">指纹编码</span><br><span class="line">指纹嵌入</span><br><span class="line">数据库维护</span><br><span class="line">end</span><br><span class="line">subgraph 跟踪子系统</span><br><span class="line">指纹提取</span><br><span class="line">指纹匹配</span><br><span class="line">end</span><br><span class="line">数据库维护 &gt; |攻击|指纹提取</span><br></pre></td></tr></table></figure>
+
+<h2 id="第七章"><a href="#第七章" class="headerlink" title="第七章"></a>第七章</h2><h4 id="水印攻击方法分类"><a href="#水印攻击方法分类" class="headerlink" title="水印攻击方法分类"></a>水印攻击方法分类</h4><ul>
+<li>有意攻击<ul>
+<li>伪造水印的抽取</li>
+<li>伪造的肯定检测</li>
+<li>统计学上的水印抽取</li>
+<li>多重水印</li>
+</ul>
+</li>
+<li>无意攻击<ul>
+<li>剪切</li>
+<li>亮度、对比度修改</li>
+<li>增强、模糊和其他滤波算法</li>
+<li>放大、缩小和旋转</li>
+<li>有损压缩，JPEG</li>
+<li>添加噪声</li>
+</ul>
+</li>
+</ul>
+<h4 id="水印攻击的方式"><a href="#水印攻击的方式" class="headerlink" title="水印攻击的方式"></a>水印攻击的方式</h4><ul>
+<li>鲁棒性攻击</li>
+<li>表示攻击</li>
+<li>解释攻击</li>
+<li>法律攻击</li>
+</ul>
+<h4 id="解释攻击"><a href="#解释攻击" class="headerlink" title="解释攻击"></a>解释攻击</h4><ul>
+<li>解释攻击<ul>
+<li>水印仲裁</li>
+<li>解释攻击</li>
+</ul>
+</li>
+</ul>
+<h4 id="抗解释攻击"><a href="#抗解释攻击" class="headerlink" title="抗解释攻击"></a>抗解释攻击</h4><ul>
+<li>时戳机制</li>
+<li>公证机制</li>
+<li>单向水印机制</li>
+</ul>
+<h4 id="商家，TTP与用户的关系"><a href="#商家，TTP与用户的关系" class="headerlink" title="商家，TTP与用户的关系"></a>商家，TTP与用户的关系</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">shangjia[商家]</span><br><span class="line">chanping((产品))</span><br><span class="line">TTP((TTP))</span><br><span class="line">wangluo(网络)</span><br><span class="line">banquan(版权信息数据库)</span><br><span class="line">yonghu[用户]</span><br><span class="line">wmb&#123;wmb&#125;</span><br><span class="line"></span><br><span class="line">shangjia --&gt; |加入秘密水印及公开水印|chanping</span><br><span class="line">shangjia --&gt; |发送注册信息Ku|TTP</span><br><span class="line">TTP --&gt; |发送Kt及WmW|shangjia</span><br><span class="line">chanping --&gt; wmb</span><br><span class="line">chanping --&gt; |上传|wangluo</span><br><span class="line">wangluo --&gt; TTP</span><br><span class="line">TTP --&gt; wangluo</span><br><span class="line">wangluo --&gt; |下载|yonghu</span><br><span class="line">TTP --&gt; banquan</span><br><span class="line">banquan --&gt; TTP</span><br><span class="line">TTP --&gt; |发送WmB|yonghu</span><br><span class="line">yonghu --&gt; |申请WmB|TTP</span><br><span class="line">wmb --&gt; yonghu</span><br></pre></td></tr></table></figure>
+
+<h2 id="第十章"><a href="#第十章" class="headerlink" title="第十章"></a>第十章</h2><h4 id="各种攻击"><a href="#各种攻击" class="headerlink" title="各种攻击"></a>各种攻击</h4><ul>
+<li>水印系统的攻击<ul>
+<li>溢出攻击</li>
+<li>扭曲攻击</li>
+<li>附加攻击</li>
+<li>共谋攻击</li>
+</ul>
+</li>
+<li>指纹系统的攻击</li>
+</ul>
+<h4 id="软件水印"><a href="#软件水印" class="headerlink" title="软件水印"></a>软件水印</h4><ul>
+<li><p>静态软件水印</p>
+<ul>
+<li>静态数据水印</li>
+<li>代码水印</li>
+</ul>
+</li>
+<li><p>动态软件水印</p>
+<ul>
+<li>Easter Egg水印</li>
+<li>动态数据结构水印</li>
+<li>执行踪迹水印</li>
+</ul>
+</li>
+<li><p>动态图水印</p>
+</li>
+</ul>
+<h2 id="第十一章"><a href="#第十一章" class="headerlink" title="第十一章"></a>第十一章</h2><ul>
+<li>DRM概述 数字权益管理是指标定、描述、监督执行和管理数字资源的一系列软、硬件技术和服务</li>
+<li>DRM技术<ul>
+<li>资源标定技术</li>
+<li>权益说明语言</li>
+<li>密码技术</li>
+<li>数字水印</li>
+<li>可信计算</li>
+<li>安全通信协议</li>
+<li>访问控制</li>
+<li>安全内容存储</li>
+</ul>
+</li>
+</ul>
+<h2 id="第十二、三、四、五章"><a href="#第十二、三、四、五章" class="headerlink" title="第十二、三、四、五章"></a>第十二、三、四、五章</h2><h4 id="视频水印定义"><a href="#视频水印定义" class="headerlink" title="视频水印定义"></a>视频水印定义</h4><p>以视频为载体对象，加入可识别的数字信号或模式，且不影响视频数据的视觉质量，又能达到用于视频数据对象的版权及内容保护等目的的技术手段</p>
+<h4 id="音频水印定义"><a href="#音频水印定义" class="headerlink" title="音频水印定义"></a>音频水印定义</h4><p>将具有特定意义的信息嵌入到原始音频中而不显著地影响其质量。根据不同的应用，嵌入的水印数据可以是版权信息、序列号、文本(如音乐或艺术家的名字)、一个小的图像甚至是一小段视频</p>
+<h4 id="隐秘分析定义"><a href="#隐秘分析定义" class="headerlink" title="隐秘分析定义"></a>隐秘分析定义</h4><p>是信息隐藏技术的对抗技术，是对可疑的载体信息进行攻击，达到检测、破坏，甚至提取秘密信息的技术</p>
+<h4 id="感知hash"><a href="#感知hash" class="headerlink" title="感知hash"></a>感知hash</h4><p>又称鲁棒hash、信息的指纹等，是指一种不可逆的原始数据的数字摘要，具有单向性、脆弱性等特点，可保证原始数据的唯一性与不可篡改性</p>
+
         </div>
         
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/08/01/信息隐藏/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
         
         
     </div>
@@ -198,7 +478,7 @@
 
 
 
-<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left is-sticky">
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
     
         
 <div class="card widget">

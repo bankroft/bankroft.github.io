@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="下载源码包解压 编译安装./configure --prefix=$prefix/python36 --enable-optimizations CFLAGS=-fPICmake &amp;amp;&amp;amp; make install 完成后遇到解决办法">
-<meta name="keywords" content="python,linux">
+    <meta name="description" content="下载源码包解压 编译安装./configure --prefix=$prefix/python36 --enable-optimizations CFLAGS=-fPICmake &amp;amp;&amp;amp; make install 完成后遇到解决办法 ldd /usr/local/bin/python3 搜索 然后在/etc/ld.so.conf.d/下建立python.conf文件加入/usr/lo">
+<meta name="keywords" content="linux,python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="编译python3.6笔记">
 <meta property="og:url" content="https://bankroft.github.io/2019/08/01/编译python3-6笔记/index.html">
 <meta property="og:site_name" content="Bankroft">
-<meta property="og:description" content="下载源码包解压 编译安装./configure --prefix=$prefix/python36 --enable-optimizations CFLAGS=-fPICmake &amp;amp;&amp;amp; make install 完成后遇到解决办法">
+<meta property="og:description" content="下载源码包解压 编译安装./configure --prefix=$prefix/python36 --enable-optimizations CFLAGS=-fPICmake &amp;amp;&amp;amp; make install 完成后遇到解决办法 ldd /usr/local/bin/python3 搜索 然后在/etc/ld.so.conf.d/下建立python.conf文件加入/usr/lo">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://bankroft.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-08-02T10:22:32.110Z">
+<meta property="og:updated_time" content="2019-08-02T10:34:45.984Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="编译python3.6笔记">
-<meta name="twitter:description" content="下载源码包解压 编译安装./configure --prefix=$prefix/python36 --enable-optimizations CFLAGS=-fPICmake &amp;amp;&amp;amp; make install 完成后遇到解决办法">
+<meta name="twitter:description" content="下载源码包解压 编译安装./configure --prefix=$prefix/python36 --enable-optimizations CFLAGS=-fPICmake &amp;amp;&amp;amp; make install 完成后遇到解决办法 ldd /usr/local/bin/python3 搜索 然后在/etc/ld.so.conf.d/下建立python.conf文件加入/usr/lo">
 <meta name="twitter:image" content="https://bankroft.github.io/images/og_image.png">
 
 
@@ -148,7 +148,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    几秒 读完 (大约 110 个字)
+                    几秒 读完 (大约 109 个字)
                 </span>
                 
                 
@@ -169,9 +169,6 @@
             <p>下载源码包解压</p>
 <p>编译安装<br><code>./configure --prefix=$prefix/python36 --enable-optimizations CFLAGS=-fPIC</code><br><code>make &amp;&amp; make install</code></p>
 <p>完成后遇到<br><img src="https://www.bankroft.cn/usr/uploads/2019/04/2109938031.png" alt="图片"><br>解决办法</p>
-<a id="more"></a>
-
-
 <p><code>ldd /usr/local/bin/python3</code><br><img src="https://www.bankroft.cn/usr/uploads/2019/04/976726107.png" alt="图片"></p>
 <p>搜索<br><img src="https://www.bankroft.cn/usr/uploads/2019/04/13588785.png" alt="图片"></p>
 <p>然后在/etc/ld.so.conf.d/下建立python.conf<br>文件加入<br><code>/usr/local/lib/</code></p>
@@ -247,7 +244,7 @@
 
 
 
-<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left is-sticky">
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
     
         
 <div class="card widget">

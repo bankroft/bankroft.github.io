@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 116 个字)
+                    1 分钟 读完 (大约 115 个字)
                 </span>
                 
                 
@@ -176,16 +176,14 @@
 </ul>
 <p>[安装python3.6]</p>
 <p>安装virtualenv<br><code>pip3 install virtualenv</code><br>启用env等</p>
+<p>安装dj、mod_wsgi等<br><code>pip install mod_wsgi django==2.0</code><br>报错:<br>MySQL config<br>安装MySQL devel可解决 <code>yum install mysql-devel</code></p>
+<p>安装apache2.4<br><code>yum install httpd</code></p>
+<p>编译安装mod_wsgi:<br>下载安装<br><code>./configure --with-python=/usr/local/python3.6</code><br><code>make &amp;&amp; make install</code></p>
+<p><code>/etc/httpd/conf/httpd.conf</code>文件添加<br><code>LoadModule wsgi_module modules/mod_wsgi.so</code></p>
+<p>在<code>/etc/httpd/conf.d/</code>下新建<code>*.conf</code>文件,文件内容如下<br><img src="https://www.bankroft.cn/usr/uploads/2019/04/1297551393.png" alt="图片"><br>重启apache</p>
+
         </div>
         
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/08/01/记录一次django2-0的部署/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
         
         
     </div>
@@ -204,7 +202,7 @@
 
 
 
-<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left is-sticky">
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
     
         
 <div class="card widget">

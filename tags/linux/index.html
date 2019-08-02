@@ -2,7 +2,7 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-<title>标签: Linux - Bankroft</title>
+<title>标签: linux - Bankroft</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
@@ -10,7 +10,7 @@
     <meta name="keywords" content="blog,python,树莓派,RaspberryPi">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Bankroft">
-<meta property="og:url" content="https://bankroft.github.io/tags/Linux/index.html">
+<meta property="og:url" content="https://bankroft.github.io/tags/linux/index.html">
 <meta property="og:site_name" content="Bankroft">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://bankroft.github.io/images/og_image.png">
@@ -133,7 +133,7 @@
         <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
             <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">Linux</a></li>
+            <li class="is-active"><a href="#" aria-current="page">linux</a></li>
         </ul>
         </nav>
     </div>
@@ -145,7 +145,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-08-01T04:23:16.000Z">2019-08-01</time>
+                <time class="level-item has-text-grey" datetime="2019-08-01T04:47:02.000Z">2019-08-01</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/笔记/">笔记</a>
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    几秒 读完 (大约 102 个字)
+                    几秒 读完 (大约 109 个字)
                 </span>
                 
                 
@@ -164,26 +164,72 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/08/01/mongdb-Linux操作记录/">mongdb Linux操作记录</a>
+                <a class="has-link-black-ter" href="/2019/08/01/编译python3-6笔记/">编译python3.6笔记</a>
             
         </h1>
         <div class="content">
-            <h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><h3 id="系统"><a href="#系统" class="headerlink" title="系统"></a>系统</h3><p>Linux</p>
-<h3 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h3><p>Ubuntu 18.04</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h3 id="官网"><a href="#官网" class="headerlink" title="官网"></a>官网</h3><p><a href="https://www.mongodb.com/cn" " target="_blank" rel="noopener">https://www.mongodb.com/cn</a></p>
-<p>下载community server<br><a href="https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu1604-3.6.4.tgz" target="_blank" rel="noopener">我下载的</a></p>
-<h3 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h3><p><code>tar -zxvf mongodb-linux-x86_64.....</code></p>
-<h3 id="进入bin"><a href="#进入bin" class="headerlink" title="进入bin"></a>进入bin</h3><p><code>cd mo..../bin</code></p>
-<h1 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h1><h3 id="直接启动"><a href="#直接启动" class="headerlink" title="直接启动"></a>直接启动</h3><p><code>./mongod</code></p>
-<h3 id="指定data目录"><a href="#指定data目录" class="headerlink" title="指定data目录"></a>指定data目录</h3><p><code>./mongod --dbpath path</code></p>
-<h3 id="守护进程启动"><a href="#守护进程启动" class="headerlink" title="守护进程启动"></a>守护进程启动</h3><p><code>./mongod --fork --logpath path</code></p>
-<h3 id="auth启动"><a href="#auth启动" class="headerlink" title="auth启动"></a>auth启动</h3><h1 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h1><h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><h3 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h3><p><code>db.createUser(
-{
-user:&quot;username&quot;,
-pwd:&quot;password&quot;,
-roles:[{role:&quot;auth&quot;,db:&quot;database&quot;}]
-}
-)</code></p>
+            <p>下载源码包解压</p>
+<p>编译安装<br><code>./configure --prefix=$prefix/python36 --enable-optimizations CFLAGS=-fPIC</code><br><code>make &amp;&amp; make install</code></p>
+<p>完成后遇到<br><img src="https://www.bankroft.cn/usr/uploads/2019/04/2109938031.png" alt="图片"><br>解决办法</p>
+<p><code>ldd /usr/local/bin/python3</code><br><img src="https://www.bankroft.cn/usr/uploads/2019/04/976726107.png" alt="图片"></p>
+<p>搜索<br><img src="https://www.bankroft.cn/usr/uploads/2019/04/13588785.png" alt="图片"></p>
+<p>然后在/etc/ld.so.conf.d/下建立python.conf<br>文件加入<br><code>/usr/local/lib/</code></p>
+<p><code>ldconfig</code>命令</p>
+<p><a href="http://www.yecuizhen.com/archives/20/" title="报错解决参考文章" target="_blank" rel="noopener">报错解决参考文章</a></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-08-01T04:22:28.000Z">2019-08-01</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/笔记/">笔记</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    1 分钟 读完 (大约 158 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/08/01/centos7-2下php7-0-mysql5-7-apache环境/">centos7.2下php7.0+mysql5.7+apache环境</a>
+            
+        </h1>
+        <div class="content">
+            <h3 id="安装apache"><a href="#安装apache" class="headerlink" title="安装apache"></a>安装apache</h3><p><code>yum install httpd</code></p>
+<h3 id="安装php7-0"><a href="#安装php7-0" class="headerlink" title="安装php7.0"></a>安装php7.0</h3><p><a href="https://stringblog.com/lamp_server_install/" title="undefined" target="_blank" rel="noopener">参考文章</a></p>
+<h6 id="添加源"><a href="#添加源" class="headerlink" title="添加源"></a>添加源</h6><p><code>rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm</code><br><code>rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm</code></p>
+<h6 id="安装php7-0-1"><a href="#安装php7-0-1" class="headerlink" title="安装php7.0"></a>安装php7.0</h6><p><code>yum install php70w php70w-opcache php70w-mysql -y</code><br><code>yum install php70w-pdo php70w-xml php70w-mbstring -y</code><br><code>yum install php70w-mcrypt php70w-gd -y</code></p>
+<h3 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h3><p>MySQL5.7下载地址</p>
+<p><a href="https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.20-1.el7.x86_64.rpm-bundle.tar" title="mysql" target="_blank" rel="noopener">mysql</a></p>
+<p><code>wget -O mysql5.7.tar https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.20-1.el7.x86_64.rpm-bundle.tar</code><br>解压后安装</p>
+<p>or</p>
+<p><a href="http://blog.csdn.net/qsw412/article/details/51766798" title="undefined" target="_blank" rel="noopener">参考文章</a></p>
+<p>阿里源<br>安装MySQL后的操作可以看[mysql命令记录]</p>
 
         </div>
         
@@ -205,7 +251,7 @@ roles:[{role:&quot;auth&quot;,db:&quot;database&quot;}]
 
 
 
-<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left is-sticky">
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
     
         
 <div class="card widget">
@@ -1073,36 +1119,6 @@ document.addEventListener('DOMContentLoaded', function () {
     
     <div class="searchbox ins-search">
     <div class="searchbox-container ins-search-container">
-        <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么...">
-            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-        </div>
-        <div class="searchbox-result-wrapper ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
-    </div>
-</div>
-<script>
-    (function (window) {
-        var INSIGHT_CONFIG = {
-            TRANSLATION: {
-                POSTS: '文章',
-                PAGES: '页面',
-                CATEGORIES: '分类',
-                TAGS: '标签',
-                UNTITLED: '(无标题)',
-            },
-            CONTENT_URL: '/content.json',
-        };
-        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-    })(window);
-</script>
-<script src="/js/insight.js" defer></script>
-<link rel="stylesheet" href="/css/search.css">
-<link rel="stylesheet" href="/css/insight.css">
-    
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
-</html>ox-container ins-search-container">
         <div class="searchbox-input-wrapper">
             <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么...">
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
