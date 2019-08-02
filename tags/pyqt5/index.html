@@ -2,7 +2,7 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-<title>标签: Python curses - Bankroft</title>
+<title>标签: pyqt5 - Bankroft</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
@@ -10,7 +10,7 @@
     <meta name="keywords" content="blog,python,树莓派,RaspberryPi">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Bankroft">
-<meta property="og:url" content="https://bankroft.github.io/tags/Python-curses/index.html">
+<meta property="og:url" content="https://bankroft.github.io/tags/pyqt5/index.html">
 <meta property="og:site_name" content="Bankroft">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://bankroft.github.io/images/og_image.png">
@@ -133,7 +133,7 @@
         <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
             <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">Python curses</a></li>
+            <li class="is-active"><a href="#" aria-current="page">pyqt5</a></li>
         </ul>
         </nav>
     </div>
@@ -145,13 +145,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-08-01T04:20:49.000Z">2019-08-01</time>
+                <time class="level-item has-text-grey" datetime="2019-08-01T04:44:28.000Z">2019-08-01</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/笔记/">笔记</a>
+                </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 538 个字)
+                    几秒 读完 (大约 48 个字)
                 </span>
                 
                 
@@ -160,50 +164,22 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/08/01/python-curses/">python-curses</a>
+                <a class="has-link-black-ter" href="/2019/08/01/pycharm-pyqt5环境搭建/">pycharm-pyqt5环境搭建</a>
             
         </h1>
         <div class="content">
-            <h2 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a><a href="https://docs.python.org/3.6/howto/curses.html" title="curses" target="_blank" rel="noopener">官方文档</a></h2><p>该库是unix和Linux平台下操作终端字符界面的一个标准库。windows下使用会报_curses模块不存在错误，但是<a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/" target="_blank" rel="noopener">这里</a>有python windows非官方库，下载curses.whl安装即可使用</p>
-<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><h4 id="先import"><a href="#先import" class="headerlink" title="先import"></a>先import</h4><p><code>import curses</code></p>
-<h4 id="在使用这个模块的时候必须先初始化"><a href="#在使用这个模块的时候必须先初始化" class="headerlink" title="在使用这个模块的时候必须先初始化"></a>在使用这个模块的时候必须先初始化</h4><p><code>tmp = curses.initscr()</code></p>
-<p>关闭getch或者getkey回显到终端<br><code>curses.noecho()</code></p>
-<p>不需要回车确认<br><code>curses.cbreak()</code></p>
-<p>开启键盘模式，意思就是按下方向键之类的会得到KEY_UP之类的值<br><code>stdscr.keypad(True)</code></p>
-<h4 id="字体和颜色问题"><a href="#字体和颜色问题" class="headerlink" title="字体和颜色问题"></a>字体和颜色问题</h4><h5 id="颜色"><a href="#颜色" class="headerlink" title="颜色"></a>颜色</h5><p>在使用颜色的时候需要</p>
-<p><code>curses.start_color()</code></p>
-<p>初始化颜色</p>
-<p><code>curses.init_pair(1, curses.COLOR_RED, curses.COLOR_BLACK)</code></p>
-<p>第一位参数1代表颜色ID，第二个参数curses.COLOR_RED表示字体颜色，第三个参数curses.COLOR_BLACK表示字体背景色</p>
-<h6 id="颜色支持"><a href="#颜色支持" class="headerlink" title="颜色支持"></a>颜色支持</h6><ul>
-<li>COLOR_MAGENTA</li>
-<li>COLOR_BLACK</li>
-<li>COLOR_WHITE</li>
-<li>COLOR_BLUE</li>
-<li>COLOR_RED</li>
-<li>COLOR_CYAN</li>
-<li>COLOR_YELLOW</li>
-<li>COLOR_GREED</li>
-</ul>
-<h5 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h5><h6 id="字体支持"><a href="#字体支持" class="headerlink" title="字体支持"></a>字体支持</h6><p>不一定都可用，视觉效果不一样</p>
-<ul>
-<li>A_BLINK   闪烁字,我反正没看出来闪烁</li>
-<li>A_BOLD   加粗？我还是没看出来</li>
-<li>A_DIM   暗淡的，。。。。</li>
-<li>A_REVERSE   反转背景色和字体色</li>
-<li>A_STANDOUT   突出显示</li>
-<li>A_UNDERLINE   下划线</li>
-</ul>
-<h4 id="显示文字"><a href="#显示文字" class="headerlink" title="显示文字"></a>显示文字</h4><p><code>tmp.addstr(y, x, str, attr)</code></p>
-<p>y为cursor y坐标，x为cursor x坐标， str为要显示的文字，attr为属性(上面说的颜色和字体)<br>例<br>字体<br><code>tmp.addstr(1, 2 &#39;bankroft&#39;, curses.A_BLINK)</code><br>颜色<br><code>tmp.addstr(stdscr.getkey(), curses.color_pair(1))</code></p>
-<p>要同时设置颜色和字体的话用 或 运算</p>
-<p>如<code>tmp.addstr(1, 2, &#39;bankroft&#39;, curses.color_pair(1)|curses.A_BOLD)</code></p>
-<h6 id="refresh"><a href="#refresh" class="headerlink" title="refresh"></a>refresh</h6><p><code>tmp.refresh()</code>用来刷新屏幕</p>
-<h4 id="用户输入"><a href="#用户输入" class="headerlink" title="用户输入"></a>用户输入</h4><h6 id="getch"><a href="#getch" class="headerlink" title="getch"></a>getch</h6><p><code>tmp.getch()</code><br>刷新屏幕，然后等待用户点击按键，在回显模式开启状态下会将输入值输出到cursor所在位置。注意，这里获取的是整数</p>
-<p><code>tmp.getkey()</code><br>和上面的一样，只是获取的值是字母，在开始键盘模式的时候特殊按键(如方向键)会返回类似于KEY_UP字符串</p>
-
+            <h2 id="pycharm安装"><a href="#pycharm安装" class="headerlink" title="pycharm安装"></a>pycharm安装</h2><h2 id="安装pyqt库"><a href="#安装pyqt库" class="headerlink" title="安装pyqt库"></a>安装pyqt库</h2><p><code>pip install pyqt5</code><br><code>pip install pyqt-tools</code></p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/08/01/pycharm-pyqt5环境搭建/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -264,7 +240,7 @@
                         分类
                     </p>
                     <p class="title has-text-weight-normal">
-                        1
+                        5
                     </p>
                 </div>
             </div>
@@ -274,7 +250,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        7
+                        20
                     </p>
                 </div>
             </div>
@@ -319,12 +295,44 @@
             </h3>
             <ul class="menu-list">
             <li>
+        <a class="level is-marginless" href="/categories/工具/">
+            <span class="level-start">
+                <span class="level-item">工具</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/杂七杂八/">
             <span class="level-start">
                 <span class="level-item">杂七杂八</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/硬件/">
+            <span class="level-start">
+                <span class="level-item">硬件</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/笔记/">
+            <span class="level-start">
+                <span class="level-item">笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">10</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/脚本/">
+            <span class="level-start">
+                <span class="level-item">脚本</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
             </span>
         </a></li>
             </ul>
@@ -338,7 +346,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Python-curses/" style="font-size: 10px;">Python curses</a> <a href="/tags/Python-密码学-AES/" style="font-size: 10px;">Python 密码学 AES</a> <a href="/tags/Python-密码学-Vigenere/" style="font-size: 10px;">Python 密码学 Vigenere</a> <a href="/tags/linux-centos7-php-apache/" style="font-size: 10px;">linux centos7 php apache</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/信息隐藏/" style="font-size: 10px;">信息隐藏</a>
+        <a href="/tags/AES/" style="font-size: 10px;">AES</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 13.33px;">MySQL</a> <a href="/tags/Python/" style="font-size: 16.67px;">Python</a> <a href="/tags/Vigenere/" style="font-size: 10px;">Vigenere</a> <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/curses/" style="font-size: 10px;">curses</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/pyqt5/" style="font-size: 10px;">pyqt5</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/raspberryPi/" style="font-size: 13.33px;">raspberryPi</a> <a href="/tags/vmware/" style="font-size: 10px;">vmware</a> <a href="/tags/信息隐藏/" style="font-size: 10px;">信息隐藏</a> <a href="/tags/刷课/" style="font-size: 10px;">刷课</a> <a href="/tags/密码学/" style="font-size: 13.33px;">密码学</a> <a href="/tags/超星/" style="font-size: 10px;">超星</a>
     </div>
 </div>
 
@@ -385,7 +393,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-01T04:49:11.000Z">2019-08-01</time></div>
                     <a href="/2019/08/01/图片转字符画/" class="has-link-black-ter is-size-6">图片转字符画</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/脚本/">脚本</a>
                     </p>
                 </div>
             </div>
@@ -404,7 +412,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-01T04:48:47.000Z">2019-08-01</time></div>
                     <a href="/2019/08/01/树莓派使用Nokia-5110屏幕显示网速温度等/" class="has-link-black-ter is-size-6">树莓派使用Nokia 5110屏幕显示网速温度等</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/硬件/">硬件</a>
                     </p>
                 </div>
             </div>
@@ -423,7 +431,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-01T04:48:20.000Z">2019-08-01</time></div>
                     <a href="/2019/08/01/记录一次django2-0的部署/" class="has-link-black-ter is-size-6">记录一次django2.0的部署</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/笔记/">笔记</a>
                     </p>
                 </div>
             </div>
@@ -442,7 +450,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-01T04:47:27.000Z">2019-08-01</time></div>
                     <a href="/2019/08/01/超星刷课/" class="has-link-black-ter is-size-6">超星刷课</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
                     </p>
                 </div>
             </div>
@@ -485,36 +493,92 @@
             <div class="field is-grouped is-grouped-multiline">
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/AES/">
+                        <span class="tag">AES</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Linux/">
+                        <span class="tag">Linux</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MySQL/">
+                        <span class="tag">MySQL</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/Python/">
                         <span class="tag">Python</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vigenere/">
+                        <span class="tag">Vigenere</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Python-curses/">
-                        <span class="tag">Python curses</span>
+                    <a class="tags has-addons" href="/tags/apache/">
+                        <span class="tag">apache</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Python-密码学-AES/">
-                        <span class="tag">Python 密码学 AES</span>
+                    <a class="tags has-addons" href="/tags/centos7/">
+                        <span class="tag">centos7</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Python-密码学-Vigenere/">
-                        <span class="tag">Python 密码学 Vigenere</span>
+                    <a class="tags has-addons" href="/tags/curses/">
+                        <span class="tag">curses</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/linux-centos7-php-apache/">
-                        <span class="tag">linux centos7 php apache</span>
+                    <a class="tags has-addons" href="/tags/django/">
+                        <span class="tag">django</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux/">
+                        <span class="tag">linux</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mongodb/">
+                        <span class="tag">mongodb</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/php/">
+                        <span class="tag">php</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pyqt5/">
+                        <span class="tag">pyqt5</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -522,6 +586,20 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/python/">
                         <span class="tag">python</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/raspberryPi/">
+                        <span class="tag">raspberryPi</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/vmware/">
+                        <span class="tag">vmware</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -529,6 +607,27 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/信息隐藏/">
                         <span class="tag">信息隐藏</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/刷课/">
+                        <span class="tag">刷课</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/密码学/">
+                        <span class="tag">密码学</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/超星/">
+                        <span class="tag">超星</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -588,7 +687,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-01T04:49:11.000Z">2019-08-01</time></div>
                     <a href="/2019/08/01/图片转字符画/" class="has-link-black-ter is-size-6">图片转字符画</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/脚本/">脚本</a>
                     </p>
                 </div>
             </div>
@@ -607,7 +706,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-01T04:48:47.000Z">2019-08-01</time></div>
                     <a href="/2019/08/01/树莓派使用Nokia-5110屏幕显示网速温度等/" class="has-link-black-ter is-size-6">树莓派使用Nokia 5110屏幕显示网速温度等</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/硬件/">硬件</a>
                     </p>
                 </div>
             </div>
@@ -626,7 +725,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-01T04:48:20.000Z">2019-08-01</time></div>
                     <a href="/2019/08/01/记录一次django2-0的部署/" class="has-link-black-ter is-size-6">记录一次django2.0的部署</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/笔记/">笔记</a>
                     </p>
                 </div>
             </div>
@@ -645,7 +744,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-01T04:47:27.000Z">2019-08-01</time></div>
                     <a href="/2019/08/01/超星刷课/" class="has-link-black-ter is-size-6">超星刷课</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
                     </p>
                 </div>
             </div>
@@ -688,36 +787,92 @@
             <div class="field is-grouped is-grouped-multiline">
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/AES/">
+                        <span class="tag">AES</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Linux/">
+                        <span class="tag">Linux</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MySQL/">
+                        <span class="tag">MySQL</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/Python/">
                         <span class="tag">Python</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vigenere/">
+                        <span class="tag">Vigenere</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Python-curses/">
-                        <span class="tag">Python curses</span>
+                    <a class="tags has-addons" href="/tags/apache/">
+                        <span class="tag">apache</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Python-密码学-AES/">
-                        <span class="tag">Python 密码学 AES</span>
+                    <a class="tags has-addons" href="/tags/centos7/">
+                        <span class="tag">centos7</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Python-密码学-Vigenere/">
-                        <span class="tag">Python 密码学 Vigenere</span>
+                    <a class="tags has-addons" href="/tags/curses/">
+                        <span class="tag">curses</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/linux-centos7-php-apache/">
-                        <span class="tag">linux centos7 php apache</span>
+                    <a class="tags has-addons" href="/tags/django/">
+                        <span class="tag">django</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux/">
+                        <span class="tag">linux</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mongodb/">
+                        <span class="tag">mongodb</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/php/">
+                        <span class="tag">php</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pyqt5/">
+                        <span class="tag">pyqt5</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -725,6 +880,20 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/python/">
                         <span class="tag">python</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/raspberryPi/">
+                        <span class="tag">raspberryPi</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/vmware/">
+                        <span class="tag">vmware</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -732,6 +901,27 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/信息隐藏/">
                         <span class="tag">信息隐藏</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/刷课/">
+                        <span class="tag">刷课</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/密码学/">
+                        <span class="tag">密码学</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/超星/">
+                        <span class="tag">超星</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
