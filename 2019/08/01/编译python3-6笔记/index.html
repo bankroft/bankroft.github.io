@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="下载源码包解压 编译安装./configure --prefix=$prefix/python36 --enable-optimizations CFLAGS=-fPICmake &amp;amp;&amp;amp; make install 完成后遇到解决办法 ldd /usr/local/bin/python3 搜索 然后在/etc/ld.so.conf.d/下建立python.conf文件加入/usr/lo">
+    <meta name="description" content="下载源码包解压 编译安装./configure --prefix=$prefix/python36 --enable-optimizations CFLAGS=-fPICmake &amp;amp;&amp;amp; make install 完成后遇到解决办法">
 <meta name="keywords" content="linux,python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="编译python3.6笔记">
 <meta property="og:url" content="https://bankroft.github.io/2019/08/01/编译python3-6笔记/index.html">
 <meta property="og:site_name" content="Bankroft">
-<meta property="og:description" content="下载源码包解压 编译安装./configure --prefix=$prefix/python36 --enable-optimizations CFLAGS=-fPICmake &amp;amp;&amp;amp; make install 完成后遇到解决办法 ldd /usr/local/bin/python3 搜索 然后在/etc/ld.so.conf.d/下建立python.conf文件加入/usr/lo">
+<meta property="og:description" content="下载源码包解压 编译安装./configure --prefix=$prefix/python36 --enable-optimizations CFLAGS=-fPICmake &amp;amp;&amp;amp; make install 完成后遇到解决办法">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://bankroft.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-08-02T10:34:45.984Z">
+<meta property="og:updated_time" content="2019-08-02T12:29:44.826Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="编译python3.6笔记">
-<meta name="twitter:description" content="下载源码包解压 编译安装./configure --prefix=$prefix/python36 --enable-optimizations CFLAGS=-fPICmake &amp;amp;&amp;amp; make install 完成后遇到解决办法 ldd /usr/local/bin/python3 搜索 然后在/etc/ld.so.conf.d/下建立python.conf文件加入/usr/lo">
+<meta name="twitter:description" content="下载源码包解压 编译安装./configure --prefix=$prefix/python36 --enable-optimizations CFLAGS=-fPICmake &amp;amp;&amp;amp; make install 完成后遇到解决办法">
 <meta name="twitter:image" content="https://bankroft.github.io/images/og_image.png">
 
 
@@ -148,7 +148,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    几秒 读完 (大约 109 个字)
+                    几秒 读完 (大约 101 个字)
                 </span>
                 
                 
@@ -168,9 +168,11 @@
         <div class="content">
             <p>下载源码包解压</p>
 <p>编译安装<br><code>./configure --prefix=$prefix/python36 --enable-optimizations CFLAGS=-fPIC</code><br><code>make &amp;&amp; make install</code></p>
-<p>完成后遇到<br><img src="https://www.bankroft.cn/usr/uploads/2019/04/2109938031.png" alt="图片"><br>解决办法</p>
-<p><code>ldd /usr/local/bin/python3</code><br><img src="https://www.bankroft.cn/usr/uploads/2019/04/976726107.png" alt="图片"></p>
-<p>搜索<br><img src="https://www.bankroft.cn/usr/uploads/2019/04/13588785.png" alt="图片"></p>
+<p>完成后遇到<br><img src="/images/article_imgs/2109938031.png" alt="图片"><br>解决办法</p>
+<a id="more"></a>
+
+<p><code>ldd /usr/local/bin/python3</code><br><img src="/images/article_imgs/976726107.png" alt="图片"></p>
+<p>搜索<br><img src="/images/article_imgs/2019/04/13588785.png" alt="图片"></p>
 <p>然后在/etc/ld.so.conf.d/下建立python.conf<br>文件加入<br><code>/usr/local/lib/</code></p>
 <p><code>ldconfig</code>命令</p>
 <p><a href="http://www.yecuizhen.com/archives/20/" title="报错解决参考文章" target="_blank" rel="noopener">报错解决参考文章</a></p>
@@ -199,15 +201,23 @@
         <div class="buttons is-centered">
             
                 
-<div class="notification is-danger">
-    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
-</div>
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/alipay.jpg" alt="支付宝"></div>
+</a>
 
                 
                 
-<div class="notification is-danger">
-    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
-</div>
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/wechat.png" alt="微信"></div>
+</a>
 
                 
         </div>

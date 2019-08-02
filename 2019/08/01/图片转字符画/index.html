@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="12345678910111213141516171819202122232425262728293031323334# coding:utf-8from PIL import Imagedef img_to_txt(file_sou, file_dst):    x = 120    # str_ = list(&amp;apos;$@B%8&amp;amp;amp;WM#*oahkbdpqwmZO0QLCJU">
+    <meta name="description" content="code:">
 <meta name="keywords" content="python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="图片转字符画">
 <meta property="og:url" content="https://bankroft.github.io/2019/08/01/图片转字符画/index.html">
 <meta property="og:site_name" content="Bankroft">
-<meta property="og:description" content="12345678910111213141516171819202122232425262728293031323334# coding:utf-8from PIL import Imagedef img_to_txt(file_sou, file_dst):    x = 120    # str_ = list(&amp;apos;$@B%8&amp;amp;amp;WM#*oahkbdpqwmZO0QLCJU">
+<meta property="og:description" content="code:">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://bankroft.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-08-02T10:34:30.550Z">
+<meta property="og:updated_time" content="2019-08-02T12:18:40.777Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图片转字符画">
-<meta name="twitter:description" content="12345678910111213141516171819202122232425262728293031323334# coding:utf-8from PIL import Imagedef img_to_txt(file_sou, file_dst):    x = 120    # str_ = list(&amp;apos;$@B%8&amp;amp;amp;WM#*oahkbdpqwmZO0QLCJU">
+<meta name="twitter:description" content="code:">
 <meta name="twitter:image" content="https://bankroft.github.io/images/og_image.png">
 
 
@@ -148,7 +148,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 126 个字)
+                    1 分钟 读完 (大约 128 个字)
                 </span>
                 
                 
@@ -166,7 +166,10 @@
             
         </h1>
         <div class="content">
-            <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"># coding:utf-8</span><br><span class="line">from PIL import Image</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def img_to_txt(file_sou, file_dst):</span><br><span class="line">    x = 120</span><br><span class="line">    # str_ = list(&apos;$@B%8&amp;amp;WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1&#123;&#125;[]?-_+~&amp;lt;&amp;gt;i!lI;:,\&quot;^`\&apos;. &apos;)</span><br><span class="line">    str_ = list(&apos;@#+:,`.&apos;)</span><br><span class="line">    # str_ = list(&apos;$@B%8&amp;amp;WM#* &apos;)</span><br><span class="line">    # str_ = list(&apos; .,\&quot;;*=+&apos;)</span><br><span class="line">    # 亮暗反转</span><br><span class="line">    # str_.reverse()</span><br><span class="line">    img = Image.open(file_sou).convert(&apos;L&apos;)</span><br><span class="line">    img = img.resize((x, img.size[1] // ((img.size[0] // x))))</span><br><span class="line">    size = img.size</span><br><span class="line">    dst = &apos;&apos;</span><br><span class="line">    for y in range(size[1]):</span><br><span class="line">        for x in range(size[0]):</span><br><span class="line">            tmp = img.getpixel((x, y))</span><br><span class="line">            dst += str_[(tmp*(len(str_) - 1)) // 255] * 2</span><br><span class="line">        dst += &apos;\n&apos;</span><br><span class="line">    with open(file_dst, &apos;w&apos;) as f:</span><br><span class="line">        f.write(dst)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    import os</span><br><span class="line">    import sys</span><br><span class="line">    filename_s = sys.argv[1]</span><br><span class="line">    filename_d = sys.argv[2]</span><br><span class="line">    if os.path.exists(filename_s):</span><br><span class="line">        img_to_txt(filename_s, filename_d)</span><br><span class="line">    else:</span><br><span class="line">        print(&quot;file not found&quot;)</span><br></pre></td></tr></table></figure>
+            <p>code:</p>
+<a id="more"></a>
+
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"># coding:utf-8</span><br><span class="line">from PIL import Image</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def img_to_txt(file_sou, file_dst):</span><br><span class="line">    x = 120</span><br><span class="line">    # str_ = list(&apos;$@B%8&amp;amp;WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1&#123;&#125;[]?-_+~&amp;lt;&amp;gt;i!lI;:,\&quot;^`\&apos;. &apos;)</span><br><span class="line">    str_ = list(&apos;@#+:,`.&apos;)</span><br><span class="line">    # str_ = list(&apos;$@B%8&amp;amp;WM#* &apos;)</span><br><span class="line">    # str_ = list(&apos; .,\&quot;;*=+&apos;)</span><br><span class="line">    # 亮暗反转</span><br><span class="line">    # str_.reverse()</span><br><span class="line">    img = Image.open(file_sou).convert(&apos;L&apos;)</span><br><span class="line">    img = img.resize((x, img.size[1] // ((img.size[0] // x))))</span><br><span class="line">    size = img.size</span><br><span class="line">    dst = &apos;&apos;</span><br><span class="line">    for y in range(size[1]):</span><br><span class="line">        for x in range(size[0]):</span><br><span class="line">            tmp = img.getpixel((x, y))</span><br><span class="line">            dst += str_[(tmp*(len(str_) - 1)) // 255] * 2</span><br><span class="line">        dst += &apos;\n&apos;</span><br><span class="line">    with open(file_dst, &apos;w&apos;) as f:</span><br><span class="line">        f.write(dst)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    import os</span><br><span class="line">    import sys</span><br><span class="line">    filename_s = sys.argv[1]</span><br><span class="line">    filename_d = sys.argv[2]</span><br><span class="line">    if os.path.exists(filename_s):</span><br><span class="line">        img_to_txt(filename_s, filename_d)</span><br><span class="line">    else:</span><br><span class="line">        print(&quot;file not found&quot;)</span><br></pre></td></tr></table></figure>
         </div>
         
         <div class="level is-size-7 is-uppercase">
@@ -191,15 +194,23 @@
         <div class="buttons is-centered">
             
                 
-<div class="notification is-danger">
-    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
-</div>
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/alipay.jpg" alt="支付宝"></div>
+</a>
 
                 
                 
-<div class="notification is-danger">
-    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
-</div>
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/wechat.png" alt="微信"></div>
+</a>
 
                 
         </div>

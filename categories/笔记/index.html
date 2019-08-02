@@ -156,7 +156,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 115 个字)
+                    1 分钟 读完 (大约 113 个字)
                 </span>
                 
                 
@@ -175,16 +175,16 @@
 <li>mod_wsgi4.2</li>
 <li>centos 7</li>
 </ul>
-<p>[安装python3.6]</p>
-<p>安装virtualenv<br><code>pip3 install virtualenv</code><br>启用env等</p>
-<p>安装dj、mod_wsgi等<br><code>pip install mod_wsgi django==2.0</code><br>报错:<br>MySQL config<br>安装MySQL devel可解决 <code>yum install mysql-devel</code></p>
-<p>安装apache2.4<br><code>yum install httpd</code></p>
-<p>编译安装mod_wsgi:<br>下载安装<br><code>./configure --with-python=/usr/local/python3.6</code><br><code>make &amp;&amp; make install</code></p>
-<p><code>/etc/httpd/conf/httpd.conf</code>文件添加<br><code>LoadModule wsgi_module modules/mod_wsgi.so</code></p>
-<p>在<code>/etc/httpd/conf.d/</code>下新建<code>*.conf</code>文件,文件内容如下<br><img src="https://www.bankroft.cn/usr/uploads/2019/04/1297551393.png" alt="图片"><br>重启apache</p>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/08/01/记录一次django2-0的部署/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -213,7 +213,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    几秒 读完 (大约 109 个字)
+                    几秒 读完 (大约 101 个字)
                 </span>
                 
                 
@@ -228,15 +228,17 @@
         <div class="content">
             <p>下载源码包解压</p>
 <p>编译安装<br><code>./configure --prefix=$prefix/python36 --enable-optimizations CFLAGS=-fPIC</code><br><code>make &amp;&amp; make install</code></p>
-<p>完成后遇到<br><img src="https://www.bankroft.cn/usr/uploads/2019/04/2109938031.png" alt="图片"><br>解决办法</p>
-<p><code>ldd /usr/local/bin/python3</code><br><img src="https://www.bankroft.cn/usr/uploads/2019/04/976726107.png" alt="图片"></p>
-<p>搜索<br><img src="https://www.bankroft.cn/usr/uploads/2019/04/13588785.png" alt="图片"></p>
-<p>然后在/etc/ld.so.conf.d/下建立python.conf<br>文件加入<br><code>/usr/local/lib/</code></p>
-<p><code>ldconfig</code>命令</p>
-<p><a href="http://www.yecuizhen.com/archives/20/" title="报错解决参考文章" target="_blank" rel="noopener">报错解决参考文章</a></p>
-
+<p>完成后遇到<br><img src="/images/article_imgs/2109938031.png" alt="图片"><br>解决办法</p>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/08/01/编译python3-6笔记/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -265,7 +267,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    几秒 读完 (大约 43 个字)
+                    几秒 读完 (大约 41 个字)
                 </span>
                 
                 
@@ -278,12 +280,17 @@
             
         </h1>
         <div class="content">
-            <h1 id="列表部分"><a href="#列表部分" class="headerlink" title="列表部分"></a>列表部分</h1><h2 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h2><h3 id="eval函数"><a href="#eval函数" class="headerlink" title="eval函数"></a>eval函数</h3><p><code>a = &quot;[[1,2,3]]&quot;</code><br><code>eval(a)</code></p>
-<p>输出<br><code>[[1, 2, 3]]</code><br>判断<br><code>isinstance(a, list) == True</code></p>
-<h1 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h1><h4 id="error-command-‘arm-linux-gnueabihf-gcc’-failed-with-exit-status-1"><a href="#error-command-‘arm-linux-gnueabihf-gcc’-failed-with-exit-status-1" class="headerlink" title="error: command ‘arm-linux-gnueabihf-gcc’ failed with exit status 1"></a>error: command ‘arm-linux-gnueabihf-gcc’ failed with exit status 1</h4><p><img src="https://www.bankroft.cn/usr/uploads/2019/04/1373970593.png" alt="图片"></p>
-
+            <h1 id="列表部分"><a href="#列表部分" class="headerlink" title="列表部分"></a>列表部分</h1><h2 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h2><h3 id="eval函数"><a href="#eval函数" class="headerlink" title="eval函数"></a>eval函数</h3>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/08/01/python笔记-错误问题/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -312,7 +319,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    几秒 读完 (大约 47 个字)
+                    几秒 读完 (大约 39 个字)
                 </span>
                 
                 
@@ -326,12 +333,17 @@
         </h1>
         <div class="content">
             <h2 id="pycharm安装"><a href="#pycharm安装" class="headerlink" title="pycharm安装"></a>pycharm安装</h2><h2 id="安装pyqt库"><a href="#安装pyqt库" class="headerlink" title="安装pyqt库"></a>安装pyqt库</h2><p><code>pip install pyqt5</code><br><code>pip install pyqt-tools</code></p>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h4 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h4><p><img src="https://www.bankroft.cn/usr/uploads/2019/04/3293847504.png" alt="图片"></p>
-<h3 id="qtdesigner"><a href="#qtdesigner" class="headerlink" title="qtdesigner"></a>qtdesigner</h3><p><img src="https://www.bankroft.cn/usr/uploads/2019/04/1288919696.png" alt="图片"></p>
-<h3 id="pyuic"><a href="#pyuic" class="headerlink" title="pyuic"></a>pyuic</h3><p><img src="https://www.bankroft.cn/usr/uploads/2019/04/1744925351.png" alt="图片"></p>
-
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/08/01/pycharm-pyqt5环境搭建/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -360,7 +372,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 113 个字)
+                    1 分钟 读完 (大约 114 个字)
                 </span>
                 
                 
@@ -375,15 +387,17 @@
         <div class="content">
             <h2 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h2><h3 id="进入命令行"><a href="#进入命令行" class="headerlink" title="进入命令行"></a>进入命令行</h3><p><code>mysql -u user -p</code></p>
 <h3 id="创建数据库，设置编码方式"><a href="#创建数据库，设置编码方式" class="headerlink" title="创建数据库，设置编码方式"></a>创建数据库，设置编码方式</h3><p><code>create database dbname default character set utf8;</code></p>
-<h3 id="查看数据库-表"><a href="#查看数据库-表" class="headerlink" title="查看数据库/表"></a>查看数据库/表</h3><p><code>show databases/tables;</code></p>
-<h3 id="切换数据库"><a href="#切换数据库" class="headerlink" title="切换数据库"></a>切换数据库</h3><p><code>use database_name;</code></p>
-<h2 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h2><h3 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h3><p><code>create user username@host;</code></p>
-<h3 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h3><p><code>delete from user where user=&#39;&#39;;</code></p>
-<h3 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h3><p>切换到mysql库，更新用户表<br><code>update user set password = password(&#39;test&#39;) where user = &#39;test&#39;</code></p>
-<h3 id="用户权限"><a href="#用户权限" class="headerlink" title="用户权限"></a>用户权限</h3><p><a href="https://www.cnblogs.com/SQL888/p/5748824.html" title="用户权限" target="_blank" rel="noopener">用户权限</a></p>
-
+<h3 id="查看数据库-表"><a href="#查看数据库-表" class="headerlink" title="查看数据库/表"></a>查看数据库/表</h3>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/08/01/MySql命令记录-随时更新/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -412,7 +426,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    几秒 读完 (大约 96 个字)
+                    几秒 读完 (大约 97 个字)
                 </span>
                 
                 
@@ -433,12 +447,16 @@
 <li><p>密码认证方式不匹配</p>
 </li>
 </ul>
-<p>更换了root密码的认证方式解决的，新版mysql使用的caching_sha2_password，换成mysql_native_password我就可以连上了。</p>
-<p>步骤是在cmd命令行连接mysql, 通过mysql -u root -p</p>
-<p>然后输入ALTER USER ‘root’@’localhost’ IDENTIFIED WITH mysql_native_password BY ‘pwd’;</p>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/08/01/MySql错误处理记录/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -467,7 +485,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    几秒 读完 (大约 102 个字)
+                    几秒 读完 (大约 103 个字)
                 </span>
                 
                 
@@ -481,24 +499,17 @@
         </h1>
         <div class="content">
             <h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><h3 id="系统"><a href="#系统" class="headerlink" title="系统"></a>系统</h3><p>Linux</p>
-<h3 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h3><p>Ubuntu 18.04</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h3 id="官网"><a href="#官网" class="headerlink" title="官网"></a>官网</h3><p><a href="https://www.mongodb.com/cn" " target="_blank" rel="noopener">https://www.mongodb.com/cn</a></p>
-<p>下载community server<br><a href="https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu1604-3.6.4.tgz" target="_blank" rel="noopener">我下载的</a></p>
-<h3 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h3><p><code>tar -zxvf mongodb-linux-x86_64.....</code></p>
-<h3 id="进入bin"><a href="#进入bin" class="headerlink" title="进入bin"></a>进入bin</h3><p><code>cd mo..../bin</code></p>
-<h1 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h1><h3 id="直接启动"><a href="#直接启动" class="headerlink" title="直接启动"></a>直接启动</h3><p><code>./mongod</code></p>
-<h3 id="指定data目录"><a href="#指定data目录" class="headerlink" title="指定data目录"></a>指定data目录</h3><p><code>./mongod --dbpath path</code></p>
-<h3 id="守护进程启动"><a href="#守护进程启动" class="headerlink" title="守护进程启动"></a>守护进程启动</h3><p><code>./mongod --fork --logpath path</code></p>
-<h3 id="auth启动"><a href="#auth启动" class="headerlink" title="auth启动"></a>auth启动</h3><h1 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h1><h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><h3 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h3><p><code>db.createUser(
-{
-user:&quot;username&quot;,
-pwd:&quot;password&quot;,
-roles:[{role:&quot;auth&quot;,db:&quot;database&quot;}]
-}
-)</code></p>
-
+<h3 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h3>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/08/01/mongdb-Linux操作记录/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -527,7 +538,7 @@ roles:[{role:&quot;auth&quot;,db:&quot;database&quot;}]
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 158 个字)
+                    1 分钟 读完 (大约 159 个字)
                 </span>
                 
                 
@@ -542,17 +553,17 @@ roles:[{role:&quot;auth&quot;,db:&quot;database&quot;}]
         <div class="content">
             <h3 id="安装apache"><a href="#安装apache" class="headerlink" title="安装apache"></a>安装apache</h3><p><code>yum install httpd</code></p>
 <h3 id="安装php7-0"><a href="#安装php7-0" class="headerlink" title="安装php7.0"></a>安装php7.0</h3><p><a href="https://stringblog.com/lamp_server_install/" title="undefined" target="_blank" rel="noopener">参考文章</a></p>
-<h6 id="添加源"><a href="#添加源" class="headerlink" title="添加源"></a>添加源</h6><p><code>rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm</code><br><code>rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm</code></p>
-<h6 id="安装php7-0-1"><a href="#安装php7-0-1" class="headerlink" title="安装php7.0"></a>安装php7.0</h6><p><code>yum install php70w php70w-opcache php70w-mysql -y</code><br><code>yum install php70w-pdo php70w-xml php70w-mbstring -y</code><br><code>yum install php70w-mcrypt php70w-gd -y</code></p>
-<h3 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h3><p>MySQL5.7下载地址</p>
-<p><a href="https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.20-1.el7.x86_64.rpm-bundle.tar" title="mysql" target="_blank" rel="noopener">mysql</a></p>
-<p><code>wget -O mysql5.7.tar https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.20-1.el7.x86_64.rpm-bundle.tar</code><br>解压后安装</p>
-<p>or</p>
-<p><a href="http://blog.csdn.net/qsw412/article/details/51766798" title="undefined" target="_blank" rel="noopener">参考文章</a></p>
-<p>阿里源<br>安装MySQL后的操作可以看[mysql命令记录]</p>
-
+<h6 id="添加源"><a href="#添加源" class="headerlink" title="添加源"></a>添加源</h6>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/08/01/centos7-2下php7-0-mysql5-7-apache环境/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -581,7 +592,7 @@ roles:[{role:&quot;auth&quot;,db:&quot;database&quot;}]
                 <span class="level-item has-text-grey">
                     
                     
-                    几秒 读完 (大约 29 个字)
+                    几秒 读完 (大约 30 个字)
                 </span>
                 
                 
@@ -598,14 +609,16 @@ roles:[{role:&quot;auth&quot;,db:&quot;database&quot;}]
 <li>curses</li>
 <li><a href="http://urwid.org/" target="_blank" rel="noopener">urwid</a></li>
 </ul>
-<ul>
-<li><a href="https://npyscreen.readthedocs.io/introduction.html" target="_blank" rel="noopener">npyscreen</a></li>
-<li><a href="https://python-prompt-toolkit.readthedocs.io/en/stable/" target="_blank" rel="noopener">Prompt Toolkit</a></li>
-<li><a href="https://curtsies.readthedocs.io/en/latest/" target="_blank" rel="noopener">curtsies</a></li>
-</ul>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/08/01/python-terminal-ui/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -634,7 +647,7 @@ roles:[{role:&quot;auth&quot;,db:&quot;database&quot;}]
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 538 个字)
+                    4 分钟 读完 (大约 539 个字)
                 </span>
                 
                 
@@ -648,45 +661,17 @@ roles:[{role:&quot;auth&quot;,db:&quot;database&quot;}]
         </h1>
         <div class="content">
             <h2 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a><a href="https://docs.python.org/3.6/howto/curses.html" title="curses" target="_blank" rel="noopener">官方文档</a></h2><p>该库是unix和Linux平台下操作终端字符界面的一个标准库。windows下使用会报_curses模块不存在错误，但是<a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/" target="_blank" rel="noopener">这里</a>有python windows非官方库，下载curses.whl安装即可使用</p>
-<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><h4 id="先import"><a href="#先import" class="headerlink" title="先import"></a>先import</h4><p><code>import curses</code></p>
-<h4 id="在使用这个模块的时候必须先初始化"><a href="#在使用这个模块的时候必须先初始化" class="headerlink" title="在使用这个模块的时候必须先初始化"></a>在使用这个模块的时候必须先初始化</h4><p><code>tmp = curses.initscr()</code></p>
-<p>关闭getch或者getkey回显到终端<br><code>curses.noecho()</code></p>
-<p>不需要回车确认<br><code>curses.cbreak()</code></p>
-<p>开启键盘模式，意思就是按下方向键之类的会得到KEY_UP之类的值<br><code>stdscr.keypad(True)</code></p>
-<h4 id="字体和颜色问题"><a href="#字体和颜色问题" class="headerlink" title="字体和颜色问题"></a>字体和颜色问题</h4><h5 id="颜色"><a href="#颜色" class="headerlink" title="颜色"></a>颜色</h5><p>在使用颜色的时候需要</p>
-<p><code>curses.start_color()</code></p>
-<p>初始化颜色</p>
-<p><code>curses.init_pair(1, curses.COLOR_RED, curses.COLOR_BLACK)</code></p>
-<p>第一位参数1代表颜色ID，第二个参数curses.COLOR_RED表示字体颜色，第三个参数curses.COLOR_BLACK表示字体背景色</p>
-<h6 id="颜色支持"><a href="#颜色支持" class="headerlink" title="颜色支持"></a>颜色支持</h6><ul>
-<li>COLOR_MAGENTA</li>
-<li>COLOR_BLACK</li>
-<li>COLOR_WHITE</li>
-<li>COLOR_BLUE</li>
-<li>COLOR_RED</li>
-<li>COLOR_CYAN</li>
-<li>COLOR_YELLOW</li>
-<li>COLOR_GREED</li>
-</ul>
-<h5 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h5><h6 id="字体支持"><a href="#字体支持" class="headerlink" title="字体支持"></a>字体支持</h6><p>不一定都可用，视觉效果不一样</p>
-<ul>
-<li>A_BLINK   闪烁字,我反正没看出来闪烁</li>
-<li>A_BOLD   加粗？我还是没看出来</li>
-<li>A_DIM   暗淡的，。。。。</li>
-<li>A_REVERSE   反转背景色和字体色</li>
-<li>A_STANDOUT   突出显示</li>
-<li>A_UNDERLINE   下划线</li>
-</ul>
-<h4 id="显示文字"><a href="#显示文字" class="headerlink" title="显示文字"></a>显示文字</h4><p><code>tmp.addstr(y, x, str, attr)</code></p>
-<p>y为cursor y坐标，x为cursor x坐标， str为要显示的文字，attr为属性(上面说的颜色和字体)<br>例<br>字体<br><code>tmp.addstr(1, 2 &#39;bankroft&#39;, curses.A_BLINK)</code><br>颜色<br><code>tmp.addstr(stdscr.getkey(), curses.color_pair(1))</code></p>
-<p>要同时设置颜色和字体的话用 或 运算</p>
-<p>如<code>tmp.addstr(1, 2, &#39;bankroft&#39;, curses.color_pair(1)|curses.A_BOLD)</code></p>
-<h6 id="refresh"><a href="#refresh" class="headerlink" title="refresh"></a>refresh</h6><p><code>tmp.refresh()</code>用来刷新屏幕</p>
-<h4 id="用户输入"><a href="#用户输入" class="headerlink" title="用户输入"></a>用户输入</h4><h6 id="getch"><a href="#getch" class="headerlink" title="getch"></a>getch</h6><p><code>tmp.getch()</code><br>刷新屏幕，然后等待用户点击按键，在回显模式开启状态下会将输入值输出到cursor所在位置。注意，这里获取的是整数</p>
-<p><code>tmp.getkey()</code><br>和上面的一样，只是获取的值是字母，在开始键盘模式的时候特殊按键(如方向键)会返回类似于KEY_UP字符串</p>
-
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/08/01/python-curses/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>

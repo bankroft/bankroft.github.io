@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="安装apacheyum install httpd 安装php7.0参考文章 添加源rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpmrpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm 安装php7.0yum i">
+    <meta name="description" content="安装apacheyum install httpd 安装php7.0参考文章 添加源">
 <meta name="keywords" content="linux,centos7,php,apache">
 <meta property="og:type" content="article">
 <meta property="og:title" content="centos7.2下php7.0+mysql5.7+apache环境">
 <meta property="og:url" content="https://bankroft.github.io/2019/08/01/centos7-2下php7-0-mysql5-7-apache环境/index.html">
 <meta property="og:site_name" content="Bankroft">
-<meta property="og:description" content="安装apacheyum install httpd 安装php7.0参考文章 添加源rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpmrpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm 安装php7.0yum i">
+<meta property="og:description" content="安装apacheyum install httpd 安装php7.0参考文章 添加源">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://bankroft.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-08-02T10:17:58.659Z">
+<meta property="og:updated_time" content="2019-08-02T12:18:15.538Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="centos7.2下php7.0+mysql5.7+apache环境">
-<meta name="twitter:description" content="安装apacheyum install httpd 安装php7.0参考文章 添加源rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpmrpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm 安装php7.0yum i">
+<meta name="twitter:description" content="安装apacheyum install httpd 安装php7.0参考文章 添加源">
 <meta name="twitter:image" content="https://bankroft.github.io/images/og_image.png">
 
 
@@ -148,7 +148,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 158 个字)
+                    1 分钟 读完 (大约 159 个字)
                 </span>
                 
                 
@@ -168,7 +168,9 @@
         <div class="content">
             <h3 id="安装apache"><a href="#安装apache" class="headerlink" title="安装apache"></a>安装apache</h3><p><code>yum install httpd</code></p>
 <h3 id="安装php7-0"><a href="#安装php7-0" class="headerlink" title="安装php7.0"></a>安装php7.0</h3><p><a href="https://stringblog.com/lamp_server_install/" title="undefined" target="_blank" rel="noopener">参考文章</a></p>
-<h6 id="添加源"><a href="#添加源" class="headerlink" title="添加源"></a>添加源</h6><p><code>rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm</code><br><code>rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm</code></p>
+<h6 id="添加源"><a href="#添加源" class="headerlink" title="添加源"></a>添加源</h6><a id="more"></a>
+
+<p><code>rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm</code><br><code>rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm</code></p>
 <h6 id="安装php7-0-1"><a href="#安装php7-0-1" class="headerlink" title="安装php7.0"></a>安装php7.0</h6><p><code>yum install php70w php70w-opcache php70w-mysql -y</code><br><code>yum install php70w-pdo php70w-xml php70w-mbstring -y</code><br><code>yum install php70w-mcrypt php70w-gd -y</code></p>
 <h3 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h3><p>MySQL5.7下载地址</p>
 <p><a href="https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.20-1.el7.x86_64.rpm-bundle.tar" title="mysql" target="_blank" rel="noopener">mysql</a></p>
@@ -201,15 +203,23 @@
         <div class="buttons is-centered">
             
                 
-<div class="notification is-danger">
-    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
-</div>
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/alipay.jpg" alt="支付宝"></div>
+</a>
 
                 
                 
-<div class="notification is-danger">
-    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
-</div>
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/wechat.png" alt="微信"></div>
+</a>
 
                 
         </div>

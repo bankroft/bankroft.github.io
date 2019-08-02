@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="apache2.4 django2.0 mod_wsgi4.2 centos 7  [安装python3.6] 安装virtualenvpip3 install virtualenv启用env等 安装dj、mod_wsgi等pip install mod_wsgi django==2.0报错:MySQL config安装MySQL devel可解决 yum install mysql-devel">
+    <meta name="description" content="apache2.4 django2.0 mod_wsgi4.2 centos 7">
 <meta name="keywords" content="python,django">
 <meta property="og:type" content="article">
 <meta property="og:title" content="记录一次django2.0的部署">
 <meta property="og:url" content="https://bankroft.github.io/2019/08/01/记录一次django2-0的部署/index.html">
 <meta property="og:site_name" content="Bankroft">
-<meta property="og:description" content="apache2.4 django2.0 mod_wsgi4.2 centos 7  [安装python3.6] 安装virtualenvpip3 install virtualenv启用env等 安装dj、mod_wsgi等pip install mod_wsgi django==2.0报错:MySQL config安装MySQL devel可解决 yum install mysql-devel">
+<meta property="og:description" content="apache2.4 django2.0 mod_wsgi4.2 centos 7">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://bankroft.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-08-02T10:34:39.359Z">
+<meta property="og:updated_time" content="2019-08-02T12:30:03.271Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="记录一次django2.0的部署">
-<meta name="twitter:description" content="apache2.4 django2.0 mod_wsgi4.2 centos 7  [安装python3.6] 安装virtualenvpip3 install virtualenv启用env等 安装dj、mod_wsgi等pip install mod_wsgi django==2.0报错:MySQL config安装MySQL devel可解决 yum install mysql-devel">
+<meta name="twitter:description" content="apache2.4 django2.0 mod_wsgi4.2 centos 7">
 <meta name="twitter:image" content="https://bankroft.github.io/images/og_image.png">
 
 
@@ -148,7 +148,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 115 个字)
+                    1 分钟 读完 (大约 113 个字)
                 </span>
                 
                 
@@ -172,13 +172,16 @@
 <li>mod_wsgi4.2</li>
 <li>centos 7</li>
 </ul>
+<a id="more"></a>
+
+
 <p>[安装python3.6]</p>
 <p>安装virtualenv<br><code>pip3 install virtualenv</code><br>启用env等</p>
 <p>安装dj、mod_wsgi等<br><code>pip install mod_wsgi django==2.0</code><br>报错:<br>MySQL config<br>安装MySQL devel可解决 <code>yum install mysql-devel</code></p>
 <p>安装apache2.4<br><code>yum install httpd</code></p>
 <p>编译安装mod_wsgi:<br>下载安装<br><code>./configure --with-python=/usr/local/python3.6</code><br><code>make &amp;&amp; make install</code></p>
 <p><code>/etc/httpd/conf/httpd.conf</code>文件添加<br><code>LoadModule wsgi_module modules/mod_wsgi.so</code></p>
-<p>在<code>/etc/httpd/conf.d/</code>下新建<code>*.conf</code>文件,文件内容如下<br><img src="https://www.bankroft.cn/usr/uploads/2019/04/1297551393.png" alt="图片"><br>重启apache</p>
+<p>在<code>/etc/httpd/conf.d/</code>下新建<code>*.conf</code>文件,文件内容如下<br><img src="/images/article_imgs/1297551393.png" alt="图片"><br>重启apache</p>
 
         </div>
         
@@ -204,15 +207,23 @@
         <div class="buttons is-centered">
             
                 
-<div class="notification is-danger">
-    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
-</div>
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/alipay.jpg" alt="支付宝"></div>
+</a>
 
                 
                 
-<div class="notification is-danger">
-    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
-</div>
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/wechat.png" alt="微信"></div>
+</a>
 
                 
         </div>

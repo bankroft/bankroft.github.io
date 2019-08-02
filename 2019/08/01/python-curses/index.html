@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="官方文档该库是unix和Linux平台下操作终端字符界面的一个标准库。windows下使用会报_curses模块不存在错误，但是这里有python windows非官方库，下载curses.whl安装即可使用 用法先importimport curses 在使用这个模块的时候必须先初始化tmp = curses.initscr() 关闭getch或者getkey回显到终端curses.noecho">
+    <meta name="description" content="官方文档该库是unix和Linux平台下操作终端字符界面的一个标准库。windows下使用会报_curses模块不存在错误，但是这里有python windows非官方库，下载curses.whl安装即可使用 用法">
 <meta name="keywords" content="Python,curses">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python-curses">
 <meta property="og:url" content="https://bankroft.github.io/2019/08/01/python-curses/index.html">
 <meta property="og:site_name" content="Bankroft">
-<meta property="og:description" content="官方文档该库是unix和Linux平台下操作终端字符界面的一个标准库。windows下使用会报_curses模块不存在错误，但是这里有python windows非官方库，下载curses.whl安装即可使用 用法先importimport curses 在使用这个模块的时候必须先初始化tmp = curses.initscr() 关闭getch或者getkey回显到终端curses.noecho">
+<meta property="og:description" content="官方文档该库是unix和Linux平台下操作终端字符界面的一个标准库。windows下使用会报_curses模块不存在错误，但是这里有python windows非官方库，下载curses.whl安装即可使用 用法">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://bankroft.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-08-02T10:24:37.433Z">
+<meta property="og:updated_time" content="2019-08-02T12:19:54.631Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python-curses">
-<meta name="twitter:description" content="官方文档该库是unix和Linux平台下操作终端字符界面的一个标准库。windows下使用会报_curses模块不存在错误，但是这里有python windows非官方库，下载curses.whl安装即可使用 用法先importimport curses 在使用这个模块的时候必须先初始化tmp = curses.initscr() 关闭getch或者getkey回显到终端curses.noecho">
+<meta name="twitter:description" content="官方文档该库是unix和Linux平台下操作终端字符界面的一个标准库。windows下使用会报_curses模块不存在错误，但是这里有python windows非官方库，下载curses.whl安装即可使用 用法">
 <meta name="twitter:image" content="https://bankroft.github.io/images/og_image.png">
 
 
@@ -148,7 +148,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 538 个字)
+                    4 分钟 读完 (大约 539 个字)
                 </span>
                 
                 
@@ -167,7 +167,9 @@
         </h1>
         <div class="content">
             <h2 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a><a href="https://docs.python.org/3.6/howto/curses.html" title="curses" target="_blank" rel="noopener">官方文档</a></h2><p>该库是unix和Linux平台下操作终端字符界面的一个标准库。windows下使用会报_curses模块不存在错误，但是<a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/" target="_blank" rel="noopener">这里</a>有python windows非官方库，下载curses.whl安装即可使用</p>
-<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><h4 id="先import"><a href="#先import" class="headerlink" title="先import"></a>先import</h4><p><code>import curses</code></p>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><a id="more"></a>
+
+<h4 id="先import"><a href="#先import" class="headerlink" title="先import"></a>先import</h4><p><code>import curses</code></p>
 <h4 id="在使用这个模块的时候必须先初始化"><a href="#在使用这个模块的时候必须先初始化" class="headerlink" title="在使用这个模块的时候必须先初始化"></a>在使用这个模块的时候必须先初始化</h4><p><code>tmp = curses.initscr()</code></p>
 <p>关闭getch或者getkey回显到终端<br><code>curses.noecho()</code></p>
 <p>不需要回车确认<br><code>curses.cbreak()</code></p>
@@ -228,15 +230,23 @@
         <div class="buttons is-centered">
             
                 
-<div class="notification is-danger">
-    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
-</div>
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/alipay.jpg" alt="支付宝"></div>
+</a>
 
                 
                 
-<div class="notification is-danger">
-    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
-</div>
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/wechat.png" alt="微信"></div>
+</a>
 
                 
         </div>

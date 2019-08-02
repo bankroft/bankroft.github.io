@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="Nokia 5110长这样 驱动PCD8544 资料Google 一搜各种博客都有介绍，毕竟我不是学硬件的，底层什么的就不说了。好玩就行 引脚 rst:外部复位引脚 ce：显示屏使能引脚 dc：数据/命令引脚 din：串行数据输入端 clk：串行时钟输入端 vcc：电源引脚 bl： 亮度调节 gnd：接地  先看看驱动代码-python修改自(Adafruit)这里用的是 BCM 模式 12345">
+    <meta name="description" content="Nokia 5110长这样 驱动PCD8544">
 <meta name="keywords" content="python,raspberryPi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="树莓派使用Nokia 5110屏幕显示网速温度等">
 <meta property="og:url" content="https://bankroft.github.io/2019/08/01/树莓派使用Nokia-5110屏幕显示网速温度等/index.html">
 <meta property="og:site_name" content="Bankroft">
-<meta property="og:description" content="Nokia 5110长这样 驱动PCD8544 资料Google 一搜各种博客都有介绍，毕竟我不是学硬件的，底层什么的就不说了。好玩就行 引脚 rst:外部复位引脚 ce：显示屏使能引脚 dc：数据/命令引脚 din：串行数据输入端 clk：串行时钟输入端 vcc：电源引脚 bl： 亮度调节 gnd：接地  先看看驱动代码-python修改自(Adafruit)这里用的是 BCM 模式 12345">
+<meta property="og:description" content="Nokia 5110长这样 驱动PCD8544">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://bankroft.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-08-02T10:34:35.211Z">
+<meta property="og:updated_time" content="2019-08-02T12:30:15.740Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="树莓派使用Nokia 5110屏幕显示网速温度等">
-<meta name="twitter:description" content="Nokia 5110长这样 驱动PCD8544 资料Google 一搜各种博客都有介绍，毕竟我不是学硬件的，底层什么的就不说了。好玩就行 引脚 rst:外部复位引脚 ce：显示屏使能引脚 dc：数据/命令引脚 din：串行数据输入端 clk：串行时钟输入端 vcc：电源引脚 bl： 亮度调节 gnd：接地  先看看驱动代码-python修改自(Adafruit)这里用的是 BCM 模式 12345">
+<meta name="twitter:description" content="Nokia 5110长这样 驱动PCD8544">
 <meta name="twitter:image" content="https://bankroft.github.io/images/og_image.png">
 
 
@@ -148,7 +148,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    17 分钟 读完 (大约 2566 个字)
+                    17 分钟 读完 (大约 2564 个字)
                 </span>
                 
                 
@@ -166,8 +166,10 @@
             
         </h1>
         <div class="content">
-            <h2 id="Nokia-5110"><a href="#Nokia-5110" class="headerlink" title="Nokia 5110"></a>Nokia 5110</h2><h4 id="长这样"><a href="#长这样" class="headerlink" title="长这样"></a>长这样</h4><p><img src="https://www.bankroft.cn/usr/uploads/2019/04/2533443824.jpg" alt="图片"></p>
+            <h2 id="Nokia-5110"><a href="#Nokia-5110" class="headerlink" title="Nokia 5110"></a>Nokia 5110</h2><h4 id="长这样"><a href="#长这样" class="headerlink" title="长这样"></a>长这样</h4><p><img src="/images/article_imgs/2533443824.jpg" alt="图片"></p>
 <h4 id="驱动"><a href="#驱动" class="headerlink" title="驱动"></a>驱动</h4><p>PCD8544</p>
+<a id="more"></a>
+
 <h4 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h4><p>Google 一搜各种博客都有介绍，毕竟我不是学硬件的，底层什么的就不说了。好玩就行</p>
 <h3 id="引脚"><a href="#引脚" class="headerlink" title="引脚"></a>引脚</h3><ul>
 <li>rst:外部复位引脚</li>
@@ -203,7 +205,7 @@
 <h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><h4 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h4><p>python3</p>
 <h6 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h6><p><code>Adafruit_GPIO</code><br><code>Adafruit_DHT</code><br><code>requests</code></p>
 <h4 id="运行-1"><a href="#运行-1" class="headerlink" title="运行"></a>运行</h4><p><code>python main.py</code></p>
-<h3 id="成果"><a href="#成果" class="headerlink" title="成果"></a>成果</h3><p><img src="https://www.bankroft.cn/usr/uploads/2019/04/2533443824.jpg" alt="图片"> </p>
+<h3 id="成果"><a href="#成果" class="headerlink" title="成果"></a>成果</h3><p><img src="/images/article_imgs/2533443824.jpg" alt="图片"> </p>
 
         </div>
         
@@ -229,15 +231,23 @@
         <div class="buttons is-centered">
             
                 
-<div class="notification is-danger">
-    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
-</div>
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/alipay.jpg" alt="支付宝"></div>
+</a>
 
                 
                 
-<div class="notification is-danger">
-    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
-</div>
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/wechat.png" alt="微信"></div>
+</a>
 
                 
         </div>
