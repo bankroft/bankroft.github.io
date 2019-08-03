@@ -151,9 +151,9 @@
     <link href="https://www.bankroft.cn/2019/08/01/%E7%BC%96%E8%AF%91python3-6%E7%AC%94%E8%AE%B0/"/>
     <id>https://www.bankroft.cn/2019/08/01/编译python3-6笔记/</id>
     <published>2019-08-01T04:47:02.000Z</published>
-    <updated>2019-08-02T12:29:44.826Z</updated>
+    <updated>2019-08-03T03:03:17.223Z</updated>
     
-    <content type="html"><![CDATA[<p>下载源码包解压</p><p>编译安装<br><code>./configure --prefix=$prefix/python36 --enable-optimizations CFLAGS=-fPIC</code><br><code>make &amp;&amp; make install</code></p><p>完成后遇到<br><img src="/images/article_imgs/2109938031.png" alt="图片"><br>解决办法</p><a id="more"></a><p><code>ldd /usr/local/bin/python3</code><br><img src="/images/article_imgs/976726107.png" alt="图片"></p><p>搜索<br><img src="/images/article_imgs/2019/04/13588785.png" alt="图片"></p><p>然后在/etc/ld.so.conf.d/下建立python.conf<br>文件加入<br><code>/usr/local/lib/</code></p><p><code>ldconfig</code>命令</p><p><a href="http://www.yecuizhen.com/archives/20/" title="报错解决参考文章" target="_blank" rel="noopener">报错解决参考文章</a></p>]]></content>
+    <content type="html"><![CDATA[<p>下载源码包解压</p><p>编译安装<br><code>./configure --prefix=$prefix/python36 --enable-optimizations CFLAGS=-fPIC</code><br><code>make &amp;&amp; make install</code></p><p>完成后遇到<br><img src="/images/article_imgs/2109938031.png" alt="图片"><br>解决办法</p><a id="more"></a><p><code>ldd /usr/local/bin/python3</code><br><img src="/images/article_imgs/976726107.png" alt="图片"></p><p>搜索<br><img src="/images/article_imgs/13588785.png" alt="图片"></p><p>然后在/etc/ld.so.conf.d/下建立python.conf<br>文件加入<br><code>/usr/local/lib/</code></p><p><code>ldconfig</code>命令</p><p><a href="http://www.yecuizhen.com/archives/20/" title="报错解决参考文章" target="_blank" rel="noopener">报错解决参考文章</a></p>]]></content>
     
     <summary type="html">
     
@@ -166,9 +166,9 @@
       <category term="笔记" scheme="https://www.bankroft.cn/categories/%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="python" scheme="https://www.bankroft.cn/tags/python/"/>
-    
       <category term="linux" scheme="https://www.bankroft.cn/tags/linux/"/>
+    
+      <category term="python" scheme="https://www.bankroft.cn/tags/python/"/>
     
   </entry>
   

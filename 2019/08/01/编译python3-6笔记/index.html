@@ -8,7 +8,7 @@
 
 
     <meta name="description" content="下载源码包解压 编译安装./configure --prefix=$prefix/python36 --enable-optimizations CFLAGS=-fPICmake &amp;amp;&amp;amp; make install 完成后遇到解决办法">
-<meta name="keywords" content="python,linux">
+<meta name="keywords" content="linux,python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="编译python3.6笔记">
 <meta property="og:url" content="https://www.bankroft.cn/2019/08/01/编译python3-6笔记/index.html">
@@ -16,7 +16,7 @@
 <meta property="og:description" content="下载源码包解压 编译安装./configure --prefix=$prefix/python36 --enable-optimizations CFLAGS=-fPICmake &amp;amp;&amp;amp; make install 完成后遇到解决办法">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://www.bankroft.cn/images/og_image.png">
-<meta property="og:updated_time" content="2019-08-02T12:29:44.826Z">
+<meta property="og:updated_time" content="2019-08-03T03:03:17.223Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="编译python3.6笔记">
 <meta name="twitter:description" content="下载源码包解压 编译安装./configure --prefix=$prefix/python36 --enable-optimizations CFLAGS=-fPICmake &amp;amp;&amp;amp; make install 完成后遇到解决办法">
@@ -172,7 +172,7 @@
 <a id="more"></a>
 
 <p><code>ldd /usr/local/bin/python3</code><br><img src="/images/article_imgs/976726107.png" alt="图片"></p>
-<p>搜索<br><img src="/images/article_imgs/2019/04/13588785.png" alt="图片"></p>
+<p>搜索<br><img src="/images/article_imgs/13588785.png" alt="图片"></p>
 <p>然后在/etc/ld.so.conf.d/下建立python.conf<br>文件加入<br><code>/usr/local/lib/</code></p>
 <p><code>ldconfig</code>命令</p>
 <p><a href="http://www.yecuizhen.com/archives/20/" title="报错解决参考文章" target="_blank" rel="noopener">报错解决参考文章</a></p>
