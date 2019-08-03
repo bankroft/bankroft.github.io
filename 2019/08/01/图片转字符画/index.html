@@ -241,6 +241,30 @@
 </div>
 
 
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">评论</h3>
+        
+<div id="comment-container"></div>
+<link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/gitalk/1.4.1/gitalk.css">
+<script src="https://cdnjs.loli.net/ajax/libs/gitalk/1.4.1/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+        clientID: '0249d1da2630a1d7b515',
+        clientSecret: 'd615d35a98d2a009c2e3ee669d23104c961344b6',
+        id: '51a98630f6103e2deb7f740c108e32a3',
+        repo: 'bankroft.github.io',
+        owner: 'Bankroft',
+        admin: "Bankroft",
+        createIssueManually: false,
+        distractionFreeMode: false
+    })
+    gitalk.render('comment-container')
+</script>
+
+    </div>
+</div>
 </div>
                 
 
