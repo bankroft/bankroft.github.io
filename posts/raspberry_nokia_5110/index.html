@@ -1,0 +1,1010 @@
+<!doctype html><html lang=en-us>
+<head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Nokia 5110 驱动 PCD8544 引脚 rst:外部复位引脚 ce：显示屏使能引脚 dc：数据/命令引脚 din：串行数据输入端 clk：串行时钟输入端 vcc：电源引脚 bl："><title>树莓派使用Nokia 5110屏幕显示网速温度等</title>
+<link rel=canonical href=https://bankroft.github.io/posts/raspberry_nokia_5110/>
+<link rel=stylesheet href=/scss/style.min.b949db8bead9abdc40291b93383b8da6abc3aa62e74f5580356c06ddbb792dab.css><meta property="og:title" content="树莓派使用Nokia 5110屏幕显示网速温度等">
+<meta property="og:description" content="Nokia 5110 驱动 PCD8544 引脚 rst:外部复位引脚 ce：显示屏使能引脚 dc：数据/命令引脚 din：串行数据输入端 clk：串行时钟输入端 vcc：电源引脚 bl：">
+<meta property="og:url" content="https://bankroft.github.io/posts/raspberry_nokia_5110/">
+<meta property="og:site_name" content="Bankroft">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="raspberryPi"><meta property="article:tag" content="python"><meta property="article:published_time" content="2019-08-01T12:48:47+00:00"><meta property="article:modified_time" content="2019-08-01T12:48:47+00:00"><meta property="og:image" content="https://bankroft.github.io/images/posts/raspberry_nokia_5110/2533443824.jpg">
+<meta name=twitter:title content="树莓派使用Nokia 5110屏幕显示网速温度等">
+<meta name=twitter:description content="Nokia 5110 驱动 PCD8544 引脚 rst:外部复位引脚 ce：显示屏使能引脚 dc：数据/命令引脚 din：串行数据输入端 clk：串行时钟输入端 vcc：电源引脚 bl："><meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://bankroft.github.io/images/posts/raspberry_nokia_5110/2533443824.jpg">
+<link rel="shortcut icon" href=/img/favicon.ico>
+</head>
+<body class="article-page has-toc">
+<script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"dark")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
+<div class="container main-container flex
+extended">
+<div id=article-toolbar>
+<a href=/ class=back-home><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="15 6 9 12 15 18"/></svg>
+<span>Back</span>
+</a>
+</div>
+<main class="main full-width">
+<article class="has-image main-article">
+<header class=article-header>
+<div class=article-image>
+<a href=/posts/raspberry_nokia_5110/>
+<img src=/images/posts/raspberry_nokia_5110/2533443824.jpg loading=lazy alt="Featured image of post 树莓派使用Nokia 5110屏幕显示网速温度等">
+</a>
+</div>
+<div class=article-details>
+<header class=article-category>
+<a href=/categories/others/>
+Others
+</a>
+</header>
+<h2 class=article-title>
+<a href=/posts/raspberry_nokia_5110/>树莓派使用Nokia 5110屏幕显示网速温度等</a>
+</h2>
+<footer class=article-time>
+<div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>Aug 01, 2019</time>
+</div>
+<div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>
+6 minute read
+</time>
+</div>
+</footer>
+</div>
+</header>
+<section class=article-content>
+<h2 id=nokia-5110>Nokia 5110</h2>
+<h3 id=驱动>驱动</h3>
+<p>PCD8544</p>
+<h3 id=引脚>引脚</h3>
+<ul>
+<li>rst:外部复位引脚</li>
+<li>ce：显示屏使能引脚</li>
+<li>dc：数据/命令引脚</li>
+<li>din：串行数据输入端</li>
+<li>clk：串行时钟输入端</li>
+<li>vcc：电源引脚</li>
+<li>bl： 亮度调节</li>
+<li>gnd：接地</li>
+</ul>
+<h3 id=驱动代码-python>驱动代码-python</h3>
+<p>修改自(<a class=link href=https://github.com/adafruit target=_blank rel=noopener>Adafruit</a>)
+mode: BCM</p>
+<div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 31
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 32
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 33
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 34
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 35
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 36
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 37
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 38
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 39
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 40
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 41
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 42
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 43
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 44
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 45
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 46
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 47
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 48
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 49
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 50
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 51
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 52
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 53
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 54
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 55
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 56
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 57
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 58
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 59
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 60
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 61
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 62
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 63
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 64
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 65
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 66
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 67
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 68
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 69
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 70
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 71
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 72
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 73
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 74
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 75
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 76
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 77
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 78
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 79
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 80
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 81
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 82
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 83
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 84
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 85
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 86
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 87
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 88
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 89
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 90
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 91
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 92
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 93
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 94
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 95
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 96
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 97
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 98
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 99
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">100
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">101
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">102
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">103
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">104
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">105
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">106
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">107
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">108
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">109
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">110
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">111
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">112
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">113
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">114
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">115
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">116
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">117
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">118
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">119
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">120
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">121
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">122
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">123
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">124
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">125
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">126
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">127
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">128
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">129
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">130
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">131
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">132
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">133
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">134
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">135
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">136
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">137
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">138
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">139
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">140
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">141
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">142
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">143
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">144
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">145
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">146
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">147
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">148
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">149
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">150
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">151
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">152
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">153
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">154
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">155
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">156
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">157
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">158
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">159
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">160
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">161
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">162
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">163
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">164
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">165
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">166
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">167
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">168
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">169
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">170
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">171
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">172
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">173
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">174
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">175
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">176
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">177
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">178
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">179
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">180
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">181
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">182
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">183
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">184
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">185
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">186
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">187
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">188
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">189
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">190
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">191
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">192
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">193
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">194
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">195
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">196
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">197
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">198
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">199
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">200
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">201
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">202
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">203
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">204
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">205
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">206
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">207
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">208
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">209
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">210
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">211
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">212
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">213
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">214
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">215
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">216
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">217
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">218
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">219
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">220
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">221
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e># coding:utf-8</span>
+<span style=color:#f92672>import</span> time
+<span style=color:#f92672>import</span> Adafruit_GPIO <span style=color:#66d9ef>as</span> GPIO
+<span style=color:#f92672>import</span> Adafruit_GPIO.SPI <span style=color:#66d9ef>as</span> SPI
+
+LCDWIDTH <span style=color:#f92672>=</span> <span style=color:#ae81ff>84</span>
+LCDHEIGHT <span style=color:#f92672>=</span> <span style=color:#ae81ff>48</span>
+ROWPIXELS <span style=color:#f92672>=</span> LCDHEIGHT<span style=color:#f92672>//</span><span style=color:#ae81ff>6</span>
+PCD8544_POWERDOWN <span style=color:#f92672>=</span> <span style=color:#ae81ff>0x04</span>
+PCD8544_ENTRYMODE <span style=color:#f92672>=</span> <span style=color:#ae81ff>0x02</span>
+PCD8544_EXTENDEDINSTRUCTION <span style=color:#f92672>=</span> <span style=color:#ae81ff>0x01</span>
+PCD8544_DISPLAYBLANK <span style=color:#f92672>=</span> <span style=color:#ae81ff>0x0</span>
+PCD8544_DISPLAYNORMAL <span style=color:#f92672>=</span> <span style=color:#ae81ff>0x4</span>
+PCD8544_DISPLAYALLON <span style=color:#f92672>=</span> <span style=color:#ae81ff>0x1</span>
+PCD8544_DISPLAYINVERTED <span style=color:#f92672>=</span> <span style=color:#ae81ff>0x5</span>
+PCD8544_FUNCTIONSET <span style=color:#f92672>=</span> <span style=color:#ae81ff>0x20</span>
+PCD8544_DISPLAYCONTROL <span style=color:#f92672>=</span> <span style=color:#ae81ff>0x08</span>
+PCD8544_SETYADDR <span style=color:#f92672>=</span> <span style=color:#ae81ff>0x40</span>
+PCD8544_SETXADDR <span style=color:#f92672>=</span> <span style=color:#ae81ff>0x80</span>
+PCD8544_SETTEMP <span style=color:#f92672>=</span> <span style=color:#ae81ff>0x04</span>
+PCD8544_SETBIAS <span style=color:#f92672>=</span> <span style=color:#ae81ff>0x10</span>
+PCD8544_SETVOP <span style=color:#f92672>=</span> <span style=color:#ae81ff>0x80</span>
+FONT <span style=color:#f92672>=</span> {
+  <span style=color:#e6db74>&#39; &#39;</span>: [<span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>],
+  <span style=color:#e6db74>&#39;!&#39;</span>: [<span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x5f</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>],
+  <span style=color:#e6db74>&#39;&#34;&#39;</span>: [<span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x07</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x07</span>, <span style=color:#ae81ff>0x00</span>],
+  <span style=color:#e6db74>&#39;#&#39;</span>: [<span style=color:#ae81ff>0x14</span>, <span style=color:#ae81ff>0x7f</span>, <span style=color:#ae81ff>0x14</span>, <span style=color:#ae81ff>0x7f</span>, <span style=color:#ae81ff>0x14</span>],
+  <span style=color:#e6db74>&#39;$&#39;</span>: [<span style=color:#ae81ff>0x24</span>, <span style=color:#ae81ff>0x2a</span>, <span style=color:#ae81ff>0x7f</span>, <span style=color:#ae81ff>0x2a</span>, <span style=color:#ae81ff>0x12</span>],
+  <span style=color:#e6db74>&#39;%&#39;</span>: [<span style=color:#ae81ff>0x23</span>, <span style=color:#ae81ff>0x13</span>, <span style=color:#ae81ff>0x08</span>, <span style=color:#ae81ff>0x64</span>, <span style=color:#ae81ff>0x62</span>],
+  <span style=color:#e6db74>&#39;&amp;&#39;</span>: [<span style=color:#ae81ff>0x36</span>, <span style=color:#ae81ff>0x49</span>, <span style=color:#ae81ff>0x55</span>, <span style=color:#ae81ff>0x22</span>, <span style=color:#ae81ff>0x50</span>],
+  <span style=color:#e6db74>&#34;&#39;&#34;</span>: [<span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x05</span>, <span style=color:#ae81ff>0x03</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>],
+  <span style=color:#e6db74>&#39;(&#39;</span>: [<span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x1c</span>, <span style=color:#ae81ff>0x22</span>, <span style=color:#ae81ff>0x41</span>, <span style=color:#ae81ff>0x00</span>],
+  <span style=color:#e6db74>&#39;)&#39;</span>: [<span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x41</span>, <span style=color:#ae81ff>0x22</span>, <span style=color:#ae81ff>0x1c</span>, <span style=color:#ae81ff>0x00</span>],
+  <span style=color:#e6db74>&#39;*&#39;</span>: [<span style=color:#ae81ff>0x14</span>, <span style=color:#ae81ff>0x08</span>, <span style=color:#ae81ff>0x3e</span>, <span style=color:#ae81ff>0x08</span>, <span style=color:#ae81ff>0x14</span>],
+  <span style=color:#e6db74>&#39;+&#39;</span>: [<span style=color:#ae81ff>0x08</span>, <span style=color:#ae81ff>0x08</span>, <span style=color:#ae81ff>0x3e</span>, <span style=color:#ae81ff>0x08</span>, <span style=color:#ae81ff>0x08</span>],
+  <span style=color:#e6db74>&#39;,&#39;</span>: [<span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x50</span>, <span style=color:#ae81ff>0x30</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>],
+  <span style=color:#e6db74>&#39;-&#39;</span>: [<span style=color:#ae81ff>0x08</span>, <span style=color:#ae81ff>0x08</span>, <span style=color:#ae81ff>0x08</span>, <span style=color:#ae81ff>0x08</span>, <span style=color:#ae81ff>0x08</span>],
+  <span style=color:#e6db74>&#39;.&#39;</span>: [<span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x60</span>, <span style=color:#ae81ff>0x60</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>],
+  <span style=color:#e6db74>&#39;/&#39;</span>: [<span style=color:#ae81ff>0x20</span>, <span style=color:#ae81ff>0x10</span>, <span style=color:#ae81ff>0x08</span>, <span style=color:#ae81ff>0x04</span>, <span style=color:#ae81ff>0x02</span>],
+  <span style=color:#e6db74>&#39;0&#39;</span>: [<span style=color:#ae81ff>0x3e</span>, <span style=color:#ae81ff>0x51</span>, <span style=color:#ae81ff>0x49</span>, <span style=color:#ae81ff>0x45</span>, <span style=color:#ae81ff>0x3e</span>],
+  <span style=color:#e6db74>&#39;1&#39;</span>: [<span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x42</span>, <span style=color:#ae81ff>0x7f</span>, <span style=color:#ae81ff>0x40</span>, <span style=color:#ae81ff>0x00</span>],
+  <span style=color:#e6db74>&#39;2&#39;</span>: [<span style=color:#ae81ff>0x42</span>, <span style=color:#ae81ff>0x61</span>, <span style=color:#ae81ff>0x51</span>, <span style=color:#ae81ff>0x49</span>, <span style=color:#ae81ff>0x46</span>],
+  <span style=color:#e6db74>&#39;3&#39;</span>: [<span style=color:#ae81ff>0x21</span>, <span style=color:#ae81ff>0x41</span>, <span style=color:#ae81ff>0x45</span>, <span style=color:#ae81ff>0x4b</span>, <span style=color:#ae81ff>0x31</span>],
+  <span style=color:#e6db74>&#39;4&#39;</span>: [<span style=color:#ae81ff>0x18</span>, <span style=color:#ae81ff>0x14</span>, <span style=color:#ae81ff>0x12</span>, <span style=color:#ae81ff>0x7f</span>, <span style=color:#ae81ff>0x10</span>],
+  <span style=color:#e6db74>&#39;5&#39;</span>: [<span style=color:#ae81ff>0x27</span>, <span style=color:#ae81ff>0x45</span>, <span style=color:#ae81ff>0x45</span>, <span style=color:#ae81ff>0x45</span>, <span style=color:#ae81ff>0x39</span>],
+  <span style=color:#e6db74>&#39;6&#39;</span>: [<span style=color:#ae81ff>0x3c</span>, <span style=color:#ae81ff>0x4a</span>, <span style=color:#ae81ff>0x49</span>, <span style=color:#ae81ff>0x49</span>, <span style=color:#ae81ff>0x30</span>],
+  <span style=color:#e6db74>&#39;7&#39;</span>: [<span style=color:#ae81ff>0x01</span>, <span style=color:#ae81ff>0x71</span>, <span style=color:#ae81ff>0x09</span>, <span style=color:#ae81ff>0x05</span>, <span style=color:#ae81ff>0x03</span>],
+  <span style=color:#e6db74>&#39;8&#39;</span>: [<span style=color:#ae81ff>0x36</span>, <span style=color:#ae81ff>0x49</span>, <span style=color:#ae81ff>0x49</span>, <span style=color:#ae81ff>0x49</span>, <span style=color:#ae81ff>0x36</span>],
+  <span style=color:#e6db74>&#39;9&#39;</span>: [<span style=color:#ae81ff>0x06</span>, <span style=color:#ae81ff>0x49</span>, <span style=color:#ae81ff>0x49</span>, <span style=color:#ae81ff>0x29</span>, <span style=color:#ae81ff>0x1e</span>],
+  <span style=color:#e6db74>&#39;:&#39;</span>: [<span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x36</span>, <span style=color:#ae81ff>0x36</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>],
+  <span style=color:#e6db74>&#39;;&#39;</span>: [<span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x56</span>, <span style=color:#ae81ff>0x36</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>],
+  <span style=color:#e6db74>&#39;&lt;&#39;</span>: [<span style=color:#ae81ff>0x08</span>, <span style=color:#ae81ff>0x14</span>, <span style=color:#ae81ff>0x22</span>, <span style=color:#ae81ff>0x41</span>, <span style=color:#ae81ff>0x00</span>],
+  <span style=color:#e6db74>&#39;=&#39;</span>: [<span style=color:#ae81ff>0x14</span>, <span style=color:#ae81ff>0x14</span>, <span style=color:#ae81ff>0x14</span>, <span style=color:#ae81ff>0x14</span>, <span style=color:#ae81ff>0x14</span>],
+  <span style=color:#e6db74>&#39;&gt;&#39;</span>: [<span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x41</span>, <span style=color:#ae81ff>0x22</span>, <span style=color:#ae81ff>0x14</span>, <span style=color:#ae81ff>0x08</span>],
+  <span style=color:#e6db74>&#39;?&#39;</span>: [<span style=color:#ae81ff>0x02</span>, <span style=color:#ae81ff>0x01</span>, <span style=color:#ae81ff>0x51</span>, <span style=color:#ae81ff>0x09</span>, <span style=color:#ae81ff>0x06</span>],
+  <span style=color:#e6db74>&#39;@&#39;</span>: [<span style=color:#ae81ff>0x32</span>, <span style=color:#ae81ff>0x49</span>, <span style=color:#ae81ff>0x79</span>, <span style=color:#ae81ff>0x41</span>, <span style=color:#ae81ff>0x3e</span>],
+  <span style=color:#e6db74>&#39;A&#39;</span>: [<span style=color:#ae81ff>0x7e</span>, <span style=color:#ae81ff>0x11</span>, <span style=color:#ae81ff>0x11</span>, <span style=color:#ae81ff>0x11</span>, <span style=color:#ae81ff>0x7e</span>],
+  <span style=color:#e6db74>&#39;B&#39;</span>: [<span style=color:#ae81ff>0x7f</span>, <span style=color:#ae81ff>0x49</span>, <span style=color:#ae81ff>0x49</span>, <span style=color:#ae81ff>0x49</span>, <span style=color:#ae81ff>0x36</span>],
+  <span style=color:#e6db74>&#39;C&#39;</span>: [<span style=color:#ae81ff>0x3e</span>, <span style=color:#ae81ff>0x41</span>, <span style=color:#ae81ff>0x41</span>, <span style=color:#ae81ff>0x41</span>, <span style=color:#ae81ff>0x22</span>],
+  <span style=color:#e6db74>&#39;D&#39;</span>: [<span style=color:#ae81ff>0x7f</span>, <span style=color:#ae81ff>0x41</span>, <span style=color:#ae81ff>0x41</span>, <span style=color:#ae81ff>0x22</span>, <span style=color:#ae81ff>0x1c</span>],
+  <span style=color:#e6db74>&#39;E&#39;</span>: [<span style=color:#ae81ff>0x7f</span>, <span style=color:#ae81ff>0x49</span>, <span style=color:#ae81ff>0x49</span>, <span style=color:#ae81ff>0x49</span>, <span style=color:#ae81ff>0x41</span>],
+  <span style=color:#e6db74>&#39;F&#39;</span>: [<span style=color:#ae81ff>0x7f</span>, <span style=color:#ae81ff>0x09</span>, <span style=color:#ae81ff>0x09</span>, <span style=color:#ae81ff>0x09</span>, <span style=color:#ae81ff>0x01</span>],
+  <span style=color:#e6db74>&#39;G&#39;</span>: [<span style=color:#ae81ff>0x3e</span>, <span style=color:#ae81ff>0x41</span>, <span style=color:#ae81ff>0x49</span>, <span style=color:#ae81ff>0x49</span>, <span style=color:#ae81ff>0x7a</span>],
+  <span style=color:#e6db74>&#39;H&#39;</span>: [<span style=color:#ae81ff>0x7f</span>, <span style=color:#ae81ff>0x08</span>, <span style=color:#ae81ff>0x08</span>, <span style=color:#ae81ff>0x08</span>, <span style=color:#ae81ff>0x7f</span>],
+  <span style=color:#e6db74>&#39;I&#39;</span>: [<span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x41</span>, <span style=color:#ae81ff>0x7f</span>, <span style=color:#ae81ff>0x41</span>, <span style=color:#ae81ff>0x00</span>],
+  <span style=color:#e6db74>&#39;J&#39;</span>: [<span style=color:#ae81ff>0x20</span>, <span style=color:#ae81ff>0x40</span>, <span style=color:#ae81ff>0x41</span>, <span style=color:#ae81ff>0x3f</span>, <span style=color:#ae81ff>0x01</span>],
+  <span style=color:#e6db74>&#39;K&#39;</span>: [<span style=color:#ae81ff>0x7f</span>, <span style=color:#ae81ff>0x08</span>, <span style=color:#ae81ff>0x14</span>, <span style=color:#ae81ff>0x22</span>, <span style=color:#ae81ff>0x41</span>],
+  <span style=color:#e6db74>&#39;L&#39;</span>: [<span style=color:#ae81ff>0x7f</span>, <span style=color:#ae81ff>0x40</span>, <span style=color:#ae81ff>0x40</span>, <span style=color:#ae81ff>0x40</span>, <span style=color:#ae81ff>0x40</span>],
+  <span style=color:#e6db74>&#39;M&#39;</span>: [<span style=color:#ae81ff>0x7f</span>, <span style=color:#ae81ff>0x02</span>, <span style=color:#ae81ff>0x0c</span>, <span style=color:#ae81ff>0x02</span>, <span style=color:#ae81ff>0x7f</span>],
+  <span style=color:#e6db74>&#39;N&#39;</span>: [<span style=color:#ae81ff>0x7f</span>, <span style=color:#ae81ff>0x04</span>, <span style=color:#ae81ff>0x08</span>, <span style=color:#ae81ff>0x10</span>, <span style=color:#ae81ff>0x7f</span>],
+  <span style=color:#e6db74>&#39;O&#39;</span>: [<span style=color:#ae81ff>0x3e</span>, <span style=color:#ae81ff>0x41</span>, <span style=color:#ae81ff>0x41</span>, <span style=color:#ae81ff>0x41</span>, <span style=color:#ae81ff>0x3e</span>],
+  <span style=color:#e6db74>&#39;P&#39;</span>: [<span style=color:#ae81ff>0x7f</span>, <span style=color:#ae81ff>0x09</span>, <span style=color:#ae81ff>0x09</span>, <span style=color:#ae81ff>0x09</span>, <span style=color:#ae81ff>0x06</span>],
+  <span style=color:#e6db74>&#39;Q&#39;</span>: [<span style=color:#ae81ff>0x3e</span>, <span style=color:#ae81ff>0x41</span>, <span style=color:#ae81ff>0x51</span>, <span style=color:#ae81ff>0x21</span>, <span style=color:#ae81ff>0x5e</span>],
+  <span style=color:#e6db74>&#39;R&#39;</span>: [<span style=color:#ae81ff>0x7f</span>, <span style=color:#ae81ff>0x09</span>, <span style=color:#ae81ff>0x19</span>, <span style=color:#ae81ff>0x29</span>, <span style=color:#ae81ff>0x46</span>],
+  <span style=color:#e6db74>&#39;S&#39;</span>: [<span style=color:#ae81ff>0x46</span>, <span style=color:#ae81ff>0x49</span>, <span style=color:#ae81ff>0x49</span>, <span style=color:#ae81ff>0x49</span>, <span style=color:#ae81ff>0x31</span>],
+  <span style=color:#e6db74>&#39;T&#39;</span>: [<span style=color:#ae81ff>0x01</span>, <span style=color:#ae81ff>0x01</span>, <span style=color:#ae81ff>0x7f</span>, <span style=color:#ae81ff>0x01</span>, <span style=color:#ae81ff>0x01</span>],
+  <span style=color:#e6db74>&#39;U&#39;</span>: [<span style=color:#ae81ff>0x3f</span>, <span style=color:#ae81ff>0x40</span>, <span style=color:#ae81ff>0x40</span>, <span style=color:#ae81ff>0x40</span>, <span style=color:#ae81ff>0x3f</span>],
+  <span style=color:#e6db74>&#39;V&#39;</span>: [<span style=color:#ae81ff>0x1f</span>, <span style=color:#ae81ff>0x20</span>, <span style=color:#ae81ff>0x40</span>, <span style=color:#ae81ff>0x20</span>, <span style=color:#ae81ff>0x1f</span>],
+  <span style=color:#e6db74>&#39;W&#39;</span>: [<span style=color:#ae81ff>0x3f</span>, <span style=color:#ae81ff>0x40</span>, <span style=color:#ae81ff>0x38</span>, <span style=color:#ae81ff>0x40</span>, <span style=color:#ae81ff>0x3f</span>],
+  <span style=color:#e6db74>&#39;X&#39;</span>: [<span style=color:#ae81ff>0x63</span>, <span style=color:#ae81ff>0x14</span>, <span style=color:#ae81ff>0x08</span>, <span style=color:#ae81ff>0x14</span>, <span style=color:#ae81ff>0x63</span>],
+  <span style=color:#e6db74>&#39;Y&#39;</span>: [<span style=color:#ae81ff>0x07</span>, <span style=color:#ae81ff>0x08</span>, <span style=color:#ae81ff>0x70</span>, <span style=color:#ae81ff>0x08</span>, <span style=color:#ae81ff>0x07</span>],
+  <span style=color:#e6db74>&#39;Z&#39;</span>: [<span style=color:#ae81ff>0x61</span>, <span style=color:#ae81ff>0x51</span>, <span style=color:#ae81ff>0x49</span>, <span style=color:#ae81ff>0x45</span>, <span style=color:#ae81ff>0x43</span>],
+  <span style=color:#e6db74>&#39;[&#39;</span>: [<span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x7f</span>, <span style=color:#ae81ff>0x41</span>, <span style=color:#ae81ff>0x41</span>, <span style=color:#ae81ff>0x00</span>],
+  <span style=color:#e6db74>&#39;</span><span style=color:#ae81ff>\\</span><span style=color:#e6db74>&#39;</span>: [<span style=color:#ae81ff>0x02</span>, <span style=color:#ae81ff>0x04</span>, <span style=color:#ae81ff>0x08</span>, <span style=color:#ae81ff>0x10</span>, <span style=color:#ae81ff>0x20</span>],
+  <span style=color:#e6db74>&#39;]&#39;</span>: [<span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x41</span>, <span style=color:#ae81ff>0x41</span>, <span style=color:#ae81ff>0x7f</span>, <span style=color:#ae81ff>0x00</span>],
+  <span style=color:#e6db74>&#39;^&#39;</span>: [<span style=color:#ae81ff>0x04</span>, <span style=color:#ae81ff>0x02</span>, <span style=color:#ae81ff>0x01</span>, <span style=color:#ae81ff>0x02</span>, <span style=color:#ae81ff>0x04</span>],
+  <span style=color:#e6db74>&#39;_&#39;</span>: [<span style=color:#ae81ff>0x40</span>, <span style=color:#ae81ff>0x40</span>, <span style=color:#ae81ff>0x40</span>, <span style=color:#ae81ff>0x40</span>, <span style=color:#ae81ff>0x40</span>],
+  <span style=color:#e6db74>&#39;`&#39;</span>: [<span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x01</span>, <span style=color:#ae81ff>0x02</span>, <span style=color:#ae81ff>0x04</span>, <span style=color:#ae81ff>0x00</span>],
+  <span style=color:#e6db74>&#39;a&#39;</span>: [<span style=color:#ae81ff>0x20</span>, <span style=color:#ae81ff>0x54</span>, <span style=color:#ae81ff>0x54</span>, <span style=color:#ae81ff>0x54</span>, <span style=color:#ae81ff>0x78</span>],
+  <span style=color:#e6db74>&#39;b&#39;</span>: [<span style=color:#ae81ff>0x7f</span>, <span style=color:#ae81ff>0x48</span>, <span style=color:#ae81ff>0x44</span>, <span style=color:#ae81ff>0x44</span>, <span style=color:#ae81ff>0x38</span>],
+  <span style=color:#e6db74>&#39;c&#39;</span>: [<span style=color:#ae81ff>0x38</span>, <span style=color:#ae81ff>0x44</span>, <span style=color:#ae81ff>0x44</span>, <span style=color:#ae81ff>0x44</span>, <span style=color:#ae81ff>0x20</span>],
+  <span style=color:#e6db74>&#39;d&#39;</span>: [<span style=color:#ae81ff>0x38</span>, <span style=color:#ae81ff>0x44</span>, <span style=color:#ae81ff>0x44</span>, <span style=color:#ae81ff>0x48</span>, <span style=color:#ae81ff>0x7f</span>],
+  <span style=color:#e6db74>&#39;e&#39;</span>: [<span style=color:#ae81ff>0x38</span>, <span style=color:#ae81ff>0x54</span>, <span style=color:#ae81ff>0x54</span>, <span style=color:#ae81ff>0x54</span>, <span style=color:#ae81ff>0x18</span>],
+  <span style=color:#e6db74>&#39;f&#39;</span>: [<span style=color:#ae81ff>0x08</span>, <span style=color:#ae81ff>0x7e</span>, <span style=color:#ae81ff>0x09</span>, <span style=color:#ae81ff>0x01</span>, <span style=color:#ae81ff>0x02</span>],
+  <span style=color:#e6db74>&#39;g&#39;</span>: [<span style=color:#ae81ff>0x0c</span>, <span style=color:#ae81ff>0x52</span>, <span style=color:#ae81ff>0x52</span>, <span style=color:#ae81ff>0x52</span>, <span style=color:#ae81ff>0x3e</span>],
+  <span style=color:#e6db74>&#39;h&#39;</span>: [<span style=color:#ae81ff>0x7f</span>, <span style=color:#ae81ff>0x08</span>, <span style=color:#ae81ff>0x04</span>, <span style=color:#ae81ff>0x04</span>, <span style=color:#ae81ff>0x78</span>],
+  <span style=color:#e6db74>&#39;i&#39;</span>: [<span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x44</span>, <span style=color:#ae81ff>0x7d</span>, <span style=color:#ae81ff>0x40</span>, <span style=color:#ae81ff>0x00</span>],
+  <span style=color:#e6db74>&#39;j&#39;</span>: [<span style=color:#ae81ff>0x20</span>, <span style=color:#ae81ff>0x40</span>, <span style=color:#ae81ff>0x44</span>, <span style=color:#ae81ff>0x3d</span>, <span style=color:#ae81ff>0x00</span>],
+  <span style=color:#e6db74>&#39;k&#39;</span>: [<span style=color:#ae81ff>0x7f</span>, <span style=color:#ae81ff>0x10</span>, <span style=color:#ae81ff>0x28</span>, <span style=color:#ae81ff>0x44</span>, <span style=color:#ae81ff>0x00</span>],
+  <span style=color:#e6db74>&#39;l&#39;</span>: [<span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x41</span>, <span style=color:#ae81ff>0x7f</span>, <span style=color:#ae81ff>0x40</span>, <span style=color:#ae81ff>0x00</span>],
+  <span style=color:#e6db74>&#39;m&#39;</span>: [<span style=color:#ae81ff>0x7c</span>, <span style=color:#ae81ff>0x04</span>, <span style=color:#ae81ff>0x18</span>, <span style=color:#ae81ff>0x04</span>, <span style=color:#ae81ff>0x78</span>],
+  <span style=color:#e6db74>&#39;n&#39;</span>: [<span style=color:#ae81ff>0x7c</span>, <span style=color:#ae81ff>0x08</span>, <span style=color:#ae81ff>0x04</span>, <span style=color:#ae81ff>0x04</span>, <span style=color:#ae81ff>0x78</span>],
+  <span style=color:#e6db74>&#39;o&#39;</span>: [<span style=color:#ae81ff>0x38</span>, <span style=color:#ae81ff>0x44</span>, <span style=color:#ae81ff>0x44</span>, <span style=color:#ae81ff>0x44</span>, <span style=color:#ae81ff>0x38</span>],
+  <span style=color:#e6db74>&#39;p&#39;</span>: [<span style=color:#ae81ff>0x7c</span>, <span style=color:#ae81ff>0x14</span>, <span style=color:#ae81ff>0x14</span>, <span style=color:#ae81ff>0x14</span>, <span style=color:#ae81ff>0x08</span>],
+  <span style=color:#e6db74>&#39;q&#39;</span>: [<span style=color:#ae81ff>0x08</span>, <span style=color:#ae81ff>0x14</span>, <span style=color:#ae81ff>0x14</span>, <span style=color:#ae81ff>0x18</span>, <span style=color:#ae81ff>0x7c</span>],
+  <span style=color:#e6db74>&#39;r&#39;</span>: [<span style=color:#ae81ff>0x7c</span>, <span style=color:#ae81ff>0x08</span>, <span style=color:#ae81ff>0x04</span>, <span style=color:#ae81ff>0x04</span>, <span style=color:#ae81ff>0x08</span>],
+  <span style=color:#e6db74>&#39;s&#39;</span>: [<span style=color:#ae81ff>0x48</span>, <span style=color:#ae81ff>0x54</span>, <span style=color:#ae81ff>0x54</span>, <span style=color:#ae81ff>0x54</span>, <span style=color:#ae81ff>0x20</span>],
+  <span style=color:#e6db74>&#39;t&#39;</span>: [<span style=color:#ae81ff>0x04</span>, <span style=color:#ae81ff>0x3f</span>, <span style=color:#ae81ff>0x44</span>, <span style=color:#ae81ff>0x40</span>, <span style=color:#ae81ff>0x20</span>],
+  <span style=color:#e6db74>&#39;u&#39;</span>: [<span style=color:#ae81ff>0x3c</span>, <span style=color:#ae81ff>0x40</span>, <span style=color:#ae81ff>0x40</span>, <span style=color:#ae81ff>0x20</span>, <span style=color:#ae81ff>0x7c</span>],
+  <span style=color:#e6db74>&#39;v&#39;</span>: [<span style=color:#ae81ff>0x1c</span>, <span style=color:#ae81ff>0x20</span>, <span style=color:#ae81ff>0x40</span>, <span style=color:#ae81ff>0x20</span>, <span style=color:#ae81ff>0x1c</span>],
+  <span style=color:#e6db74>&#39;w&#39;</span>: [<span style=color:#ae81ff>0x3c</span>, <span style=color:#ae81ff>0x40</span>, <span style=color:#ae81ff>0x30</span>, <span style=color:#ae81ff>0x40</span>, <span style=color:#ae81ff>0x3c</span>],
+  <span style=color:#e6db74>&#39;x&#39;</span>: [<span style=color:#ae81ff>0x44</span>, <span style=color:#ae81ff>0x28</span>, <span style=color:#ae81ff>0x10</span>, <span style=color:#ae81ff>0x28</span>, <span style=color:#ae81ff>0x44</span>],
+  <span style=color:#e6db74>&#39;y&#39;</span>: [<span style=color:#ae81ff>0x0c</span>, <span style=color:#ae81ff>0x50</span>, <span style=color:#ae81ff>0x50</span>, <span style=color:#ae81ff>0x50</span>, <span style=color:#ae81ff>0x3c</span>],
+  <span style=color:#e6db74>&#39;z&#39;</span>: [<span style=color:#ae81ff>0x44</span>, <span style=color:#ae81ff>0x64</span>, <span style=color:#ae81ff>0x54</span>, <span style=color:#ae81ff>0x4c</span>, <span style=color:#ae81ff>0x44</span>],
+  <span style=color:#e6db74>&#39;{&#39;</span>: [<span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x08</span>, <span style=color:#ae81ff>0x36</span>, <span style=color:#ae81ff>0x41</span>, <span style=color:#ae81ff>0x00</span>],
+  <span style=color:#e6db74>&#39;|&#39;</span>: [<span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x7f</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>],
+  <span style=color:#e6db74>&#39;}&#39;</span>: [<span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x41</span>, <span style=color:#ae81ff>0x36</span>, <span style=color:#ae81ff>0x08</span>, <span style=color:#ae81ff>0x00</span>],
+  <span style=color:#e6db74>&#39;~&#39;</span>: [<span style=color:#ae81ff>0x10</span>, <span style=color:#ae81ff>0x08</span>, <span style=color:#ae81ff>0x08</span>, <span style=color:#ae81ff>0x10</span>, <span style=color:#ae81ff>0x08</span>],
+  <span style=color:#e6db74>&#39;</span><span style=color:#ae81ff>\x7f</span><span style=color:#e6db74>&#39;</span>: [<span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x7e</span>, <span style=color:#ae81ff>0x42</span>, <span style=color:#ae81ff>0x42</span>, <span style=color:#ae81ff>0x7e</span>],
+}
+X <span style=color:#f92672>=</span> <span style=color:#ae81ff>13</span>
+Y <span style=color:#f92672>=</span> <span style=color:#ae81ff>5</span>
+
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>PCD8544</span>(object):
+    <span style=color:#e6db74>&#34;&#34;&#34;Nokia 5110/3310 PCD8544-based LCD display.&#34;&#34;&#34;</span>
+
+    <span style=color:#66d9ef>def</span> __init__(self, dc, rst, sclk<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>, din<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>, cs<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>, gpio<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>, spi<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>, vcc<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>, bl<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>):
+        self<span style=color:#f92672>.</span>_sclk <span style=color:#f92672>=</span> sclk
+        self<span style=color:#f92672>.</span>_din <span style=color:#f92672>=</span> din
+        self<span style=color:#f92672>.</span>_dc <span style=color:#f92672>=</span> dc
+        self<span style=color:#f92672>.</span>_cs <span style=color:#f92672>=</span> cs
+        self<span style=color:#f92672>.</span>_rst <span style=color:#f92672>=</span> rst
+        self<span style=color:#f92672>.</span>_gpio <span style=color:#f92672>=</span> gpio
+        self<span style=color:#f92672>.</span>_spi <span style=color:#f92672>=</span> spi
+        self<span style=color:#f92672>.</span>_buffer <span style=color:#f92672>=</span> [<span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0xC0</span>, <span style=color:#ae81ff>0xE0</span>, <span style=color:#ae81ff>0xF0</span>, <span style=color:#ae81ff>0xF8</span>, <span style=color:#ae81ff>0xFC</span>, <span style=color:#ae81ff>0xFC</span>, <span style=color:#ae81ff>0xFE</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFC</span>, <span style=color:#ae81ff>0xE0</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0xF8</span>, <span style=color:#ae81ff>0xF8</span>, <span style=color:#ae81ff>0xF8</span>, <span style=color:#ae81ff>0xF8</span>, <span style=color:#ae81ff>0xF8</span>, <span style=color:#ae81ff>0xF8</span>, <span style=color:#ae81ff>0xF8</span>, <span style=color:#ae81ff>0xF8</span>, <span style=color:#ae81ff>0xF8</span>, <span style=color:#ae81ff>0xF8</span>, <span style=color:#ae81ff>0xF8</span>, <span style=color:#ae81ff>0xF8</span>, <span style=color:#ae81ff>0xF0</span>, <span style=color:#ae81ff>0xF0</span>, <span style=color:#ae81ff>0xE0</span>, <span style=color:#ae81ff>0xE0</span>, <span style=color:#ae81ff>0xC0</span>, <span style=color:#ae81ff>0x80</span>, <span style=color:#ae81ff>0xC0</span>, <span style=color:#ae81ff>0xFC</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0x7F</span>, <span style=color:#ae81ff>0x3F</span>, <span style=color:#ae81ff>0x7F</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x0F</span>, <span style=color:#ae81ff>0x1F</span>, <span style=color:#ae81ff>0x3F</span>, <span style=color:#ae81ff>0x7F</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xE7</span>, <span style=color:#ae81ff>0xC7</span>, <span style=color:#ae81ff>0xC7</span>, <span style=color:#ae81ff>0x87</span>, <span style=color:#ae81ff>0x8F</span>, <span style=color:#ae81ff>0x9F</span>, <span style=color:#ae81ff>0x9F</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xC1</span>, <span style=color:#ae81ff>0xC0</span>, <span style=color:#ae81ff>0xE0</span>, <span style=color:#ae81ff>0xFC</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFC</span>, <span style=color:#ae81ff>0xFC</span>, <span style=color:#ae81ff>0xFC</span>, <span style=color:#ae81ff>0xFC</span>, <span style=color:#ae81ff>0xFE</span>, <span style=color:#ae81ff>0xFE</span>, <span style=color:#ae81ff>0xFE</span>, <span style=color:#ae81ff>0xFC</span>, <span style=color:#ae81ff>0xFC</span>, <span style=color:#ae81ff>0xF8</span>, <span style=color:#ae81ff>0xF8</span>, <span style=color:#ae81ff>0xF0</span>, <span style=color:#ae81ff>0xE0</span>, <span style=color:#ae81ff>0xC0</span>, <span style=color:#ae81ff>0xC0</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x80</span>, <span style=color:#ae81ff>0xC0</span>, <span style=color:#ae81ff>0xE0</span>, <span style=color:#ae81ff>0xF1</span>, <span style=color:#ae81ff>0xFB</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0x7F</span>, <span style=color:#ae81ff>0x1F</span>, <span style=color:#ae81ff>0x0F</span>, <span style=color:#ae81ff>0x0F</span>, <span style=color:#ae81ff>0x87</span>, <span style=color:#ae81ff>0xE7</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0x1F</span>, <span style=color:#ae81ff>0x1F</span>, <span style=color:#ae81ff>0x3F</span>, <span style=color:#ae81ff>0xF9</span>, <span style=color:#ae81ff>0xF8</span>, <span style=color:#ae81ff>0xF8</span>, <span style=color:#ae81ff>0xF8</span>, <span style=color:#ae81ff>0xF8</span>, <span style=color:#ae81ff>0xF8</span>, <span style=color:#ae81ff>0xF8</span>, <span style=color:#ae81ff>0xFD</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0x7F</span>, <span style=color:#ae81ff>0x3F</span>, <span style=color:#ae81ff>0x0F</span>, <span style=color:#ae81ff>0x07</span>, <span style=color:#ae81ff>0x01</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0xF0</span>, <span style=color:#ae81ff>0xFE</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFE</span>, <span style=color:#ae81ff>0x7E</span>, <span style=color:#ae81ff>0x3F</span>, <span style=color:#ae81ff>0x3F</span>, <span style=color:#ae81ff>0x0F</span>, <span style=color:#ae81ff>0x1F</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFC</span>, <span style=color:#ae81ff>0xF0</span>, <span style=color:#ae81ff>0xE0</span>, <span style=color:#ae81ff>0xF1</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFC</span>, <span style=color:#ae81ff>0xF0</span>, <span style=color:#ae81ff>0x01</span>, <span style=color:#ae81ff>0x01</span>, <span style=color:#ae81ff>0x01</span>, <span style=color:#ae81ff>0x01</span>, <span style=color:#ae81ff>0x01</span>, <span style=color:#ae81ff>0x01</span>, <span style=color:#ae81ff>0x01</span>, <span style=color:#ae81ff>0x01</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x03</span>, <span style=color:#ae81ff>0x03</span>, <span style=color:#ae81ff>0x03</span>, <span style=color:#ae81ff>0x03</span>, <span style=color:#ae81ff>0x03</span>, <span style=color:#ae81ff>0x03</span>, <span style=color:#ae81ff>0x03</span>, <span style=color:#ae81ff>0x03</span>, <span style=color:#ae81ff>0x01</span>, <span style=color:#ae81ff>0x01</span>, <span style=color:#ae81ff>0x01</span>, <span style=color:#ae81ff>0x01</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x03</span>, <span style=color:#ae81ff>0x0F</span>, <span style=color:#ae81ff>0x1F</span>, <span style=color:#ae81ff>0x3F</span>, <span style=color:#ae81ff>0x7F</span>, <span style=color:#ae81ff>0x7F</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0xFF</span>, <span style=color:#ae81ff>0x7F</span>, <span style=color:#ae81ff>0x7F</span>, <span style=color:#ae81ff>0x1F</span>, <span style=color:#ae81ff>0x03</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span> ]
+        <span style=color:#66d9ef>if</span> self<span style=color:#f92672>.</span>_gpio <span style=color:#f92672>is</span> <span style=color:#66d9ef>None</span>:
+            self<span style=color:#f92672>.</span>_gpio <span style=color:#f92672>=</span> GPIO<span style=color:#f92672>.</span>get_platform_gpio()
+            self<span style=color:#f92672>.</span>_gpio<span style=color:#f92672>.</span>setup(vcc, GPIO<span style=color:#f92672>.</span>OUT)
+            self<span style=color:#f92672>.</span>_gpio<span style=color:#f92672>.</span>setup(bl, GPIO<span style=color:#f92672>.</span>OUT)
+            self<span style=color:#f92672>.</span>_gpio<span style=color:#f92672>.</span>output(vcc, <span style=color:#ae81ff>1</span>)
+            self<span style=color:#f92672>.</span>_gpio<span style=color:#f92672>.</span>output(bl, <span style=color:#ae81ff>1</span>)
+        <span style=color:#66d9ef>if</span> self<span style=color:#f92672>.</span>_rst <span style=color:#f92672>is</span> <span style=color:#f92672>not</span> <span style=color:#66d9ef>None</span>:
+            self<span style=color:#f92672>.</span>_gpio<span style=color:#f92672>.</span>setup(self<span style=color:#f92672>.</span>_rst, GPIO<span style=color:#f92672>.</span>OUT)
+        <span style=color:#75715e># Default to bit bang SPI.</span>
+        <span style=color:#66d9ef>if</span> self<span style=color:#f92672>.</span>_spi <span style=color:#f92672>is</span> <span style=color:#66d9ef>None</span>:
+            self<span style=color:#f92672>.</span>_spi <span style=color:#f92672>=</span> SPI<span style=color:#f92672>.</span>BitBang(self<span style=color:#f92672>.</span>_gpio, self<span style=color:#f92672>.</span>_sclk, self<span style=color:#f92672>.</span>_din, <span style=color:#66d9ef>None</span>, self<span style=color:#f92672>.</span>_cs)
+        <span style=color:#75715e># Set pin outputs.</span>
+        self<span style=color:#f92672>.</span>_gpio<span style=color:#f92672>.</span>setup(self<span style=color:#f92672>.</span>_dc, GPIO<span style=color:#f92672>.</span>OUT)
+        <span style=color:#75715e># Initialize buffer to Adafruit logo.</span>
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>command</span>(self, c):
+        <span style=color:#e6db74>&#34;&#34;&#34;Send command byte to display.&#34;&#34;&#34;</span>
+        <span style=color:#75715e># DC pin low signals command byte.</span>
+        self<span style=color:#f92672>.</span>_gpio<span style=color:#f92672>.</span>set_low(self<span style=color:#f92672>.</span>_dc)
+        self<span style=color:#f92672>.</span>_spi<span style=color:#f92672>.</span>write([c])
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>extended_command</span>(self, c):
+        <span style=color:#e6db74>&#34;&#34;&#34;Send a command in extended mode&#34;&#34;&#34;</span>
+        <span style=color:#75715e># Set extended command mode</span>
+        self<span style=color:#f92672>.</span>command(PCD8544_FUNCTIONSET <span style=color:#f92672>|</span> PCD8544_EXTENDEDINSTRUCTION)
+        self<span style=color:#f92672>.</span>command(c)
+        <span style=color:#75715e># Set normal display mode.</span>
+        self<span style=color:#f92672>.</span>command(PCD8544_FUNCTIONSET)
+        self<span style=color:#f92672>.</span>command(PCD8544_DISPLAYCONTROL <span style=color:#f92672>|</span> PCD8544_DISPLAYNORMAL)
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>begin</span>(self, contrast<span style=color:#f92672>=</span><span style=color:#ae81ff>40</span>, bias<span style=color:#f92672>=</span><span style=color:#ae81ff>4</span>):
+        <span style=color:#e6db74>&#34;&#34;&#34;Initialize display.&#34;&#34;&#34;</span>
+        self<span style=color:#f92672>.</span>reset()
+        <span style=color:#75715e># Set LCD bias.</span>
+        self<span style=color:#f92672>.</span>set_bias(bias)
+        self<span style=color:#f92672>.</span>set_contrast(contrast)
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>reset</span>(self):
+        <span style=color:#e6db74>&#34;&#34;&#34;Reset the display&#34;&#34;&#34;</span>
+        <span style=color:#66d9ef>if</span> self<span style=color:#f92672>.</span>_rst <span style=color:#f92672>is</span> <span style=color:#f92672>not</span> <span style=color:#66d9ef>None</span>:
+            <span style=color:#75715e># Toggle RST low to reset.</span>
+            self<span style=color:#f92672>.</span>_gpio<span style=color:#f92672>.</span>set_low(self<span style=color:#f92672>.</span>_rst)
+            time<span style=color:#f92672>.</span>sleep(<span style=color:#ae81ff>0.1</span>)
+            self<span style=color:#f92672>.</span>_gpio<span style=color:#f92672>.</span>set_high(self<span style=color:#f92672>.</span>_rst)
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>display</span>(self):
+        <span style=color:#e6db74>&#34;&#34;&#34;Write display buffer to physical display.&#34;&#34;&#34;</span>
+        <span style=color:#75715e># TODO: Consider support for partial updates like Arduino library.</span>
+        <span style=color:#75715e># Reset to position zero.</span>
+        self<span style=color:#f92672>.</span>command(PCD8544_SETYADDR)
+        self<span style=color:#f92672>.</span>command(PCD8544_SETXADDR)
+        <span style=color:#75715e># Write the buffer.</span>
+        self<span style=color:#f92672>.</span>_gpio<span style=color:#f92672>.</span>set_high(self<span style=color:#f92672>.</span>_dc)
+        self<span style=color:#f92672>.</span>_spi<span style=color:#f92672>.</span>write(self<span style=color:#f92672>.</span>_buffer)
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>clear</span>(self):
+        <span style=color:#e6db74>&#34;&#34;&#34;Clear contents of image buffer.&#34;&#34;&#34;</span>
+        self<span style=color:#f92672>.</span>_buffer <span style=color:#f92672>=</span> [<span style=color:#ae81ff>0</span>] <span style=color:#f92672>*</span> (LCDWIDTH <span style=color:#f92672>*</span> LCDHEIGHT <span style=color:#f92672>//</span> <span style=color:#ae81ff>8</span>)
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>set_contrast</span>(self, contrast):
+        <span style=color:#e6db74>&#34;&#34;&#34;Set contrast to specified value (should be 0-127).&#34;&#34;&#34;</span>
+        contrast <span style=color:#f92672>=</span> max(<span style=color:#ae81ff>0</span>, min(contrast, <span style=color:#ae81ff>0x7f</span>)) <span style=color:#75715e># Clamp to values 0-0x7f</span>
+        self<span style=color:#f92672>.</span>extended_command(PCD8544_SETVOP <span style=color:#f92672>|</span> contrast)
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>set_bias</span>(self, bias):
+        <span style=color:#e6db74>&#34;&#34;&#34;Set bias&#34;&#34;&#34;</span>
+        self<span style=color:#f92672>.</span>extended_command(PCD8544_SETBIAS <span style=color:#f92672>|</span> bias)
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>draw_str</span>(self, y, s):
+        <span style=color:#e6db74>&#34;&#34;&#34;修改显示数据，y 为第几行，s 为要显示的数据&#34;&#34;&#34;</span>
+        <span style=color:#66d9ef>if</span> (y <span style=color:#f92672>&gt;=</span> Y ) <span style=color:#f92672>or</span> (y <span style=color:#f92672>&lt;</span> <span style=color:#ae81ff>0</span>):
+            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>False</span>
+        x <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+        <span style=color:#66d9ef>for</span> c <span style=color:#f92672>in</span> s[<span style=color:#ae81ff>0</span>:<span style=color:#ae81ff>14</span>]:
+            <span style=color:#66d9ef>try</span>:
+                self<span style=color:#f92672>.</span>_buffer[y<span style=color:#f92672>*</span><span style=color:#ae81ff>84</span><span style=color:#f92672>+</span>x<span style=color:#f92672>*</span><span style=color:#ae81ff>6</span>: y<span style=color:#f92672>*</span><span style=color:#ae81ff>84</span><span style=color:#f92672>+</span>x<span style=color:#f92672>*</span><span style=color:#ae81ff>6</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>6</span>] <span style=color:#f92672>=</span> FONT[c] <span style=color:#f92672>+</span> [<span style=color:#ae81ff>0</span>]
+            <span style=color:#66d9ef>except</span> <span style=color:#a6e22e>KeyError</span>:
+                <span style=color:#66d9ef>pass</span>
+            x <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1</span>
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>draw_char</span>(self, x, y):
+        <span style=color:#66d9ef>pass</span>
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>quit</span>(self):
+        self<span style=color:#f92672>.</span>_gpio<span style=color:#f92672>.</span>cleanup()
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=接线bcm>接线(BCM)</h3>
+<ul>
+<li>dc 13</li>
+<li>rst 5</li>
+<li>sclk 26</li>
+<li>din 19</li>
+<li>cs 6</li>
+<li>vcc 20</li>
+<li>bl 21</li>
+<li>gnd 0v</li>
+</ul>
+<h3 id=显示信息>显示信息</h3>
+<h4 id=网速>网速</h4>
+<p>显示路由器的网速，电脑网速就没必要了
+我用的是老毛子固件,所以用这个固件的可以参考我的代码</p>
+<div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 31
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 32
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 33
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 34
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 35
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 36
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 37
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 38
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 39
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 40
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 41
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 42
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 43
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 44
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 45
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 46
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 47
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 48
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 49
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 50
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 51
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 52
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 53
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 54
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 55
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 56
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 57
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 58
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 59
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 60
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 61
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 62
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 63
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 64
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 65
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 66
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 67
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 68
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 69
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 70
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 71
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 72
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 73
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 74
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 75
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 76
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 77
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 78
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 79
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 80
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 81
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 82
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 83
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 84
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 85
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 86
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 87
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 88
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 89
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 90
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 91
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 92
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 93
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 94
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 95
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 96
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 97
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 98
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 99
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">100
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">101
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">102
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">103
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">104
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">105
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">106
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">107
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">108
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">109
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">110
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">111
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e># coding:utf-8</span>
+<span style=color:#f92672>import</span> requests
+<span style=color:#f92672>import</span> time
+<span style=color:#f92672>from</span> math <span style=color:#f92672>import</span> fabs
+<span style=color:#f92672>from</span> base64 <span style=color:#f92672>import</span> b64encode
+<span style=color:#75715e># from demjson import decode</span>
+
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>RaspberryMonitorNetSpeed</span>:
+    url <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;http://192.168.123.1/update.cgi?output=netdev&#39;</span>
+    headers <span style=color:#f92672>=</span> {
+            <span style=color:#e6db74>&#39;Accept&#39;</span>: <span style=color:#e6db74>&#39;text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8&#39;</span>,
+            <span style=color:#e6db74>&#39;Accept-Encoding&#39;</span>: <span style=color:#e6db74>&#39;gzip, deflate&#39;</span>,
+            <span style=color:#e6db74>&#39;Accept-Language&#39;</span>: <span style=color:#e6db74>&#39;zh-CN,zh;q=0.9,en;q=0.8&#39;</span>,
+            <span style=color:#e6db74>&#39;Cache-Control&#39;</span>: <span style=color:#e6db74>&#39;max-age=0&#39;</span>,
+            <span style=color:#75715e># &#39;Connection&#39;:&#39;keep-alive&#39;,</span>
+            <span style=color:#e6db74>&#39;Connection&#39;</span>: <span style=color:#e6db74>&#39;close&#39;</span>,
+            <span style=color:#e6db74>&#39;Cookie&#39;</span>: <span style=color:#e6db74>&#39;n56u_cookie_bw_rt_tab=WAN&#39;</span>,
+            <span style=color:#e6db74>&#39;Host&#39;</span>: <span style=color:#e6db74>&#39;192.168.123.1&#39;</span>,
+            <span style=color:#e6db74>&#39;Upgrade-Insecure-Requests&#39;</span>: <span style=color:#e6db74>&#39;1&#39;</span>,
+            <span style=color:#e6db74>&#39;User-Agent&#39;</span>: <span style=color:#e6db74>&#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36&#39;</span>,
+        }
+    <span style=color:#75715e># 最近一次请求时间</span>
+    last_time <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+    <span style=color:#75715e># 最近一次请求的下行数据总量</span>
+    last_rbytes <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+    <span style=color:#75715e># 最近一次请求的上行数据总量</span>
+    last_tbytes <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+
+    <span style=color:#66d9ef>def</span> __init__(self, username, passwd):
+        self<span style=color:#f92672>.</span>headers[<span style=color:#e6db74>&#39;Authorization&#39;</span>] <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;Basic &#39;</span><span style=color:#f92672>+</span>b64encode((username<span style=color:#f92672>+</span><span style=color:#e6db74>&#39;:&#39;</span><span style=color:#f92672>+</span>passwd)<span style=color:#f92672>.</span>encode())<span style=color:#f92672>.</span>decode()
+        data <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>__get_wan_rx_and_tx()
+        self<span style=color:#f92672>.</span>last_rbytes <span style=color:#f92672>=</span> data[<span style=color:#ae81ff>0</span>]
+        self<span style=color:#f92672>.</span>last_tbytes <span style=color:#f92672>=</span> data[<span style=color:#ae81ff>1</span>]
+        self<span style=color:#f92672>.</span>last_time <span style=color:#f92672>=</span> data[<span style=color:#ae81ff>2</span>]
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>set_auth</span>(self, username, passwd):
+        self<span style=color:#f92672>.</span>headers[<span style=color:#e6db74>&#39;Authorization&#39;</span>] <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;Basic &#39;</span><span style=color:#f92672>+</span>b64encode((username<span style=color:#f92672>+</span><span style=color:#e6db74>&#39;:&#39;</span><span style=color:#f92672>+</span>passwd)<span style=color:#f92672>.</span>encode())<span style=color:#f92672>.</span>decode()
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__get_wan_rx_and_tx</span>(self):
+        text <span style=color:#f92672>=</span> requests<span style=color:#f92672>.</span>get(self<span style=color:#f92672>.</span>url, headers<span style=color:#f92672>=</span>self<span style=color:#f92672>.</span>headers)<span style=color:#f92672>.</span>text
+        <span style=color:#66d9ef>try</span>:
+            rx <span style=color:#f92672>=</span> int(text<span style=color:#f92672>.</span>split(<span style=color:#e6db74>&#39;,&#39;</span>)[<span style=color:#ae81ff>25</span>]<span style=color:#f92672>.</span>lstrip(<span style=color:#e6db74>&#39;rx:&#39;</span>)<span style=color:#f92672>.</span>strip(), <span style=color:#ae81ff>16</span>)
+            tx <span style=color:#f92672>=</span> int(text<span style=color:#f92672>.</span>split(<span style=color:#e6db74>&#39;,&#39;</span>)[<span style=color:#ae81ff>26</span>]<span style=color:#f92672>.</span>lstrip(<span style=color:#e6db74>&#39;tx:&#39;</span>)<span style=color:#f92672>.</span>rstrip(<span style=color:#e6db74>&#39;}</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#39;</span>)<span style=color:#f92672>.</span>strip(), <span style=color:#ae81ff>16</span>)
+            new_time <span style=color:#f92672>=</span> time<span style=color:#f92672>.</span>time()
+        <span style=color:#66d9ef>except</span> (<span style=color:#a6e22e>IndexError</span>, <span style=color:#a6e22e>ValueError</span>, <span style=color:#a6e22e>TypeError</span>):
+            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>False</span>
+        <span style=color:#66d9ef>return</span> [rx, tx, new_time]
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>get_human_speed</span>(self):
+        <span style=color:#e6db74>&#34;&#34;&#34;这里返回的是 M/s 这种网速，[下载，上传]&#34;&#34;&#34;</span>
+        data <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>__get_wan_rx_and_tx()
+        <span style=color:#66d9ef>if</span> data:
+            down_speed <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+            up_speed <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+            <span style=color:#66d9ef>try</span>:
+                down_speed <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>__bytes_to_humanspeed((data[<span style=color:#ae81ff>0</span>] <span style=color:#f92672>-</span> self<span style=color:#f92672>.</span>last_rbytes) <span style=color:#f92672>/</span> (data[<span style=color:#ae81ff>2</span>] <span style=color:#f92672>-</span> self<span style=color:#f92672>.</span>last_time))
+                up_speed <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>__bytes_to_humanspeed((data[<span style=color:#ae81ff>1</span>] <span style=color:#f92672>-</span> self<span style=color:#f92672>.</span>last_tbytes) <span style=color:#f92672>/</span> (data[<span style=color:#ae81ff>2</span>] <span style=color:#f92672>-</span> self<span style=color:#f92672>.</span>last_time))
+            <span style=color:#66d9ef>except</span> <span style=color:#a6e22e>ZeroDivisionError</span>:
+                <span style=color:#66d9ef>pass</span>
+            self<span style=color:#f92672>.</span>last_rbytes <span style=color:#f92672>=</span> data[<span style=color:#ae81ff>0</span>]
+            self<span style=color:#f92672>.</span>last_tbytes <span style=color:#f92672>=</span> data[<span style=color:#ae81ff>1</span>]
+            self<span style=color:#f92672>.</span>last_time <span style=color:#f92672>=</span> data[<span style=color:#ae81ff>2</span>]
+            <span style=color:#66d9ef>return</span> down_speed, up_speed
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__bytes_to_humanspeed</span>(self, B):
+        absval <span style=color:#f92672>=</span> fabs(B) <span style=color:#f92672>/</span> <span style=color:#ae81ff>1024</span>
+        megabyte <span style=color:#f92672>=</span> <span style=color:#ae81ff>1024</span>
+        gigabyte <span style=color:#f92672>=</span> megabyte <span style=color:#f92672>*</span> <span style=color:#ae81ff>1024</span>
+        terabyte <span style=color:#f92672>=</span> gigabyte <span style=color:#f92672>*</span> <span style=color:#ae81ff>1024</span>
+        <span style=color:#75715e># petabyte = terabyte * 1024</span>
+        <span style=color:#66d9ef>if</span> absval <span style=color:#f92672>&lt;</span> megabyte:
+            <span style=color:#66d9ef>return</span> str(round(absval, <span style=color:#ae81ff>2</span>)) <span style=color:#f92672>+</span> <span style=color:#e6db74>&#39; KB/s&#39;</span>
+        <span style=color:#66d9ef>elif</span> absval <span style=color:#f92672>&lt;</span> gigabyte:
+            <span style=color:#66d9ef>return</span> str(round(absval <span style=color:#f92672>/</span> megabyte, <span style=color:#ae81ff>2</span>)) <span style=color:#f92672>+</span> <span style=color:#e6db74>&#39; M/s&#39;</span>
+        <span style=color:#66d9ef>else</span>:
+            <span style=color:#66d9ef>return</span> str(round(absval <span style=color:#f92672>/</span> gigabyte, <span style=color:#ae81ff>2</span>)) <span style=color:#f92672>+</span> <span style=color:#e6db74>&#39; G/s&#39;</span>
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>get_bits_speed</span>(self):
+        <span style=color:#e6db74>&#34;&#34;&#34;这里返回的是 Mbps 这种网速，[下载，上传]&#34;&#34;&#34;</span>
+        data <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>__get_wan_rx_and_tx()
+        <span style=color:#66d9ef>if</span> data:
+            down_speed <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>__bytes_to_bitrate((data[<span style=color:#ae81ff>0</span>] <span style=color:#f92672>-</span> self<span style=color:#f92672>.</span>last_rbytes) <span style=color:#f92672>/</span> (data[<span style=color:#ae81ff>2</span>] <span style=color:#f92672>-</span> self<span style=color:#f92672>.</span>last_time))
+            up_speed <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>__bytes_to_bitrate((data[<span style=color:#ae81ff>1</span>] <span style=color:#f92672>-</span> self<span style=color:#f92672>.</span>last_tbytes) <span style=color:#f92672>/</span> (data[<span style=color:#ae81ff>2</span>] <span style=color:#f92672>-</span> self<span style=color:#f92672>.</span>last_time))
+            self<span style=color:#f92672>.</span>last_rbytes <span style=color:#f92672>=</span> data[<span style=color:#ae81ff>0</span>]
+            self<span style=color:#f92672>.</span>last_tbytes <span style=color:#f92672>=</span> data[<span style=color:#ae81ff>1</span>]
+            self<span style=color:#f92672>.</span>last_time <span style=color:#f92672>=</span> data[<span style=color:#ae81ff>2</span>]
+            <span style=color:#66d9ef>return</span> down_speed, up_speed
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__bytes_to_bitrate</span>(self, B):
+        bits <span style=color:#f92672>=</span> B <span style=color:#f92672>*</span> <span style=color:#ae81ff>8</span>
+        absval <span style=color:#f92672>=</span> fabs(bits)
+        kilobit <span style=color:#f92672>=</span> <span style=color:#ae81ff>1000</span>
+        megabit <span style=color:#f92672>=</span> kilobit <span style=color:#f92672>*</span> <span style=color:#ae81ff>1000</span>
+        gigabit <span style=color:#f92672>=</span> megabit <span style=color:#f92672>*</span> <span style=color:#ae81ff>1000</span>
+        <span style=color:#66d9ef>if</span> absval <span style=color:#f92672>&lt;</span> megabit:
+            <span style=color:#66d9ef>return</span> str(round(bits <span style=color:#f92672>/</span> kilobit, <span style=color:#ae81ff>2</span>)) <span style=color:#f92672>+</span> <span style=color:#e6db74>&#39; Kbps&#39;</span>
+        <span style=color:#66d9ef>elif</span> absval <span style=color:#f92672>&lt;</span> gigabit:
+            <span style=color:#66d9ef>return</span> str(round(bits <span style=color:#f92672>/</span> megabit, <span style=color:#ae81ff>2</span>)) <span style=color:#f92672>+</span> <span style=color:#e6db74>&#39; Mbps&#39;</span>
+        <span style=color:#66d9ef>else</span>:
+            <span style=color:#66d9ef>return</span> str(round(bits <span style=color:#f92672>/</span> gigabit, <span style=color:#ae81ff>2</span>)) <span style=color:#f92672>+</span> <span style=color:#e6db74>&#39; Gbps&#39;</span>
+
+<span style=color:#66d9ef>if</span> __name__ <span style=color:#f92672>==</span> <span style=color:#e6db74>&#39;__main__&#39;</span>:
+    <span style=color:#f92672>from</span> lcd1602 <span style=color:#f92672>import</span> LCD1602
+    a <span style=color:#f92672>=</span> RaspberryMonitorNetSpeed(<span style=color:#e6db74>&#39;username&#39;</span>, <span style=color:#e6db74>&#39;password&#39;</span>)
+    lcd <span style=color:#f92672>=</span> LCD1602()
+    <span style=color:#66d9ef>while</span> <span style=color:#66d9ef>True</span>:
+        tmp <span style=color:#f92672>=</span> a<span style=color:#f92672>.</span>get_human_speed()
+        lcd<span style=color:#f92672>.</span>lcd_string(<span style=color:#e6db74>&#39;u:&#39;</span> <span style=color:#f92672>+</span> tmp[<span style=color:#ae81ff>1</span>], lcd<span style=color:#f92672>.</span>LCD_LINE_1)
+        lcd<span style=color:#f92672>.</span>lcd_string(<span style=color:#e6db74>&#39;d:&#39;</span> <span style=color:#f92672>+</span> tmp[<span style=color:#ae81ff>0</span>], lcd<span style=color:#f92672>.</span>LCD_LINE_2)
+        time<span style=color:#f92672>.</span>sleep(<span style=color:#ae81ff>2</span>)
+
+</code></pre></td></tr></table>
+</div>
+</div><h4 id=温度>温度</h4>
+<p>这里用的是 DTH11，驱动同样参考这个(<a class=link href=https://github.com/adafruit target=_blank rel=noopener>Adafruit</a>)</p>
+<h4 id=开始显示>开始显示</h4>
+<div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">48
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">49
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">50
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">51
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">52
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">53
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">54
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">55
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#f92672>import</span> time
+<span style=color:#f92672>import</span> datetime
+<span style=color:#f92672>from</span> PCD8544 <span style=color:#f92672>import</span> PCD8544 <span style=color:#66d9ef>as</span> lcd
+<span style=color:#f92672>import</span> threading
+<span style=color:#f92672>import</span> Adafruit_DHT
+<span style=color:#f92672>from</span> speed <span style=color:#f92672>import</span> RaspberryMonitorNetSpeed <span style=color:#66d9ef>as</span> rmn
+
+ns <span style=color:#f92672>=</span> [<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>, <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>]
+th <span style=color:#f92672>=</span> [<span style=color:#f92672>-</span><span style=color:#ae81ff>2</span>, <span style=color:#f92672>-</span><span style=color:#ae81ff>2</span>]
+
+<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>main</span>():
+    a <span style=color:#f92672>=</span> lcd(dc<span style=color:#f92672>=</span><span style=color:#ae81ff>13</span>, rst<span style=color:#f92672>=</span><span style=color:#ae81ff>5</span>, sclk<span style=color:#f92672>=</span><span style=color:#ae81ff>26</span>, din<span style=color:#f92672>=</span><span style=color:#ae81ff>19</span>, cs<span style=color:#f92672>=</span><span style=color:#ae81ff>6</span>, vcc<span style=color:#f92672>=</span><span style=color:#ae81ff>20</span>, bl<span style=color:#f92672>=</span><span style=color:#ae81ff>21</span>)
+    a<span style=color:#f92672>.</span>begin(contrast<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>)
+    tmp <span style=color:#f92672>=</span> threading<span style=color:#f92672>.</span>Thread(target<span style=color:#f92672>=</span>network_speed)
+    tmp<span style=color:#f92672>.</span>setDaemon(<span style=color:#66d9ef>True</span>)
+    tmp<span style=color:#f92672>.</span>start()
+    tmp <span style=color:#f92672>=</span> threading<span style=color:#f92672>.</span>Thread(target<span style=color:#f92672>=</span>temperature_humidity)
+    tmp<span style=color:#f92672>.</span>setDaemon(<span style=color:#66d9ef>True</span>)
+    tmp<span style=color:#f92672>.</span>start()
+    <span style=color:#66d9ef>while</span> <span style=color:#66d9ef>True</span>:
+        <span style=color:#66d9ef>try</span>:
+            a<span style=color:#f92672>.</span>clear()
+            <span style=color:#75715e># 上传速度</span>
+            a<span style=color:#f92672>.</span>draw_str(<span style=color:#ae81ff>0</span>, <span style=color:#e6db74>&#39;U: &#39;</span> <span style=color:#f92672>+</span> str(ns[<span style=color:#ae81ff>1</span>]))
+            <span style=color:#75715e># 下载速度</span>
+            a<span style=color:#f92672>.</span>draw_str(<span style=color:#ae81ff>1</span>, <span style=color:#e6db74>&#39;D: &#39;</span> <span style=color:#f92672>+</span> str(ns[<span style=color:#ae81ff>0</span>]))
+            <span style=color:#75715e># 温度</span>
+            a<span style=color:#f92672>.</span>draw_str(<span style=color:#ae81ff>2</span>, <span style=color:#e6db74>&#39;T: &#39;</span> <span style=color:#f92672>+</span> str(th[<span style=color:#ae81ff>1</span>]) <span style=color:#f92672>+</span> <span style=color:#e6db74>&#39; C&#39;</span>)
+            <span style=color:#75715e># 湿度</span>
+            a<span style=color:#f92672>.</span>draw_str(<span style=color:#ae81ff>3</span>, <span style=color:#e6db74>&#39;H: &#39;</span> <span style=color:#f92672>+</span> str(th[<span style=color:#ae81ff>0</span>]) <span style=color:#f92672>+</span> <span style=color:#e6db74>&#39;%&#39;</span>)
+            <span style=color:#75715e># 时间</span>
+            a<span style=color:#f92672>.</span>draw_str(<span style=color:#ae81ff>4</span>, datetime<span style=color:#f92672>.</span>datetime<span style=color:#f92672>.</span>now()<span style=color:#f92672>.</span>__str__()[<span style=color:#ae81ff>5</span>:]<span style=color:#f92672>.</span>lstrip(<span style=color:#e6db74>&#39;0&#39;</span>)<span style=color:#f92672>.</span>split(<span style=color:#e6db74>&#39;.&#39;</span>)[<span style=color:#ae81ff>0</span>])
+            a<span style=color:#f92672>.</span>display()
+            time<span style=color:#f92672>.</span>sleep(<span style=color:#ae81ff>1</span>)
+        <span style=color:#66d9ef>except</span> <span style=color:#a6e22e>KeyboardInterrupt</span>:
+            a<span style=color:#f92672>.</span>quit()
+            exit(<span style=color:#ae81ff>0</span>)
+
+<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>network_speed</span>():
+    <span style=color:#66d9ef>global</span> ns
+    b <span style=color:#f92672>=</span> rmn(<span style=color:#e6db74>&#39;bankroft&#39;</span>, <span style=color:#e6db74>&#39;123456&#39;</span>)
+    <span style=color:#66d9ef>while</span> <span style=color:#66d9ef>True</span>:
+        time<span style=color:#f92672>.</span>sleep(<span style=color:#ae81ff>1</span>)
+        ns <span style=color:#f92672>=</span> b<span style=color:#f92672>.</span>get_human_speed()
+
+<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>temperature_humidity</span>():
+    <span style=color:#66d9ef>global</span> th
+    pin <span style=color:#f92672>=</span> <span style=color:#ae81ff>25</span>
+    <span style=color:#66d9ef>while</span> <span style=color:#66d9ef>True</span>:
+        time<span style=color:#f92672>.</span>sleep(<span style=color:#ae81ff>10</span>)
+        th <span style=color:#f92672>=</span> Adafruit_DHT<span style=color:#f92672>.</span>read_retry(<span style=color:#ae81ff>11</span>, <span style=color:#ae81ff>25</span>)
+
+<span style=color:#66d9ef>if</span> __name__ <span style=color:#f92672>==</span> <span style=color:#e6db74>&#39;__main__&#39;</span>:
+    main()
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=运行>运行</h3>
+<h4 id=依赖>依赖</h4>
+<p>python3</p>
+<h6 id=安装>安装</h6>
+<p><code>Adafruit_GPIO</code>
+<code>Adafruit_DHT</code>
+<code>requests</code></p>
+<h4 id=运行-1>运行</h4>
+<p><code>python main.py</code></p>
+<h3 id=成果>成果</h3>
+<p><img src=/images/posts/raspberry_nokia_5110/2533443824.jpg loading=lazy alt=图片></p>
+</section>
+<footer class=article-footer>
+<section class=article-tags>
+<a href=/tags/raspberrypi/>RaspberryPi</a>
+<a href=/tags/python/>python</a>
+</section>
+<section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span>
+</section>
+</footer>
+</article>
+<aside class=related-contents--wrapper>
+<h2 class=section-title>Related contents</h2>
+<div class=related-contents>
+<div class="flex article-list--tile">
+<article>
+<a href=/posts/raspberry-pi-3-%E4%BD%BF%E7%94%A8lcd1602/>
+<div class=article-details>
+<h2 class=article-title>raspberry pi 3 使用lcd1602</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</aside>
+<div id=gitalk-container></div>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css>
+<script src=https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js></script>
+<script>const gitalk=new Gitalk({clientID:"b8b69aaca9354fa6c0b3",clientSecret:"decd8028bd5d99f9f942efcc1e8bef298c7332a6",repo:"bankroft.github.io",owner:"bankroft",admin:["bankroft"],distractionFreeMode:!1,id:md5(location.pathname)});(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("gitalk-container").innerHTML="Gitalk comments not available by default when the website is previewed locally.";return}gitalk.render("gitalk-container")})()</script>
+<footer class=site-footer>
+<section class=copyright>
+&copy;
+2019 -
+2022 Bankroft
+</section>
+<section class=powerby>
+<a target=_blank href=https://bankroft.github.io>The world is worth fighting for.</a> <br>
+Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> <br>
+Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.8.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a>
+</section>
+</footer>
+<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
+<div class=pswp__bg></div>
+<div class=pswp__scroll-wrap>
+<div class=pswp__container>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+</div>
+<div class="pswp__ui pswp__ui--hidden">
+<div class=pswp__top-bar>
+<div class=pswp__counter></div>
+<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+<div class=pswp__preloader>
+<div class=pswp__preloader__icn>
+<div class=pswp__preloader__cut>
+<div class=pswp__preloader__donut></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+<div class=pswp__share-tooltip></div>
+</div>
+<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+</button>
+<div class=pswp__caption>
+<div class=pswp__caption__center></div>
+</div>
+</div>
+</div>
+</div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
+</main>
+<aside class="sidebar right-sidebar sticky">
+<section class="widget archives">
+<div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg>
+</div>
+<h2 class="widget-title section-title">Table of contents</h2>
+<div class=widget--toc>
+<nav id=TableOfContents>
+<ol>
+<li><a href=#nokia-5110>Nokia 5110</a>
+<ol>
+<li><a href=#驱动>驱动</a></li>
+<li><a href=#引脚>引脚</a></li>
+<li><a href=#驱动代码-python>驱动代码-python</a></li>
+<li><a href=#接线bcm>接线(BCM)</a></li>
+<li><a href=#显示信息>显示信息</a>
+<ol>
+<li><a href=#网速>网速</a></li>
+<li><a href=#温度>温度</a></li>
+<li><a href=#开始显示>开始显示</a></li>
+</ol>
+</li>
+<li><a href=#运行>运行</a>
+<ol>
+<li><a href=#依赖>依赖</a></li>
+<li><a href=#运行-1>运行</a></li>
+</ol>
+</li>
+<li><a href=#成果>成果</a></li>
+</ol>
+</li>
+</ol>
+</nav>
+</div>
+</section>
+</aside>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
+</body>
+</html>

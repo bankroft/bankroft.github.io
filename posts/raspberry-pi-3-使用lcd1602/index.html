@@ -1,0 +1,406 @@
+<!doctype html><html lang=en-us>
+<head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="code:
+"><title>raspberry pi 3 使用lcd1602</title>
+<link rel=canonical href=https://bankroft.github.io/posts/raspberry-pi-3-%E4%BD%BF%E7%94%A8lcd1602/>
+<link rel=stylesheet href=/scss/style.min.b949db8bead9abdc40291b93383b8da6abc3aa62e74f5580356c06ddbb792dab.css><meta property="og:title" content="raspberry pi 3 使用lcd1602">
+<meta property="og:description" content="code:
+">
+<meta property="og:url" content="https://bankroft.github.io/posts/raspberry-pi-3-%E4%BD%BF%E7%94%A8lcd1602/">
+<meta property="og:site_name" content="Bankroft">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="RaspberryPi"><meta property="article:published_time" content="2019-08-01T12:46:15+00:00"><meta property="article:modified_time" content="2019-08-01T12:46:15+00:00">
+<meta name=twitter:title content="raspberry pi 3 使用lcd1602">
+<meta name=twitter:description content="code:
+">
+<link rel="shortcut icon" href=/img/favicon.ico>
+</head>
+<body class=article-page>
+<script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"dark")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
+<div class="container main-container flex
+on-phone--column extended">
+<aside class="sidebar left-sidebar sticky">
+<button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box>
+<span class=hamburger-inner></span>
+</span>
+</button>
+<header class=site-info>
+<figure class=site-avatar>
+<a href=/>
+<img src=/img/avatar_hue13ae315eb9537cc0eca2a9548b9798d_35298_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a>
+<span class=emoji>😊</span>
+</figure>
+<h1 class=site-name><a href=/>Bankroft</a></h1>
+<h2 class=site-description>差生文具多</h2><ol class=social-menu>
+<li>
+<a href=https://github.com/bankroft target=_blank title=GitHub><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+</a>
+</li>
+</ol></header>
+<ol class=menu id=main-menu>
+<li>
+<a href=/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>Home</span>
+</a>
+</li>
+<li>
+<a href=/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>Archives</span>
+</a>
+</li>
+<li>
+<a href=/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>Search</span>
+</a>
+</li>
+<li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>Dark Mode</span>
+</li>
+</ol>
+</aside>
+<main class="main full-width">
+<article class=main-article>
+<header class=article-header>
+<div class=article-details>
+<header class=article-category>
+<a href=/categories/others/>
+Others
+</a>
+</header>
+<h2 class=article-title>
+<a href=/posts/raspberry-pi-3-%E4%BD%BF%E7%94%A8lcd1602/>raspberry pi 3 使用lcd1602</a>
+</h2>
+<footer class=article-time>
+<div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>Aug 01, 2019</time>
+</div>
+<div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>
+1 minute read
+</time>
+</div>
+</footer>
+</div>
+</header>
+<section class=article-content>
+<p>code:</p>
+<div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 31
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 32
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 33
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 34
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 35
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 36
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 37
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 38
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 39
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 40
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 41
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 42
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 43
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 44
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 45
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 46
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 47
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 48
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 49
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 50
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 51
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 52
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 53
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 54
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 55
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 56
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 57
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 58
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 59
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 60
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 61
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 62
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 63
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 64
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 65
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 66
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 67
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 68
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 69
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 70
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 71
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 72
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 73
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 74
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 75
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 76
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 77
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 78
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 79
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 80
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 81
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 82
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 83
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 84
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 85
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 86
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 87
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 88
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 89
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 90
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 91
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 92
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 93
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 94
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 95
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 96
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 97
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 98
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 99
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">100
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">101
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">102
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">103
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">104
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">105
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">106
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">107
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">108
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">109
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">110
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">111
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">112
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">113
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#f92672>import</span> RPi.GPIO <span style=color:#66d9ef>as</span> GPIO
+<span style=color:#f92672>from</span> random <span style=color:#f92672>import</span> sample
+<span style=color:#f92672>import</span> string
+<span style=color:#f92672>import</span> time
+
+
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>LCD1602</span>:
+    <span style=color:#75715e># Define GPIO to LCD mapping</span>
+    LCD_RS <span style=color:#f92672>=</span> <span style=color:#ae81ff>14</span>
+    LCD_E <span style=color:#f92672>=</span> <span style=color:#ae81ff>15</span>
+    LCD_D4 <span style=color:#f92672>=</span> <span style=color:#ae81ff>17</span>
+    LCD_D5 <span style=color:#f92672>=</span> <span style=color:#ae81ff>18</span>
+    LCD_D6 <span style=color:#f92672>=</span> <span style=color:#ae81ff>27</span>
+    LCD_D7 <span style=color:#f92672>=</span> <span style=color:#ae81ff>22</span>
+
+    <span style=color:#75715e># Define some device constants</span>
+    LCD_WIDTH <span style=color:#f92672>=</span> <span style=color:#ae81ff>16</span>  <span style=color:#75715e># Maximum characters per line</span>
+    LCD_CHR <span style=color:#f92672>=</span> <span style=color:#66d9ef>True</span>
+    LCD_CMD <span style=color:#f92672>=</span> <span style=color:#66d9ef>False</span>
+
+    LCD_LINE_1 <span style=color:#f92672>=</span> <span style=color:#ae81ff>0x80</span>  <span style=color:#75715e># LCD RAM address for the 1st line</span>
+    LCD_LINE_2 <span style=color:#f92672>=</span> <span style=color:#ae81ff>0xC0</span>  <span style=color:#75715e># LCD RAM address for the 2nd line</span>
+
+    <span style=color:#75715e># Timing constants</span>
+    E_PULSE <span style=color:#f92672>=</span> <span style=color:#ae81ff>0.0005</span>
+    E_DELAY <span style=color:#f92672>=</span> <span style=color:#ae81ff>0.0005</span>
+
+    <span style=color:#66d9ef>def</span> __init__(self):
+        <span style=color:#75715e># Main program block</span>
+        GPIO<span style=color:#f92672>.</span>setwarnings(<span style=color:#66d9ef>False</span>)
+        GPIO<span style=color:#f92672>.</span>setmode(GPIO<span style=color:#f92672>.</span>BCM)  <span style=color:#75715e># Use BCM GPIO numbers</span>
+        GPIO<span style=color:#f92672>.</span>setup(self<span style=color:#f92672>.</span>LCD_E, GPIO<span style=color:#f92672>.</span>OUT)  <span style=color:#75715e># E</span>
+        GPIO<span style=color:#f92672>.</span>setup(self<span style=color:#f92672>.</span>LCD_RS, GPIO<span style=color:#f92672>.</span>OUT)  <span style=color:#75715e># RS</span>
+        GPIO<span style=color:#f92672>.</span>setup(self<span style=color:#f92672>.</span>LCD_D4, GPIO<span style=color:#f92672>.</span>OUT)  <span style=color:#75715e># DB4</span>
+        GPIO<span style=color:#f92672>.</span>setup(self<span style=color:#f92672>.</span>LCD_D5, GPIO<span style=color:#f92672>.</span>OUT)  <span style=color:#75715e># DB5</span>
+        GPIO<span style=color:#f92672>.</span>setup(self<span style=color:#f92672>.</span>LCD_D6, GPIO<span style=color:#f92672>.</span>OUT)  <span style=color:#75715e># DB6</span>
+        GPIO<span style=color:#f92672>.</span>setup(self<span style=color:#f92672>.</span>LCD_D7, GPIO<span style=color:#f92672>.</span>OUT)  <span style=color:#75715e># DB7</span>
+        <span style=color:#75715e># Initialise display</span>
+        self<span style=color:#f92672>.</span>lcd_init()
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>lcd_init</span>(self):
+        <span style=color:#75715e># Initialise display</span>
+        self<span style=color:#f92672>.</span>lcd_byte(<span style=color:#ae81ff>0x33</span>, self<span style=color:#f92672>.</span>LCD_CMD)  <span style=color:#75715e># 110011 Initialise</span>
+        self<span style=color:#f92672>.</span>lcd_byte(<span style=color:#ae81ff>0x32</span>, self<span style=color:#f92672>.</span>LCD_CMD)  <span style=color:#75715e># 110010 Initialise</span>
+        self<span style=color:#f92672>.</span>lcd_byte(<span style=color:#ae81ff>0x06</span>, self<span style=color:#f92672>.</span>LCD_CMD)  <span style=color:#75715e># 000110 Cursor move direction</span>
+        self<span style=color:#f92672>.</span>lcd_byte(<span style=color:#ae81ff>0x0C</span>, self<span style=color:#f92672>.</span>LCD_CMD)  <span style=color:#75715e># 001100 Display On,Cursor Off, Blink Off</span>
+        self<span style=color:#f92672>.</span>lcd_byte(<span style=color:#ae81ff>0x28</span>, self<span style=color:#f92672>.</span>LCD_CMD)  <span style=color:#75715e># 101000 Data length, number of lines, font size</span>
+        self<span style=color:#f92672>.</span>lcd_byte(<span style=color:#ae81ff>0x01</span>, self<span style=color:#f92672>.</span>LCD_CMD)  <span style=color:#75715e># 000001 Clear display</span>
+        time<span style=color:#f92672>.</span>sleep(self<span style=color:#f92672>.</span>E_DELAY)
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>lcd_byte</span>(self, bits, mode):
+        <span style=color:#75715e># Send byte to data pins</span>
+        <span style=color:#75715e># bits = data</span>
+        <span style=color:#75715e># mode = True  for character</span>
+        <span style=color:#75715e>#        False for command</span>
+        GPIO<span style=color:#f92672>.</span>output(self<span style=color:#f92672>.</span>LCD_RS, mode)  <span style=color:#75715e># RS</span>
+        <span style=color:#75715e># High bits</span>
+        GPIO<span style=color:#f92672>.</span>output(self<span style=color:#f92672>.</span>LCD_D4, <span style=color:#66d9ef>False</span>)
+        GPIO<span style=color:#f92672>.</span>output(self<span style=color:#f92672>.</span>LCD_D5, <span style=color:#66d9ef>False</span>)
+        GPIO<span style=color:#f92672>.</span>output(self<span style=color:#f92672>.</span>LCD_D6, <span style=color:#66d9ef>False</span>)
+        GPIO<span style=color:#f92672>.</span>output(self<span style=color:#f92672>.</span>LCD_D7, <span style=color:#66d9ef>False</span>)
+        <span style=color:#66d9ef>if</span> bits <span style=color:#f92672>&amp;</span> <span style=color:#ae81ff>0x10</span> <span style=color:#f92672>==</span> <span style=color:#ae81ff>0x10</span>:
+            GPIO<span style=color:#f92672>.</span>output(self<span style=color:#f92672>.</span>LCD_D4, <span style=color:#66d9ef>True</span>)
+        <span style=color:#66d9ef>if</span> bits <span style=color:#f92672>&amp;</span> <span style=color:#ae81ff>0x20</span> <span style=color:#f92672>==</span> <span style=color:#ae81ff>0x20</span>:
+            GPIO<span style=color:#f92672>.</span>output(self<span style=color:#f92672>.</span>LCD_D5, <span style=color:#66d9ef>True</span>)
+        <span style=color:#66d9ef>if</span> bits <span style=color:#f92672>&amp;</span> <span style=color:#ae81ff>0x40</span> <span style=color:#f92672>==</span> <span style=color:#ae81ff>0x40</span>:
+            GPIO<span style=color:#f92672>.</span>output(self<span style=color:#f92672>.</span>LCD_D6, <span style=color:#66d9ef>True</span>)
+        <span style=color:#66d9ef>if</span> bits <span style=color:#f92672>&amp;</span> <span style=color:#ae81ff>0x80</span> <span style=color:#f92672>==</span> <span style=color:#ae81ff>0x80</span>:
+            GPIO<span style=color:#f92672>.</span>output(self<span style=color:#f92672>.</span>LCD_D7, <span style=color:#66d9ef>True</span>)
+
+        <span style=color:#75715e># Toggle &#39;Enable&#39; pin</span>
+        self<span style=color:#f92672>.</span>lcd_toggle_enable()
+
+        <span style=color:#75715e># Low bits</span>
+        GPIO<span style=color:#f92672>.</span>output(self<span style=color:#f92672>.</span>LCD_D4, <span style=color:#66d9ef>False</span>)
+        GPIO<span style=color:#f92672>.</span>output(self<span style=color:#f92672>.</span>LCD_D5, <span style=color:#66d9ef>False</span>)
+        GPIO<span style=color:#f92672>.</span>output(self<span style=color:#f92672>.</span>LCD_D6, <span style=color:#66d9ef>False</span>)
+        GPIO<span style=color:#f92672>.</span>output(self<span style=color:#f92672>.</span>LCD_D7, <span style=color:#66d9ef>False</span>)
+        <span style=color:#66d9ef>if</span> bits <span style=color:#f92672>&amp;</span> <span style=color:#ae81ff>0x01</span> <span style=color:#f92672>==</span> <span style=color:#ae81ff>0x01</span>:
+            GPIO<span style=color:#f92672>.</span>output(self<span style=color:#f92672>.</span>LCD_D4, <span style=color:#66d9ef>True</span>)
+        <span style=color:#66d9ef>if</span> bits <span style=color:#f92672>&amp;</span> <span style=color:#ae81ff>0x02</span> <span style=color:#f92672>==</span> <span style=color:#ae81ff>0x02</span>:
+            GPIO<span style=color:#f92672>.</span>output(self<span style=color:#f92672>.</span>LCD_D5, <span style=color:#66d9ef>True</span>)
+        <span style=color:#66d9ef>if</span> bits <span style=color:#f92672>&amp;</span> <span style=color:#ae81ff>0x04</span> <span style=color:#f92672>==</span> <span style=color:#ae81ff>0x04</span>:
+            GPIO<span style=color:#f92672>.</span>output(self<span style=color:#f92672>.</span>LCD_D6, <span style=color:#66d9ef>True</span>)
+        <span style=color:#66d9ef>if</span> bits <span style=color:#f92672>&amp;</span> <span style=color:#ae81ff>0x08</span> <span style=color:#f92672>==</span> <span style=color:#ae81ff>0x08</span>:
+            GPIO<span style=color:#f92672>.</span>output(self<span style=color:#f92672>.</span>LCD_D7, <span style=color:#66d9ef>True</span>)
+
+        <span style=color:#75715e># Toggle &#39;Enable&#39; pin</span>
+        self<span style=color:#f92672>.</span>lcd_toggle_enable()
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>lcd_toggle_enable</span>(self):
+        <span style=color:#75715e># Toggle enable</span>
+        time<span style=color:#f92672>.</span>sleep(self<span style=color:#f92672>.</span>E_DELAY)
+        GPIO<span style=color:#f92672>.</span>output(self<span style=color:#f92672>.</span>LCD_E, <span style=color:#66d9ef>True</span>)
+        time<span style=color:#f92672>.</span>sleep(self<span style=color:#f92672>.</span>E_PULSE)
+        GPIO<span style=color:#f92672>.</span>output(self<span style=color:#f92672>.</span>LCD_E, <span style=color:#66d9ef>False</span>)
+        time<span style=color:#f92672>.</span>sleep(self<span style=color:#f92672>.</span>E_DELAY)
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>lcd_string</span>(self, message, line):
+        <span style=color:#75715e># Send string to display</span>
+        message <span style=color:#f92672>=</span> message<span style=color:#f92672>.</span>ljust(self<span style=color:#f92672>.</span>LCD_WIDTH, <span style=color:#e6db74>&#34; &#34;</span>)
+        self<span style=color:#f92672>.</span>lcd_byte(line, self<span style=color:#f92672>.</span>LCD_CMD)
+        <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(self<span style=color:#f92672>.</span>LCD_WIDTH):
+            self<span style=color:#f92672>.</span>lcd_byte(ord(message[i]), self<span style=color:#f92672>.</span>LCD_CHR)
+
+
+<span style=color:#66d9ef>if</span> __name__ <span style=color:#f92672>==</span> <span style=color:#e6db74>&#39;__main__&#39;</span>:
+    a <span style=color:#f92672>=</span> LCD1602()
+    <span style=color:#66d9ef>while</span> <span style=color:#66d9ef>True</span>:
+        a<span style=color:#f92672>.</span>lcd_string(<span style=color:#e6db74>&#39;&#39;</span><span style=color:#f92672>.</span>join(sample(string<span style=color:#f92672>.</span>ascii_letters, k<span style=color:#f92672>=</span><span style=color:#ae81ff>8</span>)), a<span style=color:#f92672>.</span>LCD_LINE_1)
+        a<span style=color:#f92672>.</span>lcd_string(<span style=color:#e6db74>&#39;&#39;</span><span style=color:#f92672>.</span>join(sample(string<span style=color:#f92672>.</span>ascii_letters, k<span style=color:#f92672>=</span><span style=color:#ae81ff>8</span>)), a<span style=color:#f92672>.</span>LCD_LINE_2)
+        time<span style=color:#f92672>.</span>sleep(<span style=color:#ae81ff>3</span>)
+
+</code></pre></td></tr></table>
+</div>
+</div><p><a class=link href=https://bitbucket.org/MattHawkinsUK/rpispy-misc/raw/master/python/lcd_16x2.py title=undefined target=_blank rel=noopener>参考代码</a></p>
+</section>
+<footer class=article-footer>
+<section class=article-tags>
+<a href=/tags/raspberrypi/>RaspberryPi</a>
+</section>
+<section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span>
+</section>
+</footer>
+</article>
+<aside class=related-contents--wrapper>
+<h2 class=section-title>Related contents</h2>
+<div class=related-contents>
+<div class="flex article-list--tile">
+<article class=has-image>
+<a href=/posts/raspberry_nokia_5110/>
+<div class=article-image>
+<img src=/images/posts/raspberry_nokia_5110/2533443824.jpg loading=lazy data-key data-hash=/images/posts/raspberry_nokia_5110/2533443824.jpg>
+</div>
+<div class=article-details>
+<h2 class=article-title>树莓派使用Nokia 5110屏幕显示网速温度等</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</aside>
+<div id=gitalk-container></div>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css>
+<script src=https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js></script>
+<script>const gitalk=new Gitalk({clientID:"b8b69aaca9354fa6c0b3",clientSecret:"decd8028bd5d99f9f942efcc1e8bef298c7332a6",repo:"bankroft.github.io",owner:"bankroft",admin:["bankroft"],distractionFreeMode:!1,id:md5(location.pathname)});(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("gitalk-container").innerHTML="Gitalk comments not available by default when the website is previewed locally.";return}gitalk.render("gitalk-container")})()</script>
+<footer class=site-footer>
+<section class=copyright>
+&copy;
+2019 -
+2022 Bankroft
+</section>
+<section class=powerby>
+<a target=_blank href=https://bankroft.github.io>The world is worth fighting for.</a> <br>
+Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> <br>
+Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.8.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a>
+</section>
+</footer>
+<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
+<div class=pswp__bg></div>
+<div class=pswp__scroll-wrap>
+<div class=pswp__container>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+</div>
+<div class="pswp__ui pswp__ui--hidden">
+<div class=pswp__top-bar>
+<div class=pswp__counter></div>
+<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+<div class=pswp__preloader>
+<div class=pswp__preloader__icn>
+<div class=pswp__preloader__cut>
+<div class=pswp__preloader__donut></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+<div class=pswp__share-tooltip></div>
+</div>
+<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+</button>
+<div class=pswp__caption>
+<div class=pswp__caption__center></div>
+</div>
+</div>
+</div>
+</div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
+</main>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
+</body>
+</html>

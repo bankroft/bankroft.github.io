@@ -1,0 +1,937 @@
+<!doctype html><html lang=en-us>
+<head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="python3实现AES ECB"><title>Python3.6实现AES(ECB)</title>
+<link rel=canonical href=https://bankroft.github.io/posts/python3-6%E5%AE%9E%E7%8E%B0aes-ecb/>
+<link rel=stylesheet href=/scss/style.min.b949db8bead9abdc40291b93383b8da6abc3aa62e74f5580356c06ddbb792dab.css><meta property="og:title" content="Python3.6实现AES(ECB)">
+<meta property="og:description" content="python3实现AES ECB">
+<meta property="og:url" content="https://bankroft.github.io/posts/python3-6%E5%AE%9E%E7%8E%B0aes-ecb/">
+<meta property="og:site_name" content="Bankroft">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="python"><meta property="article:tag" content="密码学"><meta property="article:tag" content="AES"><meta property="article:published_time" content="2019-08-01T12:02:05+00:00"><meta property="article:modified_time" content="2019-08-01T12:02:05+00:00">
+<meta name=twitter:title content="Python3.6实现AES(ECB)">
+<meta name=twitter:description content="python3实现AES ECB">
+<link rel="shortcut icon" href=/img/favicon.ico>
+</head>
+<body class=article-page>
+<script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"dark")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
+<div class="container main-container flex
+on-phone--column extended">
+<aside class="sidebar left-sidebar sticky">
+<button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box>
+<span class=hamburger-inner></span>
+</span>
+</button>
+<header class=site-info>
+<figure class=site-avatar>
+<a href=/>
+<img src=/img/avatar_hue13ae315eb9537cc0eca2a9548b9798d_35298_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a>
+<span class=emoji>😊</span>
+</figure>
+<h1 class=site-name><a href=/>Bankroft</a></h1>
+<h2 class=site-description>差生文具多</h2><ol class=social-menu>
+<li>
+<a href=https://github.com/bankroft target=_blank title=GitHub><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+</a>
+</li>
+</ol></header>
+<ol class=menu id=main-menu>
+<li>
+<a href=/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>Home</span>
+</a>
+</li>
+<li>
+<a href=/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>Archives</span>
+</a>
+</li>
+<li>
+<a href=/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>Search</span>
+</a>
+</li>
+<li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>Dark Mode</span>
+</li>
+</ol>
+</aside>
+<main class="main full-width">
+<article class=main-article>
+<header class=article-header>
+<div class=article-details>
+<header class=article-category>
+<a href=/categories/scripts/>
+Scripts
+</a>
+</header>
+<h2 class=article-title>
+<a href=/posts/python3-6%E5%AE%9E%E7%8E%B0aes-ecb/>Python3.6实现AES(ECB)</a>
+</h2>
+<footer class=article-time>
+<div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>Aug 01, 2019</time>
+</div>
+<div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>
+5 minute read
+</time>
+</div>
+</footer>
+</div>
+</header>
+<section class=article-content>
+<h1 id=python3实现aes-ecb>python3实现AES ECB</h1>
+<div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 31
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 32
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 33
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 34
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 35
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 36
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 37
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 38
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 39
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 40
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 41
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 42
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 43
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 44
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 45
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 46
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 47
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 48
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 49
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 50
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 51
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 52
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 53
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 54
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 55
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 56
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 57
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 58
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 59
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 60
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 61
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 62
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 63
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 64
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 65
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 66
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 67
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 68
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 69
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 70
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 71
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 72
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 73
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 74
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 75
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 76
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 77
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 78
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 79
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 80
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 81
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 82
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 83
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 84
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 85
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 86
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 87
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 88
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 89
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 90
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 91
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 92
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 93
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 94
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 95
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 96
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 97
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 98
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 99
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">100
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">101
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">102
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">103
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">104
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">105
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">106
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">107
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">108
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">109
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">110
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">111
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">112
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">113
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">114
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">115
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">116
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">117
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">118
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">119
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">120
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">121
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">122
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">123
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">124
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">125
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">126
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">127
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">128
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">129
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">130
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">131
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">132
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">133
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">134
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">135
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">136
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">137
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">138
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">139
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">140
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">141
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">142
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">143
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">144
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">145
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">146
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">147
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">148
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">149
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">150
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">151
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">152
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">153
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">154
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">155
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">156
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">157
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">158
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">159
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">160
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">161
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">162
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">163
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">164
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">165
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">166
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">167
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">168
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">169
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">170
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">171
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">172
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">173
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">174
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">175
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">176
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">177
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">178
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">179
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">180
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">181
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">182
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">183
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">184
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">185
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">186
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">187
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">188
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">189
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">190
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">191
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">192
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">193
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">194
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">195
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">196
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">197
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">198
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">199
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">200
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">201
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">202
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">203
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">204
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">205
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">206
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">207
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">208
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">209
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">210
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">211
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">212
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">213
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">214
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">215
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">216
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">217
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">218
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">219
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">220
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">221
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">222
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">223
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">224
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">225
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">226
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">227
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">228
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">229
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">230
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">231
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">232
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">233
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">234
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">235
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">236
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">237
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">238
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">239
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">240
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">241
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">242
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">243
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">244
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">245
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">246
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">247
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">248
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">249
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">250
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">251
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">252
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">253
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">254
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">255
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">256
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">257
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">258
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">259
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">260
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">261
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">262
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">263
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">264
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">265
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">266
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">267
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">268
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">269
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">270
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">271
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">272
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">273
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">274
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">275
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">276
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">277
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">278
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">279
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">280
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">281
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">282
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">283
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">284
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">285
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">286
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">287
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">288
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">289
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">290
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">291
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">292
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">293
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">294
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">295
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">296
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">297
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">298
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">299
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">300
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">301
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">302
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">303
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">304
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">305
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">306
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">307
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">308
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">309
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">310
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">311
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">312
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">313
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">314
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">315
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">316
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">317
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">318
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">319
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">320
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">321
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">322
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">323
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">324
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">325
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">326
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">327
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">328
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">329
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">330
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">331
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">332
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">333
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">334
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">335
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">336
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">337
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">338
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">339
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">340
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">341
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">342
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">343
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">344
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">345
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">346
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">347
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">348
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">349
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">350
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">351
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">352
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">353
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">354
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">355
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">356
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">357
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">358
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">359
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">360
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">361
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">362
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">363
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">364
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">365
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">366
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">367
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">368
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">369
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">370
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">371
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">372
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">373
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">374
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">375
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">376
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">377
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e># coding:utf-8</span>
+<span style=color:#f92672>import</span> copy
+<span style=color:#f92672>import</span> math
+
+<span style=color:#e6db74>&#39;&#39;&#39;
+</span><span style=color:#e6db74>test_state: 0x3243f6a8, 0x885a308d, 0x313198a2, 0xe0370734
+</span><span style=color:#e6db74>test_cipher key: 0x2b7e1516, 0x28aed2a6, 0xabf71588, 0x09cf4f3c
+</span><span style=color:#e6db74>&#39;&#39;&#39;</span>
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>EncryptionAES</span>:
+    <span style=color:#e6db74>&#39;&#39;&#39;
+</span><span style=color:#e6db74>    pass
+</span><span style=color:#e6db74>    &#39;&#39;&#39;</span>
+    key <span style=color:#f92672>=</span> []
+    plaintext <span style=color:#f92672>=</span> []
+    wheels_number <span style=color:#f92672>=</span> <span style=color:#ae81ff>10</span> <span style=color:#75715e># 加密轮数</span>
+    sbox <span style=color:#f92672>=</span> [
+        [<span style=color:#ae81ff>0x63</span>, <span style=color:#ae81ff>0x7c</span>, <span style=color:#ae81ff>0x77</span>, <span style=color:#ae81ff>0x7b</span>, <span style=color:#ae81ff>0xf2</span>, <span style=color:#ae81ff>0x6b</span>, <span style=color:#ae81ff>0x6f</span>, <span style=color:#ae81ff>0xc5</span>, <span style=color:#ae81ff>0x30</span>, <span style=color:#ae81ff>0x01</span>, <span style=color:#ae81ff>0x67</span>, <span style=color:#ae81ff>0x2b</span>, <span style=color:#ae81ff>0xfe</span>, <span style=color:#ae81ff>0xd7</span>, <span style=color:#ae81ff>0xab</span>, <span style=color:#ae81ff>0x76</span>],
+        [<span style=color:#ae81ff>0xca</span>, <span style=color:#ae81ff>0x82</span>, <span style=color:#ae81ff>0xc9</span>, <span style=color:#ae81ff>0x7d</span>, <span style=color:#ae81ff>0xfa</span>, <span style=color:#ae81ff>0x59</span>, <span style=color:#ae81ff>0x47</span>, <span style=color:#ae81ff>0xf0</span>, <span style=color:#ae81ff>0xad</span>, <span style=color:#ae81ff>0xd4</span>, <span style=color:#ae81ff>0xa2</span>, <span style=color:#ae81ff>0xaf</span>, <span style=color:#ae81ff>0x9c</span>, <span style=color:#ae81ff>0xa4</span>, <span style=color:#ae81ff>0x72</span>, <span style=color:#ae81ff>0xc0</span>],
+        [<span style=color:#ae81ff>0xb7</span>, <span style=color:#ae81ff>0xfd</span>, <span style=color:#ae81ff>0x93</span>, <span style=color:#ae81ff>0x26</span>, <span style=color:#ae81ff>0x36</span>, <span style=color:#ae81ff>0x3f</span>, <span style=color:#ae81ff>0xf7</span>, <span style=color:#ae81ff>0xcc</span>, <span style=color:#ae81ff>0x34</span>, <span style=color:#ae81ff>0xa5</span>, <span style=color:#ae81ff>0xe5</span>, <span style=color:#ae81ff>0xf1</span>, <span style=color:#ae81ff>0x71</span>, <span style=color:#ae81ff>0xd8</span>, <span style=color:#ae81ff>0x31</span>, <span style=color:#ae81ff>0x15</span>],
+        [<span style=color:#ae81ff>0x04</span>, <span style=color:#ae81ff>0xc7</span>, <span style=color:#ae81ff>0x23</span>, <span style=color:#ae81ff>0xc3</span>, <span style=color:#ae81ff>0x18</span>, <span style=color:#ae81ff>0x96</span>, <span style=color:#ae81ff>0x05</span>, <span style=color:#ae81ff>0x9a</span>, <span style=color:#ae81ff>0x07</span>, <span style=color:#ae81ff>0x12</span>, <span style=color:#ae81ff>0x80</span>, <span style=color:#ae81ff>0xe2</span>, <span style=color:#ae81ff>0xeb</span>, <span style=color:#ae81ff>0x27</span>, <span style=color:#ae81ff>0xb2</span>, <span style=color:#ae81ff>0x75</span>],
+        [<span style=color:#ae81ff>0x09</span>, <span style=color:#ae81ff>0x83</span>, <span style=color:#ae81ff>0x2c</span>, <span style=color:#ae81ff>0x1a</span>, <span style=color:#ae81ff>0x1b</span>, <span style=color:#ae81ff>0x6e</span>, <span style=color:#ae81ff>0x5a</span>, <span style=color:#ae81ff>0xa0</span>, <span style=color:#ae81ff>0x52</span>, <span style=color:#ae81ff>0x3b</span>, <span style=color:#ae81ff>0xd6</span>, <span style=color:#ae81ff>0xb3</span>, <span style=color:#ae81ff>0x29</span>, <span style=color:#ae81ff>0xe3</span>, <span style=color:#ae81ff>0x2f</span>, <span style=color:#ae81ff>0x84</span>],
+        [<span style=color:#ae81ff>0x53</span>, <span style=color:#ae81ff>0xd1</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0xed</span>, <span style=color:#ae81ff>0x20</span>, <span style=color:#ae81ff>0xfc</span>, <span style=color:#ae81ff>0xb1</span>, <span style=color:#ae81ff>0x5b</span>, <span style=color:#ae81ff>0x6a</span>, <span style=color:#ae81ff>0xcb</span>, <span style=color:#ae81ff>0xbe</span>, <span style=color:#ae81ff>0x39</span>, <span style=color:#ae81ff>0x4a</span>, <span style=color:#ae81ff>0x4c</span>, <span style=color:#ae81ff>0x58</span>, <span style=color:#ae81ff>0xcf</span>],
+        [<span style=color:#ae81ff>0xd0</span>, <span style=color:#ae81ff>0xef</span>, <span style=color:#ae81ff>0xaa</span>, <span style=color:#ae81ff>0xfb</span>, <span style=color:#ae81ff>0x43</span>, <span style=color:#ae81ff>0x4d</span>, <span style=color:#ae81ff>0x33</span>, <span style=color:#ae81ff>0x85</span>, <span style=color:#ae81ff>0x45</span>, <span style=color:#ae81ff>0xf9</span>, <span style=color:#ae81ff>0x02</span>, <span style=color:#ae81ff>0x7f</span>, <span style=color:#ae81ff>0x50</span>, <span style=color:#ae81ff>0x3c</span>, <span style=color:#ae81ff>0x9f</span>, <span style=color:#ae81ff>0xa8</span>],
+        [<span style=color:#ae81ff>0x51</span>, <span style=color:#ae81ff>0xa3</span>, <span style=color:#ae81ff>0x40</span>, <span style=color:#ae81ff>0x8f</span>, <span style=color:#ae81ff>0x92</span>, <span style=color:#ae81ff>0x9d</span>, <span style=color:#ae81ff>0x38</span>, <span style=color:#ae81ff>0xf5</span>, <span style=color:#ae81ff>0xbc</span>, <span style=color:#ae81ff>0xb6</span>, <span style=color:#ae81ff>0xda</span>, <span style=color:#ae81ff>0x21</span>, <span style=color:#ae81ff>0x10</span>, <span style=color:#ae81ff>0xff</span>, <span style=color:#ae81ff>0xf3</span>, <span style=color:#ae81ff>0xd2</span>],
+        [<span style=color:#ae81ff>0xcd</span>, <span style=color:#ae81ff>0x0c</span>, <span style=color:#ae81ff>0x13</span>, <span style=color:#ae81ff>0xec</span>, <span style=color:#ae81ff>0x5f</span>, <span style=color:#ae81ff>0x97</span>, <span style=color:#ae81ff>0x44</span>, <span style=color:#ae81ff>0x17</span>, <span style=color:#ae81ff>0xc4</span>, <span style=color:#ae81ff>0xa7</span>, <span style=color:#ae81ff>0x7e</span>, <span style=color:#ae81ff>0x3d</span>, <span style=color:#ae81ff>0x64</span>, <span style=color:#ae81ff>0x5d</span>, <span style=color:#ae81ff>0x19</span>, <span style=color:#ae81ff>0x73</span>],
+        [<span style=color:#ae81ff>0x60</span>, <span style=color:#ae81ff>0x81</span>, <span style=color:#ae81ff>0x4f</span>, <span style=color:#ae81ff>0xdc</span>, <span style=color:#ae81ff>0x22</span>, <span style=color:#ae81ff>0x2a</span>, <span style=color:#ae81ff>0x90</span>, <span style=color:#ae81ff>0x88</span>, <span style=color:#ae81ff>0x46</span>, <span style=color:#ae81ff>0xee</span>, <span style=color:#ae81ff>0xb8</span>, <span style=color:#ae81ff>0x14</span>, <span style=color:#ae81ff>0xde</span>, <span style=color:#ae81ff>0x5e</span>, <span style=color:#ae81ff>0x0b</span>, <span style=color:#ae81ff>0xdb</span>],
+        [<span style=color:#ae81ff>0xe0</span>, <span style=color:#ae81ff>0x32</span>, <span style=color:#ae81ff>0x3a</span>, <span style=color:#ae81ff>0x0a</span>, <span style=color:#ae81ff>0x49</span>, <span style=color:#ae81ff>0x06</span>, <span style=color:#ae81ff>0x24</span>, <span style=color:#ae81ff>0x5c</span>, <span style=color:#ae81ff>0xc2</span>, <span style=color:#ae81ff>0xd3</span>, <span style=color:#ae81ff>0xac</span>, <span style=color:#ae81ff>0x62</span>, <span style=color:#ae81ff>0x91</span>, <span style=color:#ae81ff>0x95</span>, <span style=color:#ae81ff>0xe4</span>, <span style=color:#ae81ff>0x79</span>],
+        [<span style=color:#ae81ff>0xe7</span>, <span style=color:#ae81ff>0xc8</span>, <span style=color:#ae81ff>0x37</span>, <span style=color:#ae81ff>0x6d</span>, <span style=color:#ae81ff>0x8d</span>, <span style=color:#ae81ff>0xd5</span>, <span style=color:#ae81ff>0x4e</span>, <span style=color:#ae81ff>0xa9</span>, <span style=color:#ae81ff>0x6c</span>, <span style=color:#ae81ff>0x56</span>, <span style=color:#ae81ff>0xf4</span>, <span style=color:#ae81ff>0xea</span>, <span style=color:#ae81ff>0x65</span>, <span style=color:#ae81ff>0x7a</span>, <span style=color:#ae81ff>0xae</span>, <span style=color:#ae81ff>0x08</span>],
+        [<span style=color:#ae81ff>0xba</span>, <span style=color:#ae81ff>0x78</span>, <span style=color:#ae81ff>0x25</span>, <span style=color:#ae81ff>0x2e</span>, <span style=color:#ae81ff>0x1c</span>, <span style=color:#ae81ff>0xa6</span>, <span style=color:#ae81ff>0xb4</span>, <span style=color:#ae81ff>0xc6</span>, <span style=color:#ae81ff>0xe8</span>, <span style=color:#ae81ff>0xdd</span>, <span style=color:#ae81ff>0x74</span>, <span style=color:#ae81ff>0x1f</span>, <span style=color:#ae81ff>0x4b</span>, <span style=color:#ae81ff>0xbd</span>, <span style=color:#ae81ff>0x8b</span>, <span style=color:#ae81ff>0x8a</span>],
+        [<span style=color:#ae81ff>0x70</span>, <span style=color:#ae81ff>0x3e</span>, <span style=color:#ae81ff>0xb5</span>, <span style=color:#ae81ff>0x66</span>, <span style=color:#ae81ff>0x48</span>, <span style=color:#ae81ff>0x03</span>, <span style=color:#ae81ff>0xf6</span>, <span style=color:#ae81ff>0x0e</span>, <span style=color:#ae81ff>0x61</span>, <span style=color:#ae81ff>0x35</span>, <span style=color:#ae81ff>0x57</span>, <span style=color:#ae81ff>0xb9</span>, <span style=color:#ae81ff>0x86</span>, <span style=color:#ae81ff>0xc1</span>, <span style=color:#ae81ff>0x1d</span>, <span style=color:#ae81ff>0x9e</span>],
+        [<span style=color:#ae81ff>0xe1</span>, <span style=color:#ae81ff>0xf8</span>, <span style=color:#ae81ff>0x98</span>, <span style=color:#ae81ff>0x11</span>, <span style=color:#ae81ff>0x69</span>, <span style=color:#ae81ff>0xd9</span>, <span style=color:#ae81ff>0x8e</span>, <span style=color:#ae81ff>0x94</span>, <span style=color:#ae81ff>0x9b</span>, <span style=color:#ae81ff>0x1e</span>, <span style=color:#ae81ff>0x87</span>, <span style=color:#ae81ff>0xe9</span>, <span style=color:#ae81ff>0xce</span>, <span style=color:#ae81ff>0x55</span>, <span style=color:#ae81ff>0x28</span>, <span style=color:#ae81ff>0xdf</span>],
+        [<span style=color:#ae81ff>0x8c</span>, <span style=color:#ae81ff>0xa1</span>, <span style=color:#ae81ff>0x89</span>, <span style=color:#ae81ff>0x0d</span>, <span style=color:#ae81ff>0xbf</span>, <span style=color:#ae81ff>0xe6</span>, <span style=color:#ae81ff>0x42</span>, <span style=color:#ae81ff>0x68</span>, <span style=color:#ae81ff>0x41</span>, <span style=color:#ae81ff>0x99</span>, <span style=color:#ae81ff>0x2d</span>, <span style=color:#ae81ff>0x0f</span>, <span style=color:#ae81ff>0xb0</span>, <span style=color:#ae81ff>0x54</span>, <span style=color:#ae81ff>0xbb</span>, <span style=color:#ae81ff>0x16</span>]
+    ]
+    rcon <span style=color:#f92672>=</span> [
+        [<span style=color:#ae81ff>0x01</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>], 
+        [<span style=color:#ae81ff>0x02</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>], 
+        [<span style=color:#ae81ff>0x04</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>], 
+        [<span style=color:#ae81ff>0x08</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>], 
+        [<span style=color:#ae81ff>0x10</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>], 
+        [<span style=color:#ae81ff>0x20</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>], 
+        [<span style=color:#ae81ff>0x40</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>], 
+        [<span style=color:#ae81ff>0x80</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>], 
+        [<span style=color:#ae81ff>0x1b</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>], 
+        [<span style=color:#ae81ff>0x36</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>]
+    ]
+    <span style=color:#66d9ef>def</span> __init__(self, plaintext):
+        self<span style=color:#f92672>.</span>plaintext <span style=color:#f92672>=</span> plaintext<span style=color:#f92672>.</span>encode()
+        <span style=color:#66d9ef>for</span> x <span style=color:#f92672>in</span> range((int(math<span style=color:#f92672>.</span>fabs((len(self<span style=color:#f92672>.</span>plaintext) <span style=color:#f92672>%</span> <span style=color:#ae81ff>16</span>) <span style=color:#f92672>-</span> <span style=color:#ae81ff>16</span>)))):
+            self<span style=color:#f92672>.</span>plaintext <span style=color:#f92672>+=</span> <span style=color:#e6db74>&#39;</span><span style=color:#ae81ff>\x00</span><span style=color:#e6db74>&#39;</span><span style=color:#f92672>.</span>encode()
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__get_plaintext</span>(self):
+        t <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+        <span style=color:#66d9ef>while</span> t <span style=color:#f92672>&lt;</span> len(self<span style=color:#f92672>.</span>plaintext):
+            <span style=color:#66d9ef>yield</span> self<span style=color:#f92672>.</span>plaintext[t:t<span style=color:#f92672>+</span><span style=color:#ae81ff>16</span>]
+            t <span style=color:#f92672>+=</span> <span style=color:#ae81ff>16</span>
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>set_number_of_encrypt_wheels</span>(self, wheels_number):
+        <span style=color:#e6db74>&#39;&#39;&#39;
+</span><span style=color:#e6db74>        设置加密轮数，默认10，待定
+</span><span style=color:#e6db74>        &#39;&#39;&#39;</span>
+        self<span style=color:#f92672>.</span>wheels_number <span style=color:#f92672>=</span> wheels_number
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__get_state</span>(self, text):
+        n <span style=color:#f92672>=</span> []
+        x <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+        <span style=color:#66d9ef>for</span> _ <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>4</span>):
+            l <span style=color:#f92672>=</span> []
+            <span style=color:#66d9ef>for</span> _ <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>4</span>):
+                l<span style=color:#f92672>.</span>append(text[x])
+                x <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1</span>
+            n<span style=color:#f92672>.</span>append(l)
+        <span style=color:#66d9ef>return</span> n
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>set_key</span>(self, key):
+        <span style=color:#e6db74>&#39;&#39;&#39;
+</span><span style=color:#e6db74>        pass
+</span><span style=color:#e6db74>        &#39;&#39;&#39;</span>
+        key <span style=color:#f92672>=</span> key<span style=color:#f92672>.</span>encode()
+        key_length <span style=color:#f92672>=</span> int(len(key))
+        len_key <span style=color:#f92672>=</span> [<span style=color:#ae81ff>16</span>, <span style=color:#ae81ff>24</span>]
+        <span style=color:#75715e># 密钥长度不正确处理</span>
+        <span style=color:#66d9ef>if</span> key_length <span style=color:#f92672>not</span> <span style=color:#f92672>in</span> len_key:
+            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>False</span>
+        tmp <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+        <span style=color:#66d9ef>for</span> _ <span style=color:#f92672>in</span> range(int(key_length <span style=color:#f92672>/</span> <span style=color:#ae81ff>4</span>)):
+            t <span style=color:#f92672>=</span> []
+            <span style=color:#66d9ef>for</span> _ <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>4</span>):
+                t<span style=color:#f92672>.</span>append(key[tmp])
+                tmp <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1</span>
+            self<span style=color:#f92672>.</span>key<span style=color:#f92672>.</span>append(t)
+        <span style=color:#66d9ef>for</span> x <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>4</span>, <span style=color:#ae81ff>4</span> <span style=color:#f92672>*</span> (self<span style=color:#f92672>.</span>wheels_number <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>)):
+            <span style=color:#66d9ef>if</span> x <span style=color:#f92672>%</span> <span style=color:#ae81ff>4</span> <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span>:
+                tmp <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>key[x <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>][:]
+                tmp<span style=color:#f92672>.</span>append(tmp[<span style=color:#ae81ff>0</span>])
+                tmp<span style=color:#f92672>.</span>pop(<span style=color:#ae81ff>0</span>)
+                <span style=color:#66d9ef>for</span> y <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>4</span>):
+                    tmp[y] <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>__get_sbox_value(tmp[y])
+                <span style=color:#66d9ef>for</span> y <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>4</span>):
+                    tmp[y] <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>key[x<span style=color:#f92672>-</span><span style=color:#ae81ff>4</span>][y] <span style=color:#f92672>^</span> tmp[y] <span style=color:#f92672>^</span> self<span style=color:#f92672>.</span>rcon[int(x<span style=color:#f92672>/</span><span style=color:#ae81ff>4</span>) <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>][y]
+                self<span style=color:#f92672>.</span>key<span style=color:#f92672>.</span>append(tmp)
+            <span style=color:#66d9ef>else</span>:
+                l <span style=color:#f92672>=</span> []
+                <span style=color:#66d9ef>for</span> y <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>4</span>):
+                    l<span style=color:#f92672>.</span>append(self<span style=color:#f92672>.</span>key[x <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>][y] <span style=color:#f92672>^</span> self<span style=color:#f92672>.</span>key[x <span style=color:#f92672>-</span> <span style=color:#ae81ff>4</span>][y])
+                self<span style=color:#f92672>.</span>key<span style=color:#f92672>.</span>append(l)
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__get_sbox_value</span>(self, value):
+        <span style=color:#66d9ef>return</span> self<span style=color:#f92672>.</span>sbox[(value <span style=color:#f92672>&amp;</span> <span style=color:#ae81ff>0xf0</span>) <span style=color:#f92672>&gt;&gt;</span> <span style=color:#ae81ff>4</span>][value <span style=color:#f92672>&amp;</span> <span style=color:#ae81ff>0x0f</span>]
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>get_ciphertext</span>(self):
+        <span style=color:#e6db74>&#39;&#39;&#39;
+</span><span style=color:#e6db74>        pass
+</span><span style=color:#e6db74>        &#39;&#39;&#39;</span>
+        ciphertext <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;&#39;</span>
+        <span style=color:#66d9ef>for</span> text <span style=color:#f92672>in</span> self<span style=color:#f92672>.</span>__get_plaintext():
+            state <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>__get_state(text)
+            self<span style=color:#f92672>.</span>__wheel_key_add(state, <span style=color:#ae81ff>0</span>)
+            <span style=color:#66d9ef>for</span> x <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>1</span>, self<span style=color:#f92672>.</span>wheels_number):
+                self<span style=color:#f92672>.</span>__subbytes(state)
+                state <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>__shift_rows(state)
+                self<span style=color:#f92672>.</span>__mix_columns(state)
+                self<span style=color:#f92672>.</span>__wheel_key_add(state, x)
+            self<span style=color:#f92672>.</span>__subbytes(state)
+            state <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>__shift_rows(state)
+            self<span style=color:#f92672>.</span>__wheel_key_add(state, self<span style=color:#f92672>.</span>wheels_number)
+            <span style=color:#66d9ef>for</span> x <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>4</span>):
+                <span style=color:#66d9ef>for</span> y <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>4</span>):
+                    t <span style=color:#f92672>=</span> hex(state[x][y])<span style=color:#f92672>.</span>split(<span style=color:#e6db74>&#39;0x&#39;</span>)[<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>]
+                    <span style=color:#66d9ef>if</span> len(t) <span style=color:#f92672>==</span> <span style=color:#ae81ff>1</span>:
+                        ciphertext <span style=color:#f92672>+=</span> <span style=color:#e6db74>&#39;0&#39;</span><span style=color:#f92672>+</span>t
+                    <span style=color:#66d9ef>else</span>:
+                        ciphertext <span style=color:#f92672>+=</span> t
+        <span style=color:#66d9ef>return</span> ciphertext
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__shift_rows</span>(self, state):
+        <span style=color:#e6db74>&#39;&#39;&#39;
+</span><span style=color:#e6db74>        行移位
+</span><span style=color:#e6db74>        参数state：分组列表
+</span><span style=color:#e6db74>        &#39;&#39;&#39;</span>
+        state <span style=color:#f92672>=</span> list(map(list, zip(<span style=color:#f92672>*</span>state)))
+        <span style=color:#66d9ef>for</span> x <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>4</span>):
+            <span style=color:#66d9ef>for</span> y <span style=color:#f92672>in</span> range(x):
+                state[x]<span style=color:#f92672>.</span>append(state[x][<span style=color:#ae81ff>0</span>])
+                state[x]<span style=color:#f92672>.</span>pop(<span style=color:#ae81ff>0</span>)
+        state <span style=color:#f92672>=</span> list(map(list, zip(<span style=color:#f92672>*</span>state)))
+        <span style=color:#66d9ef>return</span> state
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__subbytes</span>(self, state):
+        <span style=color:#75715e># 完成</span>
+        <span style=color:#66d9ef>for</span> x <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>4</span>):
+            <span style=color:#66d9ef>for</span> y <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>4</span>):
+                state[x][y] <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>__get_sbox_value(state[x][y])
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__mix_columns</span>(self, state):
+        <span style=color:#66d9ef>for</span> x <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>4</span>):
+            tmp <span style=color:#f92672>=</span> state[x][:]
+            state[x][<span style=color:#ae81ff>0</span>] <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>__ffmul(<span style=color:#ae81ff>0x02</span>, tmp[<span style=color:#ae81ff>0</span>]) <span style=color:#f92672>^</span> self<span style=color:#f92672>.</span>__ffmul(<span style=color:#ae81ff>0x03</span>, tmp[<span style=color:#ae81ff>1</span>]) <span style=color:#f92672>^</span> tmp[<span style=color:#ae81ff>2</span>] <span style=color:#f92672>^</span> tmp[<span style=color:#ae81ff>3</span>]
+            state[x][<span style=color:#ae81ff>1</span>] <span style=color:#f92672>=</span> tmp[<span style=color:#ae81ff>0</span>] <span style=color:#f92672>^</span> self<span style=color:#f92672>.</span>__ffmul(<span style=color:#ae81ff>0x02</span>, tmp[<span style=color:#ae81ff>1</span>]) <span style=color:#f92672>^</span> self<span style=color:#f92672>.</span>__ffmul(<span style=color:#ae81ff>0x03</span>, tmp[<span style=color:#ae81ff>2</span>]) <span style=color:#f92672>^</span> tmp[<span style=color:#ae81ff>3</span>]
+            state[x][<span style=color:#ae81ff>2</span>] <span style=color:#f92672>=</span> tmp[<span style=color:#ae81ff>0</span>] <span style=color:#f92672>^</span> tmp[<span style=color:#ae81ff>1</span>] <span style=color:#f92672>^</span> self<span style=color:#f92672>.</span>__ffmul(<span style=color:#ae81ff>0x02</span>, tmp[<span style=color:#ae81ff>2</span>]) <span style=color:#f92672>^</span> self<span style=color:#f92672>.</span>__ffmul(<span style=color:#ae81ff>0x03</span>, tmp[<span style=color:#ae81ff>3</span>])
+            state[x][<span style=color:#ae81ff>3</span>] <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>__ffmul(<span style=color:#ae81ff>0x03</span>, tmp[<span style=color:#ae81ff>0</span>]) <span style=color:#f92672>^</span> tmp[<span style=color:#ae81ff>1</span>] <span style=color:#f92672>^</span> tmp[<span style=color:#ae81ff>2</span>] <span style=color:#f92672>^</span> self<span style=color:#f92672>.</span>__ffmul(<span style=color:#ae81ff>0x02</span>, tmp[<span style=color:#ae81ff>3</span>])
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__ffmul</span>(self, x, y):
+        <span style=color:#66d9ef>if</span> x <span style=color:#f92672>==</span> <span style=color:#ae81ff>0x02</span>:
+            <span style=color:#66d9ef>if</span> y <span style=color:#f92672>&gt;=</span> <span style=color:#ae81ff>0x80</span>:
+                <span style=color:#66d9ef>return</span> ((y <span style=color:#f92672>&lt;&lt;</span> <span style=color:#ae81ff>1</span>) <span style=color:#f92672>^</span> <span style=color:#ae81ff>0x0100</span> <span style=color:#f92672>^</span> <span style=color:#ae81ff>0x1b</span>)
+            <span style=color:#66d9ef>else</span>:
+                <span style=color:#66d9ef>return</span> (y <span style=color:#f92672>&lt;&lt;</span> <span style=color:#ae81ff>1</span>)
+        <span style=color:#66d9ef>elif</span> x <span style=color:#f92672>==</span> <span style=color:#ae81ff>0x03</span>:
+            <span style=color:#66d9ef>return</span> (self<span style=color:#f92672>.</span>__ffmul(<span style=color:#ae81ff>0x02</span>, y) <span style=color:#f92672>^</span> y)
+        <span style=color:#66d9ef>else</span>:
+            <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0x00</span>
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__wheel_key_add</span>(self, state, number):
+        <span style=color:#75715e># 完成</span>
+        <span style=color:#66d9ef>for</span> x <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>4</span>):
+            <span style=color:#66d9ef>for</span> y <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>4</span>):
+                state[x][y] <span style=color:#f92672>=</span> state[x][y] <span style=color:#f92672>^</span> self<span style=color:#f92672>.</span>key[<span style=color:#ae81ff>4</span> <span style=color:#f92672>*</span> number<span style=color:#f92672>+</span>x][y]
+
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DecryptionAES</span>:
+    <span style=color:#e6db74>&#39;&#39;&#39;
+</span><span style=color:#e6db74>    AES-128 ECB 解密（填充</span><span style=color:#ae81ff>\x00</span><span style=color:#e6db74>）
+</span><span style=color:#e6db74>    &#39;&#39;&#39;</span>
+    wheels_number <span style=color:#f92672>=</span> <span style=color:#ae81ff>10</span>
+    reverse_sbox <span style=color:#f92672>=</span> [
+        [<span style=color:#ae81ff>0x52</span>, <span style=color:#ae81ff>0x09</span>, <span style=color:#ae81ff>0x6a</span>, <span style=color:#ae81ff>0xd5</span>, <span style=color:#ae81ff>0x30</span>, <span style=color:#ae81ff>0x36</span>, <span style=color:#ae81ff>0xa5</span>, <span style=color:#ae81ff>0x38</span>, <span style=color:#ae81ff>0xbf</span>, <span style=color:#ae81ff>0x40</span>, <span style=color:#ae81ff>0xa3</span>, <span style=color:#ae81ff>0x9e</span>, <span style=color:#ae81ff>0x81</span>, <span style=color:#ae81ff>0xf3</span>, <span style=color:#ae81ff>0xd7</span>, <span style=color:#ae81ff>0xfb</span>],
+        [<span style=color:#ae81ff>0x7c</span>, <span style=color:#ae81ff>0xe3</span>, <span style=color:#ae81ff>0x39</span>, <span style=color:#ae81ff>0x82</span>, <span style=color:#ae81ff>0x9b</span>, <span style=color:#ae81ff>0x2f</span>, <span style=color:#ae81ff>0xff</span>, <span style=color:#ae81ff>0x87</span>, <span style=color:#ae81ff>0x34</span>, <span style=color:#ae81ff>0x8e</span>, <span style=color:#ae81ff>0x43</span>, <span style=color:#ae81ff>0x44</span>, <span style=color:#ae81ff>0xc4</span>, <span style=color:#ae81ff>0xde</span>, <span style=color:#ae81ff>0xe9</span>, <span style=color:#ae81ff>0xcb</span>],
+        [<span style=color:#ae81ff>0x54</span>, <span style=color:#ae81ff>0x7b</span>, <span style=color:#ae81ff>0x94</span>, <span style=color:#ae81ff>0x32</span>, <span style=color:#ae81ff>0xa6</span>, <span style=color:#ae81ff>0xc2</span>, <span style=color:#ae81ff>0x23</span>, <span style=color:#ae81ff>0x3d</span>, <span style=color:#ae81ff>0xee</span>, <span style=color:#ae81ff>0x4c</span>, <span style=color:#ae81ff>0x95</span>, <span style=color:#ae81ff>0x0b</span>, <span style=color:#ae81ff>0x42</span>, <span style=color:#ae81ff>0xfa</span>, <span style=color:#ae81ff>0xc3</span>, <span style=color:#ae81ff>0x4e</span>],
+        [<span style=color:#ae81ff>0x08</span>, <span style=color:#ae81ff>0x2e</span>, <span style=color:#ae81ff>0xa1</span>, <span style=color:#ae81ff>0x66</span>, <span style=color:#ae81ff>0x28</span>, <span style=color:#ae81ff>0xd9</span>, <span style=color:#ae81ff>0x24</span>, <span style=color:#ae81ff>0xb2</span>, <span style=color:#ae81ff>0x76</span>, <span style=color:#ae81ff>0x5b</span>, <span style=color:#ae81ff>0xa2</span>, <span style=color:#ae81ff>0x49</span>, <span style=color:#ae81ff>0x6d</span>, <span style=color:#ae81ff>0x8b</span>, <span style=color:#ae81ff>0xd1</span>, <span style=color:#ae81ff>0x25</span>],
+        [<span style=color:#ae81ff>0x72</span>, <span style=color:#ae81ff>0xf8</span>, <span style=color:#ae81ff>0xf6</span>, <span style=color:#ae81ff>0x64</span>, <span style=color:#ae81ff>0x86</span>, <span style=color:#ae81ff>0x68</span>, <span style=color:#ae81ff>0x98</span>, <span style=color:#ae81ff>0x16</span>, <span style=color:#ae81ff>0xd4</span>, <span style=color:#ae81ff>0xa4</span>, <span style=color:#ae81ff>0x5c</span>, <span style=color:#ae81ff>0xcc</span>, <span style=color:#ae81ff>0x5d</span>, <span style=color:#ae81ff>0x65</span>, <span style=color:#ae81ff>0xb6</span>, <span style=color:#ae81ff>0x92</span>],
+        [<span style=color:#ae81ff>0x6c</span>, <span style=color:#ae81ff>0x70</span>, <span style=color:#ae81ff>0x48</span>, <span style=color:#ae81ff>0x50</span>, <span style=color:#ae81ff>0xfd</span>, <span style=color:#ae81ff>0xed</span>, <span style=color:#ae81ff>0xb9</span>, <span style=color:#ae81ff>0xda</span>, <span style=color:#ae81ff>0x5e</span>, <span style=color:#ae81ff>0x15</span>, <span style=color:#ae81ff>0x46</span>, <span style=color:#ae81ff>0x57</span>, <span style=color:#ae81ff>0xa7</span>, <span style=color:#ae81ff>0x8d</span>, <span style=color:#ae81ff>0x9d</span>, <span style=color:#ae81ff>0x84</span>],
+        [<span style=color:#ae81ff>0x90</span>, <span style=color:#ae81ff>0xd8</span>, <span style=color:#ae81ff>0xab</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x8c</span>, <span style=color:#ae81ff>0xbc</span>, <span style=color:#ae81ff>0xd3</span>, <span style=color:#ae81ff>0x0a</span>, <span style=color:#ae81ff>0xf7</span>, <span style=color:#ae81ff>0xe4</span>, <span style=color:#ae81ff>0x58</span>, <span style=color:#ae81ff>0x05</span>, <span style=color:#ae81ff>0xb8</span>, <span style=color:#ae81ff>0xb3</span>, <span style=color:#ae81ff>0x45</span>, <span style=color:#ae81ff>0x06</span>],
+        [<span style=color:#ae81ff>0xd0</span>, <span style=color:#ae81ff>0x2c</span>, <span style=color:#ae81ff>0x1e</span>, <span style=color:#ae81ff>0x8f</span>, <span style=color:#ae81ff>0xca</span>, <span style=color:#ae81ff>0x3f</span>, <span style=color:#ae81ff>0x0f</span>, <span style=color:#ae81ff>0x02</span>, <span style=color:#ae81ff>0xc1</span>, <span style=color:#ae81ff>0xaf</span>, <span style=color:#ae81ff>0xbd</span>, <span style=color:#ae81ff>0x03</span>, <span style=color:#ae81ff>0x01</span>, <span style=color:#ae81ff>0x13</span>, <span style=color:#ae81ff>0x8a</span>, <span style=color:#ae81ff>0x6b</span>],
+        [<span style=color:#ae81ff>0x3a</span>, <span style=color:#ae81ff>0x91</span>, <span style=color:#ae81ff>0x11</span>, <span style=color:#ae81ff>0x41</span>, <span style=color:#ae81ff>0x4f</span>, <span style=color:#ae81ff>0x67</span>, <span style=color:#ae81ff>0xdc</span>, <span style=color:#ae81ff>0xea</span>, <span style=color:#ae81ff>0x97</span>, <span style=color:#ae81ff>0xf2</span>, <span style=color:#ae81ff>0xcf</span>, <span style=color:#ae81ff>0xce</span>, <span style=color:#ae81ff>0xf0</span>, <span style=color:#ae81ff>0xb4</span>, <span style=color:#ae81ff>0xe6</span>, <span style=color:#ae81ff>0x73</span>],
+        [<span style=color:#ae81ff>0x96</span>, <span style=color:#ae81ff>0xac</span>, <span style=color:#ae81ff>0x74</span>, <span style=color:#ae81ff>0x22</span>, <span style=color:#ae81ff>0xe7</span>, <span style=color:#ae81ff>0xad</span>, <span style=color:#ae81ff>0x35</span>, <span style=color:#ae81ff>0x85</span>, <span style=color:#ae81ff>0xe2</span>, <span style=color:#ae81ff>0xf9</span>, <span style=color:#ae81ff>0x37</span>, <span style=color:#ae81ff>0xe8</span>, <span style=color:#ae81ff>0x1c</span>, <span style=color:#ae81ff>0x75</span>, <span style=color:#ae81ff>0xdf</span>, <span style=color:#ae81ff>0x6e</span>],
+        [<span style=color:#ae81ff>0x47</span>, <span style=color:#ae81ff>0xf1</span>, <span style=color:#ae81ff>0x1a</span>, <span style=color:#ae81ff>0x71</span>, <span style=color:#ae81ff>0x1d</span>, <span style=color:#ae81ff>0x29</span>, <span style=color:#ae81ff>0xc5</span>, <span style=color:#ae81ff>0x89</span>, <span style=color:#ae81ff>0x6f</span>, <span style=color:#ae81ff>0xb7</span>, <span style=color:#ae81ff>0x62</span>, <span style=color:#ae81ff>0x0e</span>, <span style=color:#ae81ff>0xaa</span>, <span style=color:#ae81ff>0x18</span>, <span style=color:#ae81ff>0xbe</span>, <span style=color:#ae81ff>0x1b</span>],
+        [<span style=color:#ae81ff>0xfc</span>, <span style=color:#ae81ff>0x56</span>, <span style=color:#ae81ff>0x3e</span>, <span style=color:#ae81ff>0x4b</span>, <span style=color:#ae81ff>0xc6</span>, <span style=color:#ae81ff>0xd2</span>, <span style=color:#ae81ff>0x79</span>, <span style=color:#ae81ff>0x20</span>, <span style=color:#ae81ff>0x9a</span>, <span style=color:#ae81ff>0xdb</span>, <span style=color:#ae81ff>0xc0</span>, <span style=color:#ae81ff>0xfe</span>, <span style=color:#ae81ff>0x78</span>, <span style=color:#ae81ff>0xcd</span>, <span style=color:#ae81ff>0x5a</span>, <span style=color:#ae81ff>0xf4</span>],
+        [<span style=color:#ae81ff>0x1f</span>, <span style=color:#ae81ff>0xdd</span>, <span style=color:#ae81ff>0xa8</span>, <span style=color:#ae81ff>0x33</span>, <span style=color:#ae81ff>0x88</span>, <span style=color:#ae81ff>0x07</span>, <span style=color:#ae81ff>0xc7</span>, <span style=color:#ae81ff>0x31</span>, <span style=color:#ae81ff>0xb1</span>, <span style=color:#ae81ff>0x12</span>, <span style=color:#ae81ff>0x10</span>, <span style=color:#ae81ff>0x59</span>, <span style=color:#ae81ff>0x27</span>, <span style=color:#ae81ff>0x80</span>, <span style=color:#ae81ff>0xec</span>, <span style=color:#ae81ff>0x5f</span>],
+        [<span style=color:#ae81ff>0x60</span>, <span style=color:#ae81ff>0x51</span>, <span style=color:#ae81ff>0x7f</span>, <span style=color:#ae81ff>0xa9</span>, <span style=color:#ae81ff>0x19</span>, <span style=color:#ae81ff>0xb5</span>, <span style=color:#ae81ff>0x4a</span>, <span style=color:#ae81ff>0x0d</span>, <span style=color:#ae81ff>0x2d</span>, <span style=color:#ae81ff>0xe5</span>, <span style=color:#ae81ff>0x7a</span>, <span style=color:#ae81ff>0x9f</span>, <span style=color:#ae81ff>0x93</span>, <span style=color:#ae81ff>0xc9</span>, <span style=color:#ae81ff>0x9c</span>, <span style=color:#ae81ff>0xef</span>],
+        [<span style=color:#ae81ff>0xa0</span>, <span style=color:#ae81ff>0xe0</span>, <span style=color:#ae81ff>0x3b</span>, <span style=color:#ae81ff>0x4d</span>, <span style=color:#ae81ff>0xae</span>, <span style=color:#ae81ff>0x2a</span>, <span style=color:#ae81ff>0xf5</span>, <span style=color:#ae81ff>0xb0</span>, <span style=color:#ae81ff>0xc8</span>, <span style=color:#ae81ff>0xeb</span>, <span style=color:#ae81ff>0xbb</span>, <span style=color:#ae81ff>0x3c</span>, <span style=color:#ae81ff>0x83</span>, <span style=color:#ae81ff>0x53</span>, <span style=color:#ae81ff>0x99</span>, <span style=color:#ae81ff>0x61</span>],
+        [<span style=color:#ae81ff>0x17</span>, <span style=color:#ae81ff>0x2b</span>, <span style=color:#ae81ff>0x04</span>, <span style=color:#ae81ff>0x7e</span>, <span style=color:#ae81ff>0xba</span>, <span style=color:#ae81ff>0x77</span>, <span style=color:#ae81ff>0xd6</span>, <span style=color:#ae81ff>0x26</span>, <span style=color:#ae81ff>0xe1</span>, <span style=color:#ae81ff>0x69</span>, <span style=color:#ae81ff>0x14</span>, <span style=color:#ae81ff>0x63</span>, <span style=color:#ae81ff>0x55</span>, <span style=color:#ae81ff>0x21</span>, <span style=color:#ae81ff>0x0c</span>, <span style=color:#ae81ff>0x7d</span>]
+        ]
+    rcon <span style=color:#f92672>=</span> [
+        [<span style=color:#ae81ff>0x01</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>], 
+        [<span style=color:#ae81ff>0x02</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>], 
+        [<span style=color:#ae81ff>0x04</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>], 
+        [<span style=color:#ae81ff>0x08</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>], 
+        [<span style=color:#ae81ff>0x10</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>], 
+        [<span style=color:#ae81ff>0x20</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>], 
+        [<span style=color:#ae81ff>0x40</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>], 
+        [<span style=color:#ae81ff>0x80</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>], 
+        [<span style=color:#ae81ff>0x1b</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>], 
+        [<span style=color:#ae81ff>0x36</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0x00</span>]
+    ]
+    sbox <span style=color:#f92672>=</span> [
+        [<span style=color:#ae81ff>0x63</span>, <span style=color:#ae81ff>0x7c</span>, <span style=color:#ae81ff>0x77</span>, <span style=color:#ae81ff>0x7b</span>, <span style=color:#ae81ff>0xf2</span>, <span style=color:#ae81ff>0x6b</span>, <span style=color:#ae81ff>0x6f</span>, <span style=color:#ae81ff>0xc5</span>, <span style=color:#ae81ff>0x30</span>, <span style=color:#ae81ff>0x01</span>, <span style=color:#ae81ff>0x67</span>, <span style=color:#ae81ff>0x2b</span>, <span style=color:#ae81ff>0xfe</span>, <span style=color:#ae81ff>0xd7</span>, <span style=color:#ae81ff>0xab</span>, <span style=color:#ae81ff>0x76</span>],
+        [<span style=color:#ae81ff>0xca</span>, <span style=color:#ae81ff>0x82</span>, <span style=color:#ae81ff>0xc9</span>, <span style=color:#ae81ff>0x7d</span>, <span style=color:#ae81ff>0xfa</span>, <span style=color:#ae81ff>0x59</span>, <span style=color:#ae81ff>0x47</span>, <span style=color:#ae81ff>0xf0</span>, <span style=color:#ae81ff>0xad</span>, <span style=color:#ae81ff>0xd4</span>, <span style=color:#ae81ff>0xa2</span>, <span style=color:#ae81ff>0xaf</span>, <span style=color:#ae81ff>0x9c</span>, <span style=color:#ae81ff>0xa4</span>, <span style=color:#ae81ff>0x72</span>, <span style=color:#ae81ff>0xc0</span>],
+        [<span style=color:#ae81ff>0xb7</span>, <span style=color:#ae81ff>0xfd</span>, <span style=color:#ae81ff>0x93</span>, <span style=color:#ae81ff>0x26</span>, <span style=color:#ae81ff>0x36</span>, <span style=color:#ae81ff>0x3f</span>, <span style=color:#ae81ff>0xf7</span>, <span style=color:#ae81ff>0xcc</span>, <span style=color:#ae81ff>0x34</span>, <span style=color:#ae81ff>0xa5</span>, <span style=color:#ae81ff>0xe5</span>, <span style=color:#ae81ff>0xf1</span>, <span style=color:#ae81ff>0x71</span>, <span style=color:#ae81ff>0xd8</span>, <span style=color:#ae81ff>0x31</span>, <span style=color:#ae81ff>0x15</span>],
+        [<span style=color:#ae81ff>0x04</span>, <span style=color:#ae81ff>0xc7</span>, <span style=color:#ae81ff>0x23</span>, <span style=color:#ae81ff>0xc3</span>, <span style=color:#ae81ff>0x18</span>, <span style=color:#ae81ff>0x96</span>, <span style=color:#ae81ff>0x05</span>, <span style=color:#ae81ff>0x9a</span>, <span style=color:#ae81ff>0x07</span>, <span style=color:#ae81ff>0x12</span>, <span style=color:#ae81ff>0x80</span>, <span style=color:#ae81ff>0xe2</span>, <span style=color:#ae81ff>0xeb</span>, <span style=color:#ae81ff>0x27</span>, <span style=color:#ae81ff>0xb2</span>, <span style=color:#ae81ff>0x75</span>],
+        [<span style=color:#ae81ff>0x09</span>, <span style=color:#ae81ff>0x83</span>, <span style=color:#ae81ff>0x2c</span>, <span style=color:#ae81ff>0x1a</span>, <span style=color:#ae81ff>0x1b</span>, <span style=color:#ae81ff>0x6e</span>, <span style=color:#ae81ff>0x5a</span>, <span style=color:#ae81ff>0xa0</span>, <span style=color:#ae81ff>0x52</span>, <span style=color:#ae81ff>0x3b</span>, <span style=color:#ae81ff>0xd6</span>, <span style=color:#ae81ff>0xb3</span>, <span style=color:#ae81ff>0x29</span>, <span style=color:#ae81ff>0xe3</span>, <span style=color:#ae81ff>0x2f</span>, <span style=color:#ae81ff>0x84</span>],
+        [<span style=color:#ae81ff>0x53</span>, <span style=color:#ae81ff>0xd1</span>, <span style=color:#ae81ff>0x00</span>, <span style=color:#ae81ff>0xed</span>, <span style=color:#ae81ff>0x20</span>, <span style=color:#ae81ff>0xfc</span>, <span style=color:#ae81ff>0xb1</span>, <span style=color:#ae81ff>0x5b</span>, <span style=color:#ae81ff>0x6a</span>, <span style=color:#ae81ff>0xcb</span>, <span style=color:#ae81ff>0xbe</span>, <span style=color:#ae81ff>0x39</span>, <span style=color:#ae81ff>0x4a</span>, <span style=color:#ae81ff>0x4c</span>, <span style=color:#ae81ff>0x58</span>, <span style=color:#ae81ff>0xcf</span>],
+        [<span style=color:#ae81ff>0xd0</span>, <span style=color:#ae81ff>0xef</span>, <span style=color:#ae81ff>0xaa</span>, <span style=color:#ae81ff>0xfb</span>, <span style=color:#ae81ff>0x43</span>, <span style=color:#ae81ff>0x4d</span>, <span style=color:#ae81ff>0x33</span>, <span style=color:#ae81ff>0x85</span>, <span style=color:#ae81ff>0x45</span>, <span style=color:#ae81ff>0xf9</span>, <span style=color:#ae81ff>0x02</span>, <span style=color:#ae81ff>0x7f</span>, <span style=color:#ae81ff>0x50</span>, <span style=color:#ae81ff>0x3c</span>, <span style=color:#ae81ff>0x9f</span>, <span style=color:#ae81ff>0xa8</span>],
+        [<span style=color:#ae81ff>0x51</span>, <span style=color:#ae81ff>0xa3</span>, <span style=color:#ae81ff>0x40</span>, <span style=color:#ae81ff>0x8f</span>, <span style=color:#ae81ff>0x92</span>, <span style=color:#ae81ff>0x9d</span>, <span style=color:#ae81ff>0x38</span>, <span style=color:#ae81ff>0xf5</span>, <span style=color:#ae81ff>0xbc</span>, <span style=color:#ae81ff>0xb6</span>, <span style=color:#ae81ff>0xda</span>, <span style=color:#ae81ff>0x21</span>, <span style=color:#ae81ff>0x10</span>, <span style=color:#ae81ff>0xff</span>, <span style=color:#ae81ff>0xf3</span>, <span style=color:#ae81ff>0xd2</span>],
+        [<span style=color:#ae81ff>0xcd</span>, <span style=color:#ae81ff>0x0c</span>, <span style=color:#ae81ff>0x13</span>, <span style=color:#ae81ff>0xec</span>, <span style=color:#ae81ff>0x5f</span>, <span style=color:#ae81ff>0x97</span>, <span style=color:#ae81ff>0x44</span>, <span style=color:#ae81ff>0x17</span>, <span style=color:#ae81ff>0xc4</span>, <span style=color:#ae81ff>0xa7</span>, <span style=color:#ae81ff>0x7e</span>, <span style=color:#ae81ff>0x3d</span>, <span style=color:#ae81ff>0x64</span>, <span style=color:#ae81ff>0x5d</span>, <span style=color:#ae81ff>0x19</span>, <span style=color:#ae81ff>0x73</span>],
+        [<span style=color:#ae81ff>0x60</span>, <span style=color:#ae81ff>0x81</span>, <span style=color:#ae81ff>0x4f</span>, <span style=color:#ae81ff>0xdc</span>, <span style=color:#ae81ff>0x22</span>, <span style=color:#ae81ff>0x2a</span>, <span style=color:#ae81ff>0x90</span>, <span style=color:#ae81ff>0x88</span>, <span style=color:#ae81ff>0x46</span>, <span style=color:#ae81ff>0xee</span>, <span style=color:#ae81ff>0xb8</span>, <span style=color:#ae81ff>0x14</span>, <span style=color:#ae81ff>0xde</span>, <span style=color:#ae81ff>0x5e</span>, <span style=color:#ae81ff>0x0b</span>, <span style=color:#ae81ff>0xdb</span>],
+        [<span style=color:#ae81ff>0xe0</span>, <span style=color:#ae81ff>0x32</span>, <span style=color:#ae81ff>0x3a</span>, <span style=color:#ae81ff>0x0a</span>, <span style=color:#ae81ff>0x49</span>, <span style=color:#ae81ff>0x06</span>, <span style=color:#ae81ff>0x24</span>, <span style=color:#ae81ff>0x5c</span>, <span style=color:#ae81ff>0xc2</span>, <span style=color:#ae81ff>0xd3</span>, <span style=color:#ae81ff>0xac</span>, <span style=color:#ae81ff>0x62</span>, <span style=color:#ae81ff>0x91</span>, <span style=color:#ae81ff>0x95</span>, <span style=color:#ae81ff>0xe4</span>, <span style=color:#ae81ff>0x79</span>],
+        [<span style=color:#ae81ff>0xe7</span>, <span style=color:#ae81ff>0xc8</span>, <span style=color:#ae81ff>0x37</span>, <span style=color:#ae81ff>0x6d</span>, <span style=color:#ae81ff>0x8d</span>, <span style=color:#ae81ff>0xd5</span>, <span style=color:#ae81ff>0x4e</span>, <span style=color:#ae81ff>0xa9</span>, <span style=color:#ae81ff>0x6c</span>, <span style=color:#ae81ff>0x56</span>, <span style=color:#ae81ff>0xf4</span>, <span style=color:#ae81ff>0xea</span>, <span style=color:#ae81ff>0x65</span>, <span style=color:#ae81ff>0x7a</span>, <span style=color:#ae81ff>0xae</span>, <span style=color:#ae81ff>0x08</span>],
+        [<span style=color:#ae81ff>0xba</span>, <span style=color:#ae81ff>0x78</span>, <span style=color:#ae81ff>0x25</span>, <span style=color:#ae81ff>0x2e</span>, <span style=color:#ae81ff>0x1c</span>, <span style=color:#ae81ff>0xa6</span>, <span style=color:#ae81ff>0xb4</span>, <span style=color:#ae81ff>0xc6</span>, <span style=color:#ae81ff>0xe8</span>, <span style=color:#ae81ff>0xdd</span>, <span style=color:#ae81ff>0x74</span>, <span style=color:#ae81ff>0x1f</span>, <span style=color:#ae81ff>0x4b</span>, <span style=color:#ae81ff>0xbd</span>, <span style=color:#ae81ff>0x8b</span>, <span style=color:#ae81ff>0x8a</span>],
+        [<span style=color:#ae81ff>0x70</span>, <span style=color:#ae81ff>0x3e</span>, <span style=color:#ae81ff>0xb5</span>, <span style=color:#ae81ff>0x66</span>, <span style=color:#ae81ff>0x48</span>, <span style=color:#ae81ff>0x03</span>, <span style=color:#ae81ff>0xf6</span>, <span style=color:#ae81ff>0x0e</span>, <span style=color:#ae81ff>0x61</span>, <span style=color:#ae81ff>0x35</span>, <span style=color:#ae81ff>0x57</span>, <span style=color:#ae81ff>0xb9</span>, <span style=color:#ae81ff>0x86</span>, <span style=color:#ae81ff>0xc1</span>, <span style=color:#ae81ff>0x1d</span>, <span style=color:#ae81ff>0x9e</span>],
+        [<span style=color:#ae81ff>0xe1</span>, <span style=color:#ae81ff>0xf8</span>, <span style=color:#ae81ff>0x98</span>, <span style=color:#ae81ff>0x11</span>, <span style=color:#ae81ff>0x69</span>, <span style=color:#ae81ff>0xd9</span>, <span style=color:#ae81ff>0x8e</span>, <span style=color:#ae81ff>0x94</span>, <span style=color:#ae81ff>0x9b</span>, <span style=color:#ae81ff>0x1e</span>, <span style=color:#ae81ff>0x87</span>, <span style=color:#ae81ff>0xe9</span>, <span style=color:#ae81ff>0xce</span>, <span style=color:#ae81ff>0x55</span>, <span style=color:#ae81ff>0x28</span>, <span style=color:#ae81ff>0xdf</span>],
+        [<span style=color:#ae81ff>0x8c</span>, <span style=color:#ae81ff>0xa1</span>, <span style=color:#ae81ff>0x89</span>, <span style=color:#ae81ff>0x0d</span>, <span style=color:#ae81ff>0xbf</span>, <span style=color:#ae81ff>0xe6</span>, <span style=color:#ae81ff>0x42</span>, <span style=color:#ae81ff>0x68</span>, <span style=color:#ae81ff>0x41</span>, <span style=color:#ae81ff>0x99</span>, <span style=color:#ae81ff>0x2d</span>, <span style=color:#ae81ff>0x0f</span>, <span style=color:#ae81ff>0xb0</span>, <span style=color:#ae81ff>0x54</span>, <span style=color:#ae81ff>0xbb</span>, <span style=color:#ae81ff>0x16</span>]
+    ]
+    key <span style=color:#f92672>=</span> []
+    <span style=color:#66d9ef>def</span> __init__(self, ciphertext, ciphertext_format):
+        <span style=color:#e6db74>&#39;&#39;&#39;
+</span><span style=color:#e6db74>        ciphertext_format = [&#39;hex&#39;]
+</span><span style=color:#e6db74>        &#39;&#39;&#39;</span>
+        self<span style=color:#f92672>.</span>ciphertext <span style=color:#f92672>=</span> []
+        <span style=color:#66d9ef>if</span> ciphertext_format <span style=color:#f92672>==</span> <span style=color:#e6db74>&#39;hex&#39;</span>:
+            t <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+            <span style=color:#66d9ef>while</span> t <span style=color:#f92672>&lt;</span> len(ciphertext):
+                l <span style=color:#f92672>=</span> []
+                <span style=color:#66d9ef>for</span> x <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>4</span>):
+                    l<span style=color:#f92672>.</span>append(int(ciphertext[t:t<span style=color:#f92672>+</span><span style=color:#ae81ff>2</span>], <span style=color:#ae81ff>16</span>))
+                    t <span style=color:#f92672>+=</span> <span style=color:#ae81ff>2</span>
+                self<span style=color:#f92672>.</span>ciphertext<span style=color:#f92672>.</span>append(l)
+
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__get_sbox_value</span>(self, value):
+        <span style=color:#e6db74>&#39;&#39;&#39;通过8位二进制返回sbox值&#39;&#39;&#39;</span>
+        <span style=color:#66d9ef>return</span> self<span style=color:#f92672>.</span>sbox[(value <span style=color:#f92672>&amp;</span> <span style=color:#ae81ff>0xf0</span>) <span style=color:#f92672>&gt;&gt;</span> <span style=color:#ae81ff>4</span>][value <span style=color:#f92672>&amp;</span> <span style=color:#ae81ff>0x0f</span>]
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__get_ciphertext</span>(self):
+        <span style=color:#e6db74>&#39;&#39;&#39;迭代128位密文&#39;&#39;&#39;</span>
+        <span style=color:#66d9ef>for</span> x <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>0</span>, len(self<span style=color:#f92672>.</span>ciphertext), <span style=color:#ae81ff>4</span>):
+            <span style=color:#66d9ef>yield</span> self<span style=color:#f92672>.</span>ciphertext[x:x<span style=color:#f92672>+</span><span style=color:#ae81ff>4</span>]
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__wheel_key_add</span>(self, state, number):
+        <span style=color:#e6db74>&#39;&#39;&#39;密钥轮加&#39;&#39;&#39;</span>
+        <span style=color:#66d9ef>for</span> x <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>4</span>):
+            <span style=color:#66d9ef>for</span> y <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>4</span>):
+                state[x][y] <span style=color:#f92672>=</span> state[x][y] <span style=color:#f92672>^</span> self<span style=color:#f92672>.</span>key[<span style=color:#ae81ff>4</span> <span style=color:#f92672>*</span> number<span style=color:#f92672>+</span>x][y]
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__get_state</span>(self, text):
+        n <span style=color:#f92672>=</span> []
+        x <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+        <span style=color:#66d9ef>for</span> _ <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>4</span>):
+            l <span style=color:#f92672>=</span> []
+            <span style=color:#66d9ef>for</span> _ <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>4</span>):
+                l<span style=color:#f92672>.</span>append(text[x])
+                x <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1</span>
+            n<span style=color:#f92672>.</span>append(l)
+        <span style=color:#66d9ef>return</span> n
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>get_plaintext</span>(self):
+        plaintext <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;&#39;</span>
+        <span style=color:#66d9ef>for</span> text <span style=color:#f92672>in</span> self<span style=color:#f92672>.</span>__get_ciphertext():
+            state <span style=color:#f92672>=</span> text
+            self<span style=color:#f92672>.</span>__wheel_key_add(state, self<span style=color:#f92672>.</span>wheels_number)
+            <span style=color:#66d9ef>for</span> x <span style=color:#f92672>in</span> range(self<span style=color:#f92672>.</span>wheels_number<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0</span>, <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>):
+                state <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>__reverse_shift_rows(state)
+                self<span style=color:#f92672>.</span>__reverse_subbytes(state)
+                self<span style=color:#f92672>.</span>__wheel_key_add(state, x)
+                self<span style=color:#f92672>.</span>__reverse_mix_columns(state)
+            state <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>__reverse_shift_rows(state)
+            self<span style=color:#f92672>.</span>__reverse_subbytes(state)
+            self<span style=color:#f92672>.</span>__wheel_key_add(state, <span style=color:#ae81ff>0</span>)
+            <span style=color:#66d9ef>for</span> x <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>4</span>):
+                <span style=color:#66d9ef>for</span> y <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>4</span>):
+                    plaintext <span style=color:#f92672>+=</span> chr(state[x][y])
+
+        <span style=color:#66d9ef>return</span> plaintext<span style=color:#f92672>.</span>strip(<span style=color:#e6db74>&#39;</span><span style=color:#ae81ff>\x00</span><span style=color:#e6db74>&#39;</span>)
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__reverse_mix_columns</span>(self, state):
+        <span style=color:#66d9ef>for</span> x <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>4</span>):
+            tmp <span style=color:#f92672>=</span> state[x][:]
+            state[x][<span style=color:#ae81ff>0</span>] <span style=color:#f92672>=</span> (self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(tmp[<span style=color:#ae81ff>0</span>]))) <span style=color:#f92672>^</span> self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(tmp[<span style=color:#ae81ff>0</span>])) <span style=color:#f92672>^</span> self<span style=color:#f92672>.</span>__xtime(tmp[<span style=color:#ae81ff>0</span>])) <span style=color:#f92672>^</span> (self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(tmp[<span style=color:#ae81ff>1</span>]))) <span style=color:#f92672>^</span> self<span style=color:#f92672>.</span>__xtime(tmp[<span style=color:#ae81ff>1</span>]) <span style=color:#f92672>^</span> tmp[<span style=color:#ae81ff>1</span>]) <span style=color:#f92672>^</span> (self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(tmp[<span style=color:#ae81ff>2</span>]))) <span style=color:#f92672>^</span> self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(tmp[<span style=color:#ae81ff>2</span>])) <span style=color:#f92672>^</span> tmp[<span style=color:#ae81ff>2</span>]) <span style=color:#f92672>^</span> (self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(tmp[<span style=color:#ae81ff>3</span>]))) <span style=color:#f92672>^</span> tmp[<span style=color:#ae81ff>3</span>])
+            state[x][<span style=color:#ae81ff>1</span>] <span style=color:#f92672>=</span> (self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(tmp[<span style=color:#ae81ff>0</span>]))) <span style=color:#f92672>^</span> tmp[<span style=color:#ae81ff>0</span>]) <span style=color:#f92672>^</span> (self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(tmp[<span style=color:#ae81ff>1</span>]))) <span style=color:#f92672>^</span> self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(tmp[<span style=color:#ae81ff>1</span>])) <span style=color:#f92672>^</span> self<span style=color:#f92672>.</span>__xtime(tmp[<span style=color:#ae81ff>1</span>])) <span style=color:#f92672>^</span> (self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(tmp[<span style=color:#ae81ff>2</span>]))) <span style=color:#f92672>^</span> self<span style=color:#f92672>.</span>__xtime(tmp[<span style=color:#ae81ff>2</span>]) <span style=color:#f92672>^</span> tmp[<span style=color:#ae81ff>2</span>]) <span style=color:#f92672>^</span> (self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(tmp[<span style=color:#ae81ff>3</span>]))) <span style=color:#f92672>^</span> self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(tmp[<span style=color:#ae81ff>3</span>])) <span style=color:#f92672>^</span> tmp[<span style=color:#ae81ff>3</span>])
+            state[x][<span style=color:#ae81ff>2</span>] <span style=color:#f92672>=</span> (self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(tmp[<span style=color:#ae81ff>0</span>]))) <span style=color:#f92672>^</span> self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(tmp[<span style=color:#ae81ff>0</span>])) <span style=color:#f92672>^</span> tmp[<span style=color:#ae81ff>0</span>]) <span style=color:#f92672>^</span> (self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(tmp[<span style=color:#ae81ff>1</span>]))) <span style=color:#f92672>^</span> tmp[<span style=color:#ae81ff>1</span>]) <span style=color:#f92672>^</span> (self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(tmp[<span style=color:#ae81ff>2</span>]))) <span style=color:#f92672>^</span>self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(tmp[<span style=color:#ae81ff>2</span>])) <span style=color:#f92672>^</span> self<span style=color:#f92672>.</span>__xtime(tmp[<span style=color:#ae81ff>2</span>])) <span style=color:#f92672>^</span> (self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(tmp[<span style=color:#ae81ff>3</span>]))) <span style=color:#f92672>^</span> self<span style=color:#f92672>.</span>__xtime(tmp[<span style=color:#ae81ff>3</span>]) <span style=color:#f92672>^</span> tmp[<span style=color:#ae81ff>3</span>])
+            state[x][<span style=color:#ae81ff>3</span>] <span style=color:#f92672>=</span> (self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(tmp[<span style=color:#ae81ff>0</span>]))) <span style=color:#f92672>^</span> self<span style=color:#f92672>.</span>__xtime(tmp[<span style=color:#ae81ff>0</span>]) <span style=color:#f92672>^</span> tmp[<span style=color:#ae81ff>0</span>]) <span style=color:#f92672>^</span> (self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(tmp[<span style=color:#ae81ff>1</span>]))) <span style=color:#f92672>^</span> self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(tmp[<span style=color:#ae81ff>1</span>])) <span style=color:#f92672>^</span> tmp[<span style=color:#ae81ff>1</span>]) <span style=color:#f92672>^</span> (self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(tmp[<span style=color:#ae81ff>2</span>]))) <span style=color:#f92672>^</span> tmp[<span style=color:#ae81ff>2</span>]) <span style=color:#f92672>^</span> (self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(tmp[<span style=color:#ae81ff>3</span>]))) <span style=color:#f92672>^</span> self<span style=color:#f92672>.</span>__xtime(self<span style=color:#f92672>.</span>__xtime(tmp[<span style=color:#ae81ff>3</span>])) <span style=color:#f92672>^</span> self<span style=color:#f92672>.</span>__xtime(tmp[<span style=color:#ae81ff>3</span>]))
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__xtime</span>(self, x):
+        <span style=color:#66d9ef>if</span> x <span style=color:#f92672>&gt;=</span> <span style=color:#ae81ff>0x80</span>:
+            <span style=color:#66d9ef>return</span> ((x <span style=color:#f92672>&lt;&lt;</span> <span style=color:#ae81ff>1</span>) <span style=color:#f92672>^</span> <span style=color:#ae81ff>0x0100</span> <span style=color:#f92672>^</span> <span style=color:#ae81ff>0x1b</span>)
+        <span style=color:#66d9ef>else</span>:
+            <span style=color:#66d9ef>return</span> (x <span style=color:#f92672>&lt;&lt;</span> <span style=color:#ae81ff>1</span>)
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__reverse_subbytes</span>(self, state):
+        <span style=color:#66d9ef>for</span> x <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>4</span>):
+            <span style=color:#66d9ef>for</span> y <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>4</span>):
+                state[x][y] <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>__get_reversesbox_value(state[x][y])
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__reverse_shift_rows</span>(self, state):
+        <span style=color:#e6db74>&#39;&#39;&#39;
+</span><span style=color:#e6db74>
+</span><span style=color:#e6db74>        &#39;&#39;&#39;</span>
+        state <span style=color:#f92672>=</span> list(map(list, zip(<span style=color:#f92672>*</span>state)))
+        <span style=color:#66d9ef>for</span> x <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>4</span>):
+            <span style=color:#66d9ef>for</span> y <span style=color:#f92672>in</span> range(x):
+                state[x]<span style=color:#f92672>.</span>insert(<span style=color:#ae81ff>0</span>, state[x][<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>])
+                state[x]<span style=color:#f92672>.</span>pop()
+        state <span style=color:#f92672>=</span> list(map(list, zip(<span style=color:#f92672>*</span>state)))
+        <span style=color:#66d9ef>return</span> state
+
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>set_key</span>(self, key):
+        <span style=color:#e6db74>&#39;&#39;&#39;
+</span><span style=color:#e6db74>        设置密钥，扩展密钥, 长度规定为128(， 192， 256)
+</span><span style=color:#e6db74>        key:密钥
+</span><span style=color:#e6db74>        &#39;&#39;&#39;</span>
+        key <span style=color:#f92672>=</span> key<span style=color:#f92672>.</span>encode()
+        key_length <span style=color:#f92672>=</span> int(len(key))
+        <span style=color:#75715e># len_key = [16, 24, 32]</span>
+        len_key <span style=color:#f92672>=</span> [<span style=color:#ae81ff>16</span>]
+        <span style=color:#75715e># 密钥长度不正确处理</span>
+        <span style=color:#66d9ef>if</span> key_length <span style=color:#f92672>not</span> <span style=color:#f92672>in</span> len_key:
+            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>False</span>
+        tmp <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+        <span style=color:#66d9ef>for</span> _ <span style=color:#f92672>in</span> range(int(key_length <span style=color:#f92672>/</span> <span style=color:#ae81ff>4</span>)):
+            t <span style=color:#f92672>=</span> []
+            <span style=color:#66d9ef>for</span> _ <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>4</span>):
+                t<span style=color:#f92672>.</span>append(key[tmp])
+                tmp <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1</span>
+            self<span style=color:#f92672>.</span>key<span style=color:#f92672>.</span>append(t)
+
+        <span style=color:#66d9ef>for</span> x <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>4</span>, <span style=color:#ae81ff>4</span> <span style=color:#f92672>*</span> (self<span style=color:#f92672>.</span>wheels_number <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>)):
+            <span style=color:#66d9ef>if</span> x <span style=color:#f92672>%</span> <span style=color:#ae81ff>4</span> <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span>:
+                tmp <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>key[x <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>][:]
+                tmp<span style=color:#f92672>.</span>append(tmp[<span style=color:#ae81ff>0</span>])
+                tmp<span style=color:#f92672>.</span>pop(<span style=color:#ae81ff>0</span>)
+                <span style=color:#66d9ef>for</span> y <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>4</span>):
+                    tmp[y] <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>__get_sbox_value(tmp[y])
+                <span style=color:#66d9ef>for</span> y <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>4</span>):
+                    tmp[y] <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>key[x<span style=color:#f92672>-</span><span style=color:#ae81ff>4</span>][y] <span style=color:#f92672>^</span> tmp[y] <span style=color:#f92672>^</span> self<span style=color:#f92672>.</span>rcon[int(x<span style=color:#f92672>/</span><span style=color:#ae81ff>4</span>) <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>][y]
+                self<span style=color:#f92672>.</span>key<span style=color:#f92672>.</span>append(tmp)
+            <span style=color:#66d9ef>else</span>:
+                l <span style=color:#f92672>=</span> []
+                <span style=color:#66d9ef>for</span> y <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>4</span>):
+                    l<span style=color:#f92672>.</span>append(self<span style=color:#f92672>.</span>key[x <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>][y] <span style=color:#f92672>^</span> self<span style=color:#f92672>.</span>key[x <span style=color:#f92672>-</span> <span style=color:#ae81ff>4</span>][y])
+                self<span style=color:#f92672>.</span>key<span style=color:#f92672>.</span>append(l)
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__get_reversesbox_value</span>(self, value):
+        <span style=color:#e6db74>&#39;&#39;&#39;
+</span><span style=color:#e6db74>        通过8位二进制返回逆sbox值
+</span><span style=color:#e6db74>        &#39;&#39;&#39;</span>
+        <span style=color:#66d9ef>return</span> self<span style=color:#f92672>.</span>reverse_sbox[(value <span style=color:#f92672>&amp;</span> <span style=color:#ae81ff>0xf0</span>) <span style=color:#f92672>&gt;&gt;</span> <span style=color:#ae81ff>4</span>][value <span style=color:#f92672>&amp;</span> <span style=color:#ae81ff>0x0f</span>]
+key <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;abcdefghijklmnop&#39;</span>
+string <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;eriltugvnaiosjevtgoaeujfcvmoqaj4otyivu00&#39;</span>
+print(<span style=color:#e6db74>&#39;明文字符串:&#39;</span>, string)
+print(<span style=color:#e6db74>&#39;密钥:&#39;</span>, key)
+a <span style=color:#f92672>=</span> EncryptionAES(string)
+a<span style=color:#f92672>.</span>set_key(key)
+print(<span style=color:#e6db74>&#39;加密结果:&#39;</span>, a<span style=color:#f92672>.</span>get_ciphertext())
+a<span style=color:#f92672>.</span>get_ciphertext()
+a <span style=color:#f92672>=</span> DecryptionAES(a<span style=color:#f92672>.</span>get_ciphertext(), <span style=color:#e6db74>&#39;hex&#39;</span>)
+a<span style=color:#f92672>.</span>set_key(key)
+print(<span style=color:#e6db74>&#39;解密结果:  &#39;</span>, a<span style=color:#f92672>.</span>get_plaintext())
+
+</code></pre></td></tr></table>
+</div>
+</div>
+</section>
+<footer class=article-footer>
+<section class=article-tags>
+<a href=/tags/python/>python</a>
+<a href=/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/>密码学</a>
+<a href=/tags/aes/>AES</a>
+</section>
+<section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span>
+</section>
+</footer>
+</article>
+<aside class=related-contents--wrapper>
+<h2 class=section-title>Related contents</h2>
+<div class=related-contents>
+<div class="flex article-list--tile">
+<article>
+<a href=/posts/python3%E5%AE%9E%E7%8E%B0vigenere%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86%E7%A0%B4%E8%A7%A3/>
+<div class=article-details>
+<h2 class=article-title>python3实现Vigenere加密、解密、破解</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/posts/%E5%9B%BE%E7%89%87%E8%BD%AC%E5%AD%97%E7%AC%A6%E7%94%BB/>
+<div class=article-details>
+<h2 class=article-title>图片转字符画</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</aside>
+<div id=gitalk-container></div>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css>
+<script src=https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js></script>
+<script>const gitalk=new Gitalk({clientID:"b8b69aaca9354fa6c0b3",clientSecret:"decd8028bd5d99f9f942efcc1e8bef298c7332a6",repo:"bankroft.github.io",owner:"bankroft",admin:["bankroft"],distractionFreeMode:!1,id:md5(location.pathname)});(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("gitalk-container").innerHTML="Gitalk comments not available by default when the website is previewed locally.";return}gitalk.render("gitalk-container")})()</script>
+<footer class=site-footer>
+<section class=copyright>
+&copy;
+2019 -
+2022 Bankroft
+</section>
+<section class=powerby>
+<a target=_blank href=https://bankroft.github.io>The world is worth fighting for.</a> <br>
+Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> <br>
+Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.8.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a>
+</section>
+</footer>
+<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
+<div class=pswp__bg></div>
+<div class=pswp__scroll-wrap>
+<div class=pswp__container>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+</div>
+<div class="pswp__ui pswp__ui--hidden">
+<div class=pswp__top-bar>
+<div class=pswp__counter></div>
+<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+<div class=pswp__preloader>
+<div class=pswp__preloader__icn>
+<div class=pswp__preloader__cut>
+<div class=pswp__preloader__donut></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+<div class=pswp__share-tooltip></div>
+</div>
+<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+</button>
+<div class=pswp__caption>
+<div class=pswp__caption__center></div>
+</div>
+</div>
+</div>
+</div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
+</main>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
+</body>
+</html>
