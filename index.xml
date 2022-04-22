@@ -1,4 +1,116 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bankroft</title><link>https://bankroft.github.io/</link><description>Recent content on Bankroft</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 18 Feb 2022 15:00:10 +0800</lastBuildDate><atom:link href="https://bankroft.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>利用Github actions部署Hugo</title><link>https://bankroft.github.io/posts/deploy_hugo/</link><pubDate>Fri, 18 Feb 2022 15:00:10 +0800</pubDate><guid>https://bankroft.github.io/posts/deploy_hugo/</guid><description>&lt;h4 id="记录一次利用github-actions部署hugo博客">记录一次利用Github actions部署Hugo博客&lt;/h4>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bankroft</title><link>https://bankroft.github.io/</link><description>Recent content on Bankroft</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 22 Apr 2022 15:27:48 +0800</lastBuildDate><atom:link href="https://bankroft.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Knuth Morris Pratt(KMP)</title><link>https://bankroft.github.io/posts/knuth-morris-pratt/</link><pubDate>Fri, 22 Apr 2022 15:27:48 +0800</pubDate><guid>https://bankroft.github.io/posts/knuth-morris-pratt/</guid><description>&lt;p>引用Wiki的一段话&lt;/p>
+&lt;blockquote>
+&lt;p>在计算机科学中，Knuth-Morris-Pratt字符串查找算法（简称为KMP算法）可在一个字符串S内查找一个词W的出现位置。一个词在不匹配时本身就包含足够的信息来确定下一个匹配可能的开始位置，此算法利用这一特性以避免重新检查先前配对的字符。&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="本文符号表">本文符号表&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>S&lt;/code>: 主字符串，即待查找的字符串&lt;/li>
+&lt;li>&lt;code>W&lt;/code>: 子字符串，即从S中查找的字符串&lt;/li>
+&lt;li>&lt;code>i&lt;/code>: 主字符串的index，即当前查找的位置&lt;/li>
+&lt;li>&lt;code>j&lt;/code>: 子字符串的index，即当前匹配的位置&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;p>介绍KMP之前我们需要了解一下字符串匹配的算法Brute-Force, 暴力匹配。&lt;/p>
+&lt;h2 id="brute-forcebf">Brute-Force(BF)&lt;/h2>
+&lt;p>顾名思义，暴力匹配是W与字符串S的每一个与W长度相同的子串的匹配。&lt;/p>
+&lt;h4 id="动画演示">动画演示&lt;/h4>
+&lt;p>TODO&lt;/p>
+&lt;h4 id="时间复杂度">时间复杂度&lt;/h4>
+&lt;p>&lt;code>O( len(W) * len(S) )&lt;/code>&lt;/p>
+&lt;h2 id="kmp">KMP&lt;/h2>
+&lt;p>由BF算法的动画中可以看出，每一轮的匹配都是从&lt;code>i+1,j=0&lt;/code>开始的，这样就不能利用之前的匹配失败结果，而KMP算法利用了之前的匹配失败结果，从而减少了匹配次数。&lt;/p>
+&lt;h4 id="动画演示-1">动画演示&lt;/h4>
+&lt;p>TODO&lt;/p>
+&lt;h4 id="golang实现">Golang实现&lt;/h4>
+&lt;div class="highlight">&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+&lt;/span>&lt;span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-go" data-lang="go">&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">strStr&lt;/span>(&lt;span style="color:#a6e22e">haystack&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span>, &lt;span style="color:#a6e22e">needle&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span>) &lt;span style="color:#66d9ef">int&lt;/span> {
+&lt;span style="color:#75715e">// KMP算法
+&lt;/span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#a6e22e">pmt&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">partialMatchTable&lt;/span>(&lt;span style="color:#a6e22e">needle&lt;/span>)
+&lt;span style="color:#a6e22e">i&lt;/span>, &lt;span style="color:#a6e22e">j&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">i&lt;/span> &amp;lt; len(&lt;span style="color:#a6e22e">haystack&lt;/span>) &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#a6e22e">j&lt;/span> &amp;lt; len(&lt;span style="color:#a6e22e">pmt&lt;/span>) {
+&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">haystack&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>] &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#a6e22e">needle&lt;/span>[&lt;span style="color:#a6e22e">j&lt;/span>] {
+&lt;span style="color:#a6e22e">j&lt;/span>&lt;span style="color:#f92672">++&lt;/span>
+&lt;span style="color:#a6e22e">i&lt;/span>&lt;span style="color:#f92672">++&lt;/span>
+} &lt;span style="color:#66d9ef">else&lt;/span> {
+&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">j&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> {
+&lt;span style="color:#a6e22e">i&lt;/span>&lt;span style="color:#f92672">++&lt;/span>
+} &lt;span style="color:#66d9ef">else&lt;/span> {
+&lt;span style="color:#a6e22e">j&lt;/span> = &lt;span style="color:#a6e22e">pmt&lt;/span>[&lt;span style="color:#a6e22e">j&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>]
+}
+}
+}
+&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">i&lt;/span> &lt;span style="color:#f92672">==&lt;/span> len(&lt;span style="color:#a6e22e">haystack&lt;/span>) &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#a6e22e">j&lt;/span> &amp;lt; len(&lt;span style="color:#a6e22e">pmt&lt;/span>) {
+&lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>
+}
+&lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">i&lt;/span> &lt;span style="color:#f92672">-&lt;/span> len(&lt;span style="color:#a6e22e">pmt&lt;/span>)
+}
+&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">partialMatchTable&lt;/span>(&lt;span style="color:#a6e22e">needel&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span>) []&lt;span style="color:#66d9ef">int&lt;/span> {
+&lt;span style="color:#a6e22e">lenPmt&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> len(&lt;span style="color:#a6e22e">needel&lt;/span>)
+&lt;span style="color:#a6e22e">pmt&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> make([]&lt;span style="color:#66d9ef">int&lt;/span>, &lt;span style="color:#a6e22e">lenPmt&lt;/span>)
+&lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">i&lt;/span>, &lt;span style="color:#a6e22e">j&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span> &amp;lt; &lt;span style="color:#a6e22e">lenPmt&lt;/span>; {
+&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">needel&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>] &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#a6e22e">needel&lt;/span>[&lt;span style="color:#a6e22e">j&lt;/span>] {
+&lt;span style="color:#a6e22e">j&lt;/span>&lt;span style="color:#f92672">++&lt;/span>
+&lt;span style="color:#a6e22e">pmt&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>] = &lt;span style="color:#a6e22e">j&lt;/span>
+&lt;span style="color:#a6e22e">i&lt;/span>&lt;span style="color:#f92672">++&lt;/span>
+} &lt;span style="color:#66d9ef">else&lt;/span> {
+&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">j&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> {
+&lt;span style="color:#a6e22e">pmt&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>] = &lt;span style="color:#a6e22e">j&lt;/span>
+&lt;span style="color:#a6e22e">i&lt;/span>&lt;span style="color:#f92672">++&lt;/span>
+} &lt;span style="color:#66d9ef">else&lt;/span> {
+&lt;span style="color:#a6e22e">j&lt;/span> = &lt;span style="color:#a6e22e">pmt&lt;/span>[&lt;span style="color:#a6e22e">j&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>]
+}
+}
+}
+&lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">pmt&lt;/span>
+}
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>利用Github actions部署Hugo</title><link>https://bankroft.github.io/posts/deploy_hugo/</link><pubDate>Fri, 18 Feb 2022 15:00:10 +0800</pubDate><guid>https://bankroft.github.io/posts/deploy_hugo/</guid><description>&lt;h4 id="记录一次利用github-actions部署hugo博客">记录一次利用Github actions部署Hugo博客&lt;/h4>
 &lt;h5 id="安装和配置hugo">安装和配置Hugo&lt;/h5>
 &lt;p>根据&lt;a class="link" href="https://gohugo.io/" target="_blank" rel="noopener"
 >hugo&lt;/a>文档安装hugo和配置theme等&lt;/p>
